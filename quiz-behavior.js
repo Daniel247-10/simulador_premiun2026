@@ -527,12 +527,12 @@
     banner.className = 'premium-lock-banner';
     banner.innerHTML = `
       <span>Has completado 3 preguntas. Accede a pruebas premium de mayor complejidad.</span>
-      <a class="btn" id="open-premium-lock">SOLICITA TU CODIGO</a>
+      <a class="btn" id="open-premium-lock">ACCEDE PRUEBAS PREMIUM</a>
     `;
     document.body.appendChild(banner);
 
     document.getElementById('open-premium-lock').addEventListener('click', () => {
-      window.location.href = 'index.html';
+      window.location.href = 'index.html?premium=open';
     });
   }
 
@@ -541,17 +541,17 @@
     const overlay = document.createElement('div');
     overlay.id = 'premiumQuizOverlay';
     overlay.className = 'premium-quiz-overlay';
-    overlay.innerHTML = `
-      <div class="premium-quiz-overlay-content">
-        <h2 class="premium-modal-title">Límite alcanzado</h2>
-        <p class="premium-modal-text">Has completado 3 preguntas. Accede a pruebas premium de mayor complejidad.</p>
-        <a class="btn" id="overlay-go-index">SOLICITA TU CODIGO</a>
-      </div>
-    `;
+      overlay.innerHTML = `
+        <div class="premium-quiz-overlay-content">
+          <h2 class="premium-modal-title">Límite alcanzado</h2>
+          <p class="premium-modal-text">Has completado 3 preguntas. Accede a pruebas premium de mayor complejidad.</p>
+          <a class="btn" id="overlay-go-index">ACCEDE PRUEBAS PREMIUM</a>
+        </div>
+      `;
     document.body.appendChild(overlay);
 
     document.getElementById('overlay-go-index').addEventListener('click', () => {
-      window.location.href = 'index.html';
+      window.location.href = 'index.html?premium=open';
     });
   }
 

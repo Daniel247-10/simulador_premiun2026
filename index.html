@@ -241,6 +241,14 @@
         // Estado inicial: si ya está activo, desbloquear el menú
         applyPremiumState(isPremiumOn());
 
+        // Abrir el modal automáticamente al venir de "Accede Pruebas Premium"
+        try {
+          const params = new URLSearchParams(window.location.search);
+          if (params.get('premium') === 'open') {
+            modal.classList.add('active');
+          }
+        } catch (e) {}
+
         banner.addEventListener('click', () => modal.classList.add('active'));
         closeBtn.addEventListener('click', () => {
           modal.classList.remove('active');
