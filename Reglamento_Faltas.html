@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reglamento de Faltas y Sanciones</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="header-content">
+            <div class="pc-doctor-title">PC DOCTOR</div>
+            <p class="welcome-elaborado">MATERIAL ELABORADO POR EL:</p>
+            <p class="welcome-profesor">Prof. Daniel Llanos</p>
+            <p class="welcome-celular">📱 Celular: 75136639</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="main-title">Reglamento de Faltas y Sanciones</h1>
+        <p class="subtitle">Cuestionario de Reglamento de Faltas y Sanciones</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. ¿Bajo qué norma jurídica se aprobó el actual Reglamento de Faltas y Sanciones?",
+                options: [
+                    "a) Mediante la Resolución Suprema número 212414, de fecha 21 de abril de mil novecientos noventa y tres.",
+                    "b) Mediante la Resolución Suprema número 212414, de fecha 21 de mayo de mil novecientos noventa y tres.",
+                    "c) Mediante la Resolución Suprema número 212414, de fecha 21 de junio de mil novecientos noventa y tres.",
+                    "d) Mediante la Resolución Suprema número 212414, de fecha 21 de marzo de mil novecientos noventa y tres."
+                ],
+                correct: 0,
+                retro: "Esta resolución actualizó el ordenamiento jurídico para el personal docente y administrativo. [1]."
+            },
+            {
+                q: "2. Según el Artículo 1°, ¿a qué personal se aplica específicamente este reglamento?",
+                options: [
+                    "a) A todo el personal comprendido en los artículos 20 y 21 del Reglamento del Escalafón Nacional.",
+                    "b) A todo el personal comprendido en los artículos 10 y 11 del Reglamento del Escalafón Nacional.",
+                    "c) A todo el personal comprendido en los artículos 15 y 16 del Reglamento del Escalafón Nacional.",
+                    "d) A todo el personal comprendido en los artículos 25 y 26 del Reglamento del Escalafón Nacional."
+                ],
+                correct: 0,
+                retro: "El campo de aplicación abarca tanto a organismos desconcentrados como descentralizados. [2]."
+            },
+            {
+                q: "3. ¿Qué establece el Artículo 3° respecto al derecho de defensa en procesos disciplinarios?",
+                options: [
+                    "a) El derecho de defensa de la persona en el proceso disciplinario es ineludible según la Constitución.",
+                    "b) El derecho de defensa de la persona en el proceso disciplinario es facultativo según la Constitución.",
+                    "c) El derecho de defensa de la persona en el proceso disciplinario es excepcional según la Constitución.",
+                    "d) El derecho de defensa de la persona en el proceso disciplinario es provisional según la Constitución."
+                ],
+                correct: 0,
+                retro: "Nadie puede ser sancionado sin haber sido oído y juzgado legalmente. [3]."
+            },
+            {
+                q: "4. ¿Cómo se presume técnicamente la condición del encauzado según el Artículo 5°?",
+                options: [
+                    "a) Se presume la inocencia del encauzado, mientras no se pruebe su culpabilidad legalmente.",
+                    "b) Se presume la inocencia del encauzado, mientras no se pruebe su implicación legalmente.",
+                    "c) Se presume la inocencia del encauzado, mientras no se pruebe su infracción legalmente.",
+                    "d) Se presume la inocencia del encauzado, mientras no se pruebe su negligencia legalmente."
+                ],
+                correct: 0,
+                retro: "La presunción de inocencia es una garantía procesal fundamental. [4]."
+            },
+            {
+                q: "5. ¿En qué caso excepcional procede la suspensión inmediata según el Artículo 6°?",
+                options: [
+                    "a) Procede la suspensión inmediata solo en el inciso a) de tipificación de faltas muy graves.",
+                    "b) Procede la suspensión inmediata solo en el inciso b) de tipificación de faltas muy graves.",
+                    "c) Procede la suspensión inmediata solo en el inciso c) de tipificación de faltas muy graves.",
+                    "d) Procede la suspensión inmediata solo en el inciso d) de tipificación de faltas muy graves."
+                ],
+                correct: 0,
+                retro: "Es la única medida precautoria que permite remover del cargo antes de la sentencia. [4]."
+            },
+            {
+                q: "6. Según el Artículo 7°, ¿qué constituye técnicamente una falta o infracción?",
+                options: [
+                    "a) El incumplimiento de deberes, obligaciones de la legislación y la inobservancia del reglamento.",
+                    "b) El incumplimiento de deberes, obligaciones de la legislación y la desobediencia del reglamento.",
+                    "c) El incumplimiento de deberes, obligaciones de la legislación y la prescripción del reglamento.",
+                    "d) El incumplimiento de deberes, obligaciones de la legislación y la alteración del reglamento."
+                ],
+                correct: 0,
+                retro: "Las faltas se cometen en el ejercicio de funciones docentes y jerarquías educativas. [5]."
+            },
+            {
+                q: "7. ¿Cómo se clasifican las faltas disciplinarias según el Artículo 8°?",
+                options: [
+                    "a) Las faltas se clasifican técnicamente en tres niveles: leves, graves y muy graves.",
+                    "b) Las faltas se clasifican técnicamente en tres niveles: leves, serias y muy graves.",
+                    "c) Las faltas se clasifican técnicamente en tres niveles: leves, graves y gravísimas.",
+                    "d) Las faltas se clasifican técnicamente en tres niveles: simples, graves y muy graves."
+                ],
+                correct: 0,
+                retro: "Esta clasificación determina la severidad de la sanción y el tribunal competente. [6]."
+            },
+            {
+                q: "8. ¿Qué situación es tipificada como falta leve en el inciso a) del Artículo 9°?",
+                options: [
+                    "a) La suspensión de labores por cumpleaños y agasajos a directores o docentes.",
+                    "b) La suspensión de labores por festejos y agasajos a directores o docentes.",
+                    "c) La suspensión de labores por reuniones y agasajos a directores o docentes.",
+                    "d) La suspensión de labores por eventos y agasajos a directores o docentes."
+                ],
+                correct: 0,
+                retro: "Interrumpir el servicio educativo por motivos sociales personales es una falta leve. [6]."
+            },
+            {
+                q: "9. ¿Qué constituye negligencia en el trabajo según el inciso c) de las faltas leves?",
+                options: [
+                    "a) La no presentación oportuna o la presentación incorrecta de los documentos de labor docente.",
+                    "b) La no presentación oportuna o la presentación incorrecta de los informes de gestión docente.",
+                    "c) La no presentación oportuna o la presentación incorrecta de los registros de acción docente.",
+                    "d) La no presentación oportuna o la presentación incorrecta de los planes de técnica docente."
+                ],
+                correct: 0,
+                retro: "Incluye registros, planes, listas, datos estadísticos, libretas y cuadernos. [6]."
+            },
+            {
+                q: "10. ¿Qué prohíbe el inciso e) del Artículo 9° en los ambientes escolares?",
+                options: [
+                    "a) El consumo de cigarrillos o productos del tabaco en los ambientes escolares.",
+                    "b) El consumo de cigarrillos o productos del tabaco en los alrededores escolares.",
+                    "c) El consumo de cigarrillos o productos del tabaco en los exteriores escolares.",
+                    "d) El consumo de cigarrillos o productos del tabaco en los perímetros escolares."
+                ],
+                correct: 0,
+                retro: "El reglamento protege el ambiente escolar de hábitos nocivos. [7]."
+            },
+            {
+                q: "11. ¿A qué se refiere el inciso h) de las faltas leves sobre el uso de alumnos?",
+                options: [
+                    "a) Utilizar a los alumnos en mandados particulares o en el servicio doméstico.",
+                    "b) Utilizar a los alumnos en mandados particulares o en el servicio institucional.",
+                    "c) Utilizar a los alumnos en mandados particulares o en el servicio administrativo.",
+                    "d) Utilizar a los alumnos en mandados particulares o en el servicio pedagógico."
+                ],
+                correct: 0,
+                retro: "Es una falta leve desviar la función del estudiante para fines personales del docente. [7]."
+            },
+            {
+                q: "12. ¿Qué define una falta grave según el inciso a) del Artículo 10°?",
+                options: [
+                    "a) La reincidencia voluntaria en las faltas leves tipificadas en el reglamento.",
+                    "b) La reincidencia voluntaria en las faltas leves señaladas en el reglamento.",
+                    "c) La reincidencia voluntaria en las faltas leves indicadas en el reglamento.",
+                    "d) La reincidencia voluntaria en las faltas leves marcadas en el reglamento."
+                ],
+                correct: 0,
+                retro: "La persistencia en conductas indebidas eleva la gravedad de la infracción. [8]."
+            },
+            {
+                q: "13. ¿Qué constituye la falta grave tipificada en el inciso b) del Artículo 10°?",
+                options: [
+                    "a) La extorsión a los alumnos ofreciendo calificaciones a cambio de algún beneficio.",
+                    "b) La extorsión a los alumnos ofreciendo calificaciones a cambio de algún servicio.",
+                    "c) La extorsión a los alumnos ofreciendo calificaciones a cambio de algún favor.",
+                    "d) La extorsión a los alumnos ofreciendo calificaciones a cambio de algún pago."
+                ],
+                correct: 0,
+                retro: "Cualquier manipulación de notas por beneficios externos es una falta grave. [8]."
+            },
+            {
+                q: "14. ¿Qué sanciona el inciso d) del Artículo 10° respecto a los padres de familia?",
+                options: [
+                    "a) Las exacciones (cobros ilegales o injustos) a los padres de familia.",
+                    "b) Las exacciones (cobros ilegales o injustos) a los tutores de familia.",
+                    "c) Las exacciones (cobros ilegales o injustos) a los miembros de familia.",
+                    "d) Las exacciones (cobros ilegales o injustos) a los parientes de familia."
+                ],
+                correct: 0,
+                retro: "Se protege la economía de las familias frente a cobros no autorizados. [8]."
+            },
+            {
+                q: "15. ¿Qué define el inciso g) del Artículo 10° sobre festejos en el lugar de trabajo?",
+                options: [
+                    "a) La organización o asistencia a fiestas con uso de bebidas alcohólicas en el establecimiento.",
+                    "b) La organización o asistencia a fiestas con uso de bebidas alcohólicas en el departamento.",
+                    "c) La organización o asistencia a fiestas con uso de bebidas alcohólicas en el distrito.",
+                    "d) La organización o asistencia a fiestas con uso de bebidas alcohólicas en el centro."
+                ],
+                correct: 0,
+                retro: "El consumo de alcohol en el centro de trabajo es una falta grave. [9]."
+            },
+            {
+                q: "16. ¿Cuál es el límite de abandono de funciones para ser falta grave en escuelas urbanas?",
+                options: [
+                    "a) El abandono del lugar de las funciones hasta cinco días en escuelas urbanas.",
+                    "b) El abandono del lugar de las funciones hasta seis días en escuelas urbanas.",
+                    "c) El abandono del lugar de las funciones hasta cuatro días en escuelas urbanas.",
+                    "d) El abandono del lugar de las funciones hasta tres días en escuelas urbanas."
+                ],
+                correct: 0,
+                retro: "El plazo aumenta a siete días en lugares alejados. [9]."
+            },
+            {
+                q: "17. ¿Qué sanciona el inciso i) del Artículo 10° respecto al material escolar?",
+                options: [
+                    "a) La venta o uso indebido del material escolar, sanitario, deportivo o de trabajo.",
+                    "b) La venta o uso indebido del material escolar, sanitario, deportivo o de oficina.",
+                    "c) La venta o uso indebido del material escolar, sanitario, deportivo o de gestión.",
+                    "d) La venta o uso indebido del material escolar, sanitario, deportivo o de aula."
+                ],
+                correct: 0,
+                retro: "Los materiales destinados a la institución no pueden ser comercializados. [9]."
+            },
+            {
+                q: "18. ¿Qué constituye la falta grave del inciso k) del Artículo 10°?",
+                options: [
+                    "a) El apercibimiento o la observación grave a un inferior en presencia de maestros o alumnos.",
+                    "b) El apercibimiento o la observación grave a un inferior en presencia de padres o alumnos.",
+                    "c) El apercibimiento o la observación grave a un inferior en presencia de autoridades o alumnos.",
+                    "d) El apercibimiento o la observación grave a un inferior en presencia de colegas o alumnos."
+                ],
+                correct: 0,
+                retro: "Se sanciona el menoscabo de la dignidad del personal ante terceros. [10]."
+            },
+            {
+                q: "19. ¿Qué prohíbe el inciso m) del Artículo 10° sobre documentos oficiales?",
+                options: [
+                    "a) El uso indebido de títulos, sellos o membretes de carácter oficial.",
+                    "b) El uso indebido de títulos, sellos o membretes de carácter institucional.",
+                    "c) El uso indebido de títulos, sellos o membretes de carácter administrativo.",
+                    "d) El uso indebido de títulos, sellos o membretes de carácter pedagógico."
+                ],
+                correct: 0,
+                retro: "El mal uso de símbolos de autoridad es falta grave. [11]."
+            },
+            {
+                q: "20. ¿Qué falta grave se describe en el inciso p) del Artículo 10°?",
+                options: [
+                    "a) El empleo de los castigos corporales o psicológicos contra la dignidad del alumno.",
+                    "b) El empleo de los castigos corporales o psicológicos contra la integridad del alumno.",
+                    "c) El empleo de los castigos corporales o psicológicos contra la moral del alumno.",
+                    "d) El empleo de los castigos corporales o psicológicos contra la conducta del alumno."
+                ],
+                correct: 0,
+                retro: "El respeto a la dignidad del estudiante es innegociable. [11]."
+            },
+            {
+                q: "21. ¿Qué constituye una falta muy grave según el inciso a) del Artículo 11°?",
+                options: [
+                    "a) La reincidencia voluntaria en faltas graves tipificadas en el presente reglamento.",
+                    "b) La reincidencia voluntaria en faltas graves señaladas en el presente reglamento.",
+                    "c) La reincidencia voluntaria en faltas graves indicadas en el presente reglamento.",
+                    "d) La reincidencia voluntaria en faltas graves marcadas en el presente reglamento."
+                ],
+                correct: 0,
+                retro: "Repetir faltas graves se sanciona con la máxima severidad. [12]."
+            },
+            {
+                q: "22. ¿Qué obligación financiera se sanciona como falta muy grave en el inciso b)?",
+                options: [
+                    "a) No rendir cuentas de dineros recaudados por concepto de rifas, kermesses u otros.",
+                    "b) No rendir cuentas de dineros recaudados por concepto de rifas, kermesses o cuotas.",
+                    "c) No rendir cuentas de dineros recaudados por concepto de rifas, kermesses o donativos.",
+                    "d) No rendir cuentas de dineros recaudados por concepto de rifas, kermesses o aportes."
+                ],
+                correct: 0,
+                retro: "La falta de transparencia en fondos recaudados es infracción muy grave. [12]."
+            },
+            {
+                q: "23. ¿Qué sanciona el inciso d) del Artículo 11° respecto a las evaluaciones?",
+                options: [
+                    "a) La venta de pruebas de exámenes y los cobros de dinero por inscripción o ascensos.",
+                    "b) La venta de pruebas de exámenes y los cobros de dinero por registros o ascensos.",
+                    "c) La venta de pruebas de exámenes y los cobros de dinero por títulos o ascensos.",
+                    "d) La venta de pruebas de exámenes y los cobros de dinero por notas o ascensos."
+                ],
+                correct: 0,
+                retro: "Cualquier comercialización de instrumentos de evaluación es muy grave. [13]."
+            },
+            {
+                q: "24. ¿Qué constituye falta muy grave en el inciso f) del Artículo 11°?",
+                options: [
+                    "a) La acumulación de cargos docentes sin autorización expresa mediante Resolución Suprema.",
+                    "b) La acumulación de cargos docentes sin autorización expresa mediante Resolución Ministerial.",
+                    "c) La acumulación de cargos docentes sin autorización expresa mediante Resolución Distrital.",
+                    "d) La acumulación de cargos docentes sin autorización expresa mediante Resolución Prefectural."
+                ],
+                correct: 0,
+                retro: "Acumular cargos sin el marco legal correspondiente es infracción muy grave. [13]."
+            },
+            {
+                q: "25. ¿Qué sanciona el inciso g) del Artículo 11° en las dependencias educativas?",
+                options: [
+                    "a) La autorización del expendio y consumo de bebidas alcohólicas o drogas peligrosas.",
+                    "b) La autorización del expendio y consumo de bebidas alcohólicas o sustancias peligrosas.",
+                    "c) La autorización del expendio y consumo de bebidas alcohólicas o materiales peligrosos.",
+                    "d) La autorización del expendio y consumo de bebidas alcohólicas o elementos peligrosos."
+                ],
+                correct: 0,
+                retro: "Permitir el consumo de estas sustancias en la escuela es falta muy grave. [14]."
+            },
+            {
+                q: "26. ¿Qué infracción muy grave se describe en el inciso h) del Artículo 11°?",
+                options: [
+                    "a) La presentación en la escuela, oficina o centro de trabajo en estado de ebriedad.",
+                    "b) La presentación en la escuela, oficina o centro de trabajo en estado de confusión.",
+                    "c) La presentación en la escuela, oficina o centro de trabajo en estado de alteración.",
+                    "d) La presentación en la escuela, oficina o centro de trabajo en estado de intoxicación."
+                ],
+                correct: 0,
+                retro: "Asistir ebrio al trabajo docente es causal de sanción máxima. [14]."
+            },
+            {
+                q: "27. ¿Qué constituye falta muy grave según el inciso k) del Artículo 11°?",
+                options: [
+                    "a) La suplantación de firmas en documentos oficiales y el uso de papel membretado.",
+                    "b) La suplantación de firmas en documentos oficiales y el uso de papel institucional.",
+                    "c) La suplantación de firmas en documentos oficiales y el uso de papel administrativo.",
+                    "d) La suplantación de firmas en documentos oficiales y el uso de papel oficializado."
+                ],
+                correct: 0,
+                retro: "Falsificar firmas y mal uso de papelería oficial son faltas muy graves. [15]."
+            },
+            {
+                q: "28. ¿Qué se sanciona en el inciso m) del Artículo 11° como falta muy grave?",
+                options: [
+                    "a) Invitación al uso de substancias indebidas, corrupción, acoso sexual, estupro o violencia.",
+                    "b) Invitación al uso de substancias indebidas, corrupción, acoso sexual, estupro o agresión.",
+                    "c) Invitación al uso de substancias indebidas, corrupción, acoso sexual, estupro o maltrato.",
+                    "d) Invitación al uso de substancias indebidas, corrupción, acoso sexual, estupro o coacción."
+                ],
+                correct: 0,
+                retro: "Agrupa los delitos más graves contra la libertad y seguridad de las personas. [15]."
+            },
+            {
+                q: "29. ¿Qué criterios se consideran para aplicar sanciones según el Artículo 12°?",
+                options: [
+                    "a) Se aplicarán de acuerdo a la concurrencia de circunstancias atenuantes o agravantes.",
+                    "b) Se aplicarán de acuerdo a la concurrencia de circunstancias atenuantes o influyentes.",
+                    "c) Se aplicarán de acuerdo a la concurrencia de circunstancias atenuantes o determinantes.",
+                    "d) Se aplicarán de acuerdo a la concurrencia de circunstancias atenuantes o condicionantes."
+                ],
+                correct: 0,
+                retro: "El contexto de la falta modula la severidad de la sanción. [16]."
+            },
+            {
+                q: "30. ¿Cuáles son las sanciones para faltas leves según el Artículo 13° inciso a)?",
+                options: [
+                    "a) Amonestación privada o escrita, descuento de 1 a 5 días o traslado de trabajo.",
+                    "b) Amonestación privada o escrita, descuento de 1 a 6 días o traslado de trabajo.",
+                    "c) Amonestación privada o escrita, descuento de 1 a 7 días o traslado de trabajo.",
+                    "d) Amonestación privada o escrita, descuento de 1 a 3 días o traslado de trabajo."
+                ],
+                correct: 0,
+                retro: "Son las medidas disciplinarias de menor escala en el sistema. [16]."
+            },
+            {
+                q: "31. ¿Qué sanciones corresponden a las faltas graves según el Artículo 13° inciso b)?",
+                options: [
+                    "a) Suspensión de 15 a 60 días, postergación de ascenso por un año o descenso de cargo.",
+                    "b) Suspensión de 10 a 60 días, postergación de ascenso por un año o descenso de cargo.",
+                    "c) Suspensión de 20 a 60 días, postergación de ascenso por un año o descenso de cargo.",
+                    "d) Suspensión de 30 a 60 días, postergación de ascenso por un año o descenso de cargo."
+                ],
+                correct: 0,
+                retro: "Las sanciones graves afectan directamente la carrera y el salario. [17]."
+            },
+            {
+                q: "32. ¿Qué sanción máxima establece el Artículo 13° para faltas muy graves?",
+                options: [
+                    "a) Retiro definitivo del ejercicio del Magisterio o destitución del cargo administrativo.",
+                    "b) Retiro definitivo del ejercicio del Magisterio o suspensión del cargo administrativo.",
+                    "c) Retiro definitivo del ejercicio del Magisterio o remoción del cargo administrativo.",
+                    "d) Retiro definitivo del ejercicio del Magisterio o censura del cargo administrativo."
+                ],
+                correct: 0,
+                retro: "Implica la expulsión definitiva del sistema educativo fiscal. [17]."
+            },
+            {
+                q: "33. ¿Qué sucede con una sanción impuesta sin normas procesales (Art. 14°)?",
+                options: [
+                    "a) Toda sanción impuesta sin el cumplimiento de las normas se tendrá por inexistente.",
+                    "b) Toda sanción impuesta sin el cumplimiento de las normas se tendrá por provisional.",
+                    "c) Toda sanción impuesta sin el cumplimiento de las normas se tendrá por observada.",
+                    "d) Toda sanción impuesta sin el cumplimiento de las normas se tendrá por recurrible."
+                ],
+                correct: 0,
+                retro: "El debido proceso es requisito de validez de cualquier sanción. [17]."
+            },
+            {
+                q: "34. ¿Cómo se componen técnicamente los tribunales disciplinarios (Art. 15°)?",
+                options: [
+                    "a) De un PRESIDENTE, un FISCAL PROMOTOR y un SECRETARIO-ACTUARIO respectivamente.",
+                    "b) De un PRESIDENTE, un FISCAL PROMOTOR y un SECRETARIO-VOCAL respectivamente.",
+                    "c) De un PRESIDENTE, un FISCAL PROMOTOR y un SECRETARIO-RELATOR respectivamente.",
+                    "d) De un PRESIDENTE, un FISCAL PROMOTOR y un SECRETARIO-MINISTRO respectivamente."
+                ],
+                correct: 0,
+                retro: "Esta estructura opera tanto a nivel nacional como departamental. [18]."
+            },
+            {
+                q: "35. ¿Quién preside el Tribunal Disciplinario Nacional según el Artículo 16°?",
+                options: [
+                    "a) Estará presidido por el Director General de Educación del Ministerio correspondiente.",
+                    "b) Estará presidido por el Ministro de Educación del despacho correspondiente.",
+                    "c) Estará presidido por el Viceministro de Educación de la repartición correspondiente.",
+                    "d) Estará presidido por el Director Nacional de Escalafón de la unidad correspondiente."
+                ],
+                correct: 0,
+                retro: "El tribunal nacional tiene sede en la ciudad de La Paz. [18]."
+            },
+            {
+                q: "36. ¿Qué nivel jerárquico deben tener los miembros de los tribunales (Art. 19°)?",
+                options: [
+                    "a) Los miembros de los tribunales deberán ser de igual o superior jerarquía al encauzado.",
+                    "b) Los miembros de los tribunales deberán ser de igual o mayor categoría al encauzado.",
+                    "c) Los miembros de los tribunales deberán ser de igual o mayor antigüedad al encauzado.",
+                    "d) Los miembros de los tribunales deberán ser de igual o mayor formación al encauzado."
+                ],
+                correct: 0,
+                retro: "Garantiza que el juzgamiento sea realizado por pares o superiores. [19]."
+            },
+            {
+                q: "37. ¿Quién sanciona técnicamente las faltas leves según el Artículo 22°?",
+                options: [
+                    "a) Las faltas leves serán sancionadas por la autoridad inmediata superior del infractor.",
+                    "b) Las faltas leves serán sancionadas por el tribunal departamental del distrito.",
+                    "c) Las faltas leves serán sancionadas por la comisión de ética del establecimiento.",
+                    "d) Las faltas leves serán sancionadas por el consejo de maestros del núcleo."
+                ],
+                correct: 0,
+                retro: "Las faltas graves y muy graves requieren un proceso ante tribunal. [20]."
+            },
+            {
+                q: "38. ¿Cómo puede interponerse la denuncia según el Artículo 23°?",
+                options: [
+                    "a) La denuncia podrá ser interpuesta verbalmente o por escrito por los damnificados.",
+                    "b) La denuncia podrá ser interpuesta solo por escrito por los damnificados.",
+                    "c) La denuncia podrá ser interpuesta solo verbalmente por los damnificados.",
+                    "d) La denuncia podrá ser interpuesta mediante apoderado por los damnificados."
+                ],
+                correct: 0,
+                retro: "Si es verbal, el funcionario que la recibe debe sentar acta inmediatamente. [20]."
+            },
+            {
+                q: "39. ¿Cuál es el plazo para remitir la denuncia al Tribunal Departamental (Art. 24°)?",
+                options: [
+                    "a) Remisión de la denuncia al Tribunal Departamental dentro las 48 horas de recibida.",
+                    "b) Remisión de la denuncia al Tribunal Departamental dentro las 24 horas de recibida.",
+                    "c) Remisión de la denuncia al Tribunal Departamental dentro las 12 horas de recibida.",
+                    "d) Remisión de la denuncia al Tribunal Departamental dentro las 72 horas de recibida."
+                ],
+                correct: 0,
+                retro: "Es el primer término procesal tras recibir la denuncia formal. [21]."
+            },
+            {
+                q: "40. ¿De cuánto tiempo es el período probatorio según el Artículo 24° inciso c)?",
+                options: [
+                    "a) El período probatorio es de 20 días, prorrogables por razón de la distancia.",
+                    "b) El período probatorio es de 15 días, prorrogables por razón de la distancia.",
+                    "c) El período probatorio es de 10 días, prorrogables por razón de la distancia.",
+                    "d) El período probatorio es de 30 días, prorrogables por razón de la distancia."
+                ],
+                correct: 0,
+                retro: "En esta fase se presentan las pruebas de cargo y descargo. [21]."
+            },
+            {
+                q: "41. ¿Cuál es el término procesal para dictar el Fallo según el reglamento?",
+                options: [
+                    "a) El tribunal debe emitir el fallo en un plazo máximo de 5 días hábiles.",
+                    "b) El tribunal debe emitir el fallo en un plazo máximo de 3 días hábiles.",
+                    "c) El tribunal debe emitir el fallo en un plazo máximo de 7 días hábiles.",
+                    "d) El tribunal debe emitir el fallo en un plazo máximo de 10 días hábiles."
+                ],
+                correct: 0,
+                retro: "Es el tiempo estipulado tras concluir el periodo probatorio. [22]."
+            },
+            {
+                q: "42. ¿Cuál es el término para interponer el recurso de apelación (Art. 25°)?",
+                options: [
+                    "a) La apelación se presentará dentro de tres días ante el mismo tribunal sentenciador.",
+                    "b) La apelación se presentará dentro de cinco días ante el mismo tribunal sentenciador.",
+                    "c) La apelación se presentará dentro de dos días ante el mismo tribunal sentenciador.",
+                    "d) La apelación se presentará dentro de un día ante el mismo tribunal sentenciador."
+                ],
+                correct: 0,
+                retro: "Debe incluir la exposición de agravios por la parte afectada. [22]."
+            },
+            {
+                q: "43. ¿En qué plazo debe confirmar o revocar el fallo el tribunal de apelación (Art. 26°)?",
+                options: [
+                    "a) El tribunal de apelación resolverá en el término de 15 días desde la recepción.",
+                    "b) El tribunal de apelación resolverá en el término de 10 días desde la recepción.",
+                    "c) El tribunal de apelación resolverá en el término de 20 días desde la recepción.",
+                    "d) El tribunal de apelación resolverá en el término de 30 días desde la recepción."
+                ],
+                correct: 0,
+                retro: "Es el tiempo de actuación para el Tribunal Nacional Disciplinario. [23]."
+            },
+            {
+                q: "44. ¿Qué calidad adquiere el fallo una vez emitida la Resolución Ministerial (Art. 27°)?",
+                options: [
+                    "a) Adquiere la calidad de autoridad de cosa juzgada en la vía administrativa.",
+                    "b) Adquiere la calidad de autoridad de sentencia firme en la vía administrativa.",
+                    "c) Adquiere la calidad de autoridad de mandato legal en la vía administrativa.",
+                    "d) Adquiere la calidad de autoridad de decreto firme en la vía administrativa."
+                ],
+                correct: 0,
+                retro: "Esto significa que la resolución es definitiva y de cumplimiento obligatorio. [23]."
+            },
+            {
+                q: "45. ¿Quién es el encargado de ejecutar los fallos disciplinarios (Art. 28°)?",
+                options: [
+                    "a) La ejecución corresponde a las autoridades administrativas pertinentes del ramo.",
+                    "b) La ejecución corresponde a las autoridades judiciales pertinentes del ramo.",
+                    "c) La ejecución corresponde a las autoridades gremiales pertinentes del ramo.",
+                    "d) La ejecución corresponde a las autoridades políticas pertinentes del ramo."
+                ],
+                correct: 0,
+                retro: "Deben proceder al cumplimiento en tres días tras recibir la Resolución. [23]."
+            },
+            {
+                q: "46. ¿Dónde se guardan y custodian los expedientes de los procesos (Art. 29°)?",
+                options: [
+                    "a) En el departamento de archivo del Ministerio de Educación y Cultura.",
+                    "b) En el departamento de archivo de la Dirección Departamental de Educación.",
+                    "c) En el departamento de archivo de la Contraloría General del Estado.",
+                    "d) En el departamento de archivo de la Prefectura del Departamento."
+                ],
+                correct: 0,
+                retro: "Se debe incluir una copia legalizada en el expediente personal del interesado. [24]."
+            },
+            {
+                q: "47. Según los Vistos y Considerando, ¿por qué se renovó este reglamento en 1993?",
+                options: [
+                    "a) Porque el reglamento de 1990 adolecía de manifiestas deficiencias en sus disposiciones.",
+                    "b) Porque el reglamento de 1990 adolecía de manifiestas omisiones en sus disposiciones.",
+                    "c) Porque el reglamento de 1990 adolecía de manifiestas fracturas en sus disposiciones.",
+                    "d) Porque el reglamento de 1990 adolecía de manifiestas rupturas en sus disposiciones."
+                ],
+                correct: 0,
+                retro: "Se buscaba un ordenamiento jurídico más completo y moderno. [1]."
+            },
+            {
+                q: "48. ¿A qué personal jerárquico se aplica también este reglamento?",
+                options: [
+                    "a) Se aplica tanto a las funciones docentes como a las jerarquías educativas.",
+                    "b) Se aplica tanto a las funciones docentes como a las jerarquías distritales.",
+                    "c) Se aplica tanto a las funciones docentes como a las jerarquías sindicales.",
+                    "d) Se aplica tanto a las funciones docentes como a las jerarquías políticas."
+                ],
+                correct: 0,
+                retro: "Ningún cargo está exento del cumplimiento del reglamento de faltas. [5]."
+            },
+            {
+                q: "49. ¿Qué prohíbe el Artículo 4° respecto al juzgamiento de maestros?",
+                options: [
+                    "a) Prohíbe el juzgamiento por comisiones especiales o tribunales extraordinarios.",
+                    "b) Prohíbe el juzgamiento por comisiones mixtas o tribunales extraordinarios.",
+                    "c) Prohíbe el juzgamiento por comisiones distritales o tribunales extraordinarios.",
+                    "d) Prohíbe el juzgamiento por comisiones gremiales o tribunales extraordinarios."
+                ],
+                correct: 0,
+                retro: "Solo los tribunales legalmente constituidos pueden procesar faltas. [4]."
+            },
+            {
+                q: "50. ¿Qué falta grave se tipifica en el inciso t) del Artículo 10°?",
+                options: [
+                    "a) La inmoralidad y los vicios en el ejercicio de las funciones educativas.",
+                    "b) La inmoralidad y los vicios en el ámbito de las funciones educativas.",
+                    "c) La inmoralidad y los vicios en el marco de las funciones educativas.",
+                    "d) La inmoralidad y los vicios en el plano de las funciones educativas."
+                ],
+                correct: 0,
+                retro: "Conductas inmorales son sancionadas como infracciones graves. [12]."
+            }
+        ];
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

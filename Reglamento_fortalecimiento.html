@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortalecimiento de la Educación Inclusiva (Modalidad Indirecta)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="header-content">
+            <div class="pc-doctor-title">PC DOCTOR</div>
+            <p class="welcome-elaborado">MATERIAL ELABORADO POR EL:</p>
+            <p class="welcome-profesor">Prof. Daniel Llanos</p>
+            <p class="welcome-celular">📱 Celular: 75136639</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="main-title">Fortalecimiento de la Educación Inclusiva (Modalidad Indirecta)</h1>
+        <p class="subtitle">Cuestionario de Educación Inclusiva</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. ¿Cuál es el objeto principal del Reglamento para el Fortalecimiento de la Educación Inclusiva?",
+                options: [
+                    "a) Garantizar el acceso, permanencia y conclusión de procesos educativos de la población del ámbito especial.",
+                    "b) Garantizar el acceso, permanencia y conclusión de procesos educativos de la población del ámbito técnico.",
+                    "c) Garantizar el acceso, permanencia y conclusión de procesos educativos de la población del ámbito social.",
+                    "d) Garantizar el acceso, permanencia y conclusión de procesos educativos de la población del ámbito directo."
+                ],
+                correct: 0,
+                retro: "Busca asegurar el derecho a la educación en Regular, Superior y Alternativa. (Art. 1, p. 5)."
+            },
+            {
+                q: "2. ¿A qué poblaciones específicas beneficia este reglamento en las unidades educativas?",
+                options: [
+                    "a) Estudiantes con discapacidad, dificultades en el aprendizaje y talento extraordinario.",
+                    "b) Estudiantes con discapacidad, dificultades en el aprendizaje y problemas de conducta.",
+                    "c) Estudiantes con discapacidad, dificultades en el aprendizaje y rezago escolar técnico.",
+                    "d) Estudiantes con discapacidad, dificultades en el aprendizaje y vulnerabilidad directa."
+                ],
+                correct: 0,
+                retro: "Cubre a los tres grupos principales matriculados en el SEP. (Art. 1, p. 5)."
+            },
+            {
+                q: "3. ¿Qué marco pedagógico sustenta la aplicación de este reglamento según el Artículo 1?",
+                options: [
+                    "a) El Modelo Educativo Sociocomunitario Productivo y el Diseño Plural para los Aprendizajes.",
+                    "b) El Modelo Educativo Sociocomunitario Productivo y el Diseño Técnico para los Aprendizajes.",
+                    "c) El Modelo Educativo Sociocomunitario Productivo y el Diseño Lógico para los Aprendizajes.",
+                    "d) El Modelo Educativo Sociocomunitario Productivo y el Diseño Directo para los Aprendizajes."
+                ],
+                correct: 0,
+                retro: "Se alinea con la política educativa plurinacional actual. (Art. 1, p. 5)."
+            },
+            {
+                q: "4. ¿Cuál es el ámbito de aplicación obligatoria de este reglamento?",
+                options: [
+                    "a) Instituciones educativas fiscales, de convenio y privadas de todo el Sistema Educativo.",
+                    "b) Instituciones educativas fiscales, de convenio y técnicas de todo el Sistema Educativo.",
+                    "c) Instituciones educativas fiscales, de convenio y sociales de todo el Sistema Educativo.",
+                    "d) Instituciones educativas fiscales, de convenio y directas de todo el Sistema Educativo."
+                ],
+                correct: 0,
+                retro: "Alcanza a directivos, maestros y personal administrativo de todo el SEP. (Art. 2, p. 5)."
+            },
+            {
+                q: "5. ¿Cómo se define la 'Evaluación Multidisciplinaria' en el Artículo 4?",
+                options: [
+                    "a) Obtención y análisis de información especializada que valora el neurodesarrollo integral.",
+                    "b) Obtención y análisis de información especializada que valora el neurodesarrollo técnico.",
+                    "c) Obtención y análisis de información especializada que valora el neurodesarrollo lógico.",
+                    "d) Obtención y análisis de información especializada que valora el neurodesarrollo directo."
+                ],
+                correct: 0,
+                retro: "Permite crear condiciones para el recorrido educativo más pertinente. (Art. 4a, p. 6)."
+            },
+            {
+                q: "6. ¿Quiénes son los 'Maestros de Apoyo Educativo' según las definiciones?",
+                options: [
+                    "a) Profesionales responsables de orientación, asesoramiento y sensibilización en Modalidad Indirecta.",
+                    "b) Profesionales responsables de orientación, asesoramiento y gestión técnica en Modalidad Indirecta.",
+                    "c) Profesionales responsables de orientación, asesoramiento y control lógico en Modalidad Indirecta.",
+                    "d) Profesionales responsables de orientación, asesoramiento y revisión directa en Modalidad Indirecta."
+                ],
+                correct: 0,
+                retro: "Su propósito es equiparar condiciones de acceso a los procesos de aula. (Art. 4b, p. 6)."
+            },
+            {
+                q: "7. ¿Qué es el 'Plan de Apoyo Técnico Pedagógico'?",
+                options: [
+                    "a) Instrumento de planificación con acciones operativas coordinadas entre apoyo y aula.",
+                    "b) Instrumento de planificación con acciones operativas coordinadas entre apoyo y técnica.",
+                    "c) Instrumento de planificación con acciones operativas coordinadas entre apoyo y gestión.",
+                    "d) Instrumento de planificación con acciones operativas coordinadas entre apoyo y norma."
+                ],
+                correct: 0,
+                retro: "Garantiza procesos educativos pertinentes e igualdad de oportunidades. (Art. 4c, p. 6)."
+            },
+            {
+                q: "8. ¿Cómo se definen los estudiantes con 'Dificultades en el Aprendizaje'?",
+                options: [
+                    "a) Presentan necesidades temporales o permanentes que no provienen de factores intelectuales.",
+                    "b) Presentan necesidades temporales o permanentes que no provienen de factores técnicos.",
+                    "c) Presentan necesidades temporales o permanentes que no provienen de factores lógicos.",
+                    "d) Presentan necesidades temporales o permanentes que no provienen de factores directos."
+                ],
+                correct: 0,
+                retro: "Son interferencias en el rendimiento sin base sensorial o intelectual. (Art. 4e, p. 6)."
+            },
+            {
+                q: "9. ¿Qué define a los estudiantes con 'Talento Extraordinario'?",
+                options: [
+                    "a) Presentan mayor desarrollo de capacidades superiores y transformadoras a lo esperado.",
+                    "b) Presentan mayor desarrollo de capacidades técnicas y transformadoras a lo esperado.",
+                    "c) Presentan mayor desarrollo de capacidades lógicas y transformadoras a lo esperado.",
+                    "d) Presentan mayor desarrollo de capacidades directas y transformadoras a lo esperado."
+                ],
+                correct: 0,
+                retro: "Destacan en dimensiones del ser, saber, hacer y decidir. (Art. 4f, p. 6)."
+            },
+            {
+                q: "10. ¿Qué es el 'Diseño Plural para los Aprendizajes' (DPA)?",
+                options: [
+                    "a) Orientaciones para el desarrollo del currículo que alcanzan a todos en la mayor medida.",
+                    "b) Orientaciones para el desarrollo del currículo que alcanzan a todos en la mayor técnica.",
+                    "c) Orientaciones para el desarrollo del currículo que alcanzan a todos en la mayor lógica.",
+                    "d) Orientaciones para el desarrollo del currículo que alcanzan a todos en la mayor gestión."
+                ],
+                correct: 0,
+                retro: "Genera condiciones educativas bajo principios de Educación Inclusiva. (Art. 4g, p. 6)."
+            },
+            {
+                q: "11. ¿En qué consiste la 'Educación Inclusiva' como política de Estado?",
+                options: [
+                    "a) Respuestas oportunas a necesidades, ritmos, estilos y potencialidades de aprendizaje.",
+                    "b) Respuestas oportunas a necesidades, técnicas, estilos y potencialidades de aprendizaje.",
+                    "c) Respuestas oportunas a necesidades, lógicas, estilos y potencialidades de aprendizaje.",
+                    "d) Respuestas oportunas a necesidades, gestiones, estilos y potencialidades de aprendizaje."
+                ],
+                correct: 0,
+                retro: "Es parte indisoluble del Modelo Educativo Sociocomunitario Productivo. (Art. 4h, p. 6)."
+            },
+            {
+                q: "12. ¿Qué sistemas incluye la 'Comunicación Alternativa y Aumentativa'?",
+                options: [
+                    "a) Sistemas lingüísticos como la Lengua de Señas Boliviana (LSB) y el Sistema Braille.",
+                    "b) Sistemas lingüísticos como la Lengua de Señas Técnica (LST) y el Sistema Braille.",
+                    "c) Sistemas lingüísticos como la Lengua de Señas Lógica (LSL) y el Sistema Braille.",
+                    "d) Sistemas lingüísticos como la Lengua de Señas Directa (LSD) y el Sistema Braille."
+                ],
+                correct: 0,
+                retro: "Facilitan el aprendizaje de estudiantes con discapacidad sensorial. (Art. 4i, p. 7)."
+            },
+            {
+                q: "13. ¿Qué es la 'Trayectoria Educativa' según el Artículo 4 literal j?",
+                options: [
+                    "a) Historial secuencial, cronológico e individual del recorrido educativo del estudiante.",
+                    "b) Historial secuencial, cronológico e individual del recorrido técnico del estudiante.",
+                    "c) Historial secuencial, cronológico e individual del recorrido lógico del estudiante.",
+                    "d) Historial secuencial, cronológico e individual del recorrido directo del estudiante."
+                ],
+                correct: 0,
+                retro: "Se registra en un Archivo Personal con intervenciones y logros. (Art. 4j, p. 7)."
+            },
+            {
+                q: "14. ¿Cuál es una finalidad primordial del reglamento (Art. 5)?",
+                options: [
+                    "a) Efectivizar la atención educativa con calidad y calidez en todos los niveles del SEP.",
+                    "b) Efectivizar la atención educativa con técnica y calidez en todos los niveles del SEP.",
+                    "c) Efectivizar la atención educativa con gestión y calidez en todos los niveles del SEP.",
+                    "d) Efectivizar la atención educativa con norma y calidez en todos los niveles del SEP."
+                ],
+                correct: 0,
+                retro: "Busca consolidar el compromiso de la comunidad con la inclusión. (Art. 5a, p. 7)."
+            },
+            {
+                q: "15. ¿Qué garantiza el reglamento respecto a la matriculación (Art. 5)?",
+                options: [
+                    "a) Promover la inscripción sin discriminación alguna en instituciones fiscales y privadas.",
+                    "b) Promover la inscripción sin discriminación técnica en instituciones fiscales y privadas.",
+                    "c) Promover la inscripción sin discriminación lógica en instituciones fiscales y privadas.",
+                    "d) Promover la inscripción sin discriminación directa en instituciones fiscales y privadas."
+                ],
+                correct: 0,
+                retro: "Se debe asegurar el acceso equitativo a una educación de calidad. (Art. 5d, p. 7)."
+            },
+            {
+                q: "16. ¿Qué criterio rige para la inscripción de estudiantes en el SEP (Art. 6)?",
+                options: [
+                    "a) Independientemente de sus condiciones del neurodesarrollo, personales o sociales.",
+                    "b) Independientemente de sus condiciones técnicas, personales o sociales.",
+                    "c) Independientemente de sus condiciones lógicas, personales o sociales.",
+                    "d) Independientemente de sus condiciones directas, personales o sociales."
+                ],
+                correct: 0,
+                retro: "Las instituciones deben inscribir a todos sin exclusión. (Art. 6a, p. 8)."
+            },
+            {
+                q: "17. ¿Es requisito la inscripción previa en Educación Especial para entrar a Regular?",
+                options: [
+                    "a) No, no es un pre-requisito su inscripción previa en el ámbito de Educación Especial.",
+                    "b) Sí, es un pre-requisito su inscripción previa en el ámbito de Educación Especial.",
+                    "c) Solo en casos de discapacidad intelectual técnica es pre-requisito la inscripción.",
+                    "d) Solo en casos de discapacidad sensorial directa es pre-requisito la inscripción."
+                ],
+                correct: 0,
+                retro: "Los estudiantes pueden inscribirse simultáneamente con el mismo RUDE. (Art. 6b, p. 8)."
+            },
+            {
+                q: "18. ¿Qué margen de edad se permite para inscribirse en Inicial y Primaria con discapacidad intelectual?",
+                options: [
+                    "a) Podrán inscribirse con una diferencia de hasta 24 meses con relación a sus pares.",
+                    "b) Podrán inscribirse con una diferencia de hasta 12 meses con relación a sus pares.",
+                    "c) Podrán inscribirse con una diferencia de hasta 36 meses con relación a sus pares.",
+                    "d) Podrán inscribirse con una diferencia de hasta 48 meses con relación a sus pares."
+                ],
+                correct: 0,
+                retro: "Requiere un informe de evaluación multidisciplinaria que lo confirme. (Art. 6d, p. 8)."
+            },
+            {
+                q: "19. ¿Cuál es la obligación de la unidad de origen ante un traslado de estudiante (Art. 7)?",
+                options: [
+                    "a) Remitir el archivo de trayectoria educativa a la institución de destino.",
+                    "b) Remitir el archivo de trayectoria técnica a la institución de destino.",
+                    "c) Remitir el archivo de trayectoria lógica a la institución de destino.",
+                    "d) Remitir el archivo de trayectoria directa a la institución de destino."
+                ],
+                correct: 0,
+                retro: "Garantiza la continuidad del proceso de apoyo educativo integral. (Art. 7a, p. 8)."
+            },
+            {
+                q: "20. ¿Qué instrumentos deben incorporar progresivamente las instituciones en su planificación?",
+                options: [
+                    "a) El Diseño Plural para los Aprendizajes (DPA) en todos sus componentes.",
+                    "b) El Diseño Técnico para los Aprendizajes (DTA) en todos sus componentes.",
+                    "c) El Diseño Lógico para los Aprendizajes (DLA) en todos sus componentes.",
+                    "d) El Diseño Directo para los Aprendizajes (DDA) en todos sus componentes."
+                ],
+                correct: 0,
+                retro: "Se aplica en Proyecto Educativo e instrumentos curriculares de aula. (Art. 8a, p. 9)."
+            },
+            {
+                q: "21. ¿Qué responsabilidad tienen las Direcciones Departamentales de Educación (DDE)?",
+                options: [
+                    "a) Planificar, organizar, monitorear y evaluar las disposiciones del reglamento.",
+                    "b) Planificar, organizar, monitorear y evaluar las disposiciones de la técnica.",
+                    "c) Planificar, organizar, monitorear y evaluar las disposiciones de la gestión.",
+                    "d) Planificar, organizar, monitorear y evaluar las disposiciones de la norma."
+                ],
+                correct: 0,
+                retro: "Lo hacen a través de las subdirecciones de los tres subsistemas. (Art. 10a, p. 9)."
+            },
+            {
+                q: "22. ¿Cuál es el rol de las Direcciones Distritales Educativas (Art. 11)?",
+                options: [
+                    "a) Desarrollar procesos de seguimiento para garantizar el apoyo educativo.",
+                    "b) Desarrollar procesos de seguimiento para garantizar el apoyo técnico.",
+                    "c) Desarrollar procesos de seguimiento para garantizar el apoyo lógico.",
+                    "d) Desarrollar procesos de seguimiento para garantizar el apoyo directo."
+                ],
+                correct: 0,
+                retro: "Deben promover el acceso en el marco de la normativa vigente. (Art. 11a, p. 9)."
+            },
+            {
+                q: "23. ¿Qué debe garantizar el Director de la Unidad Educativa Inclusiva (Art. 12)?",
+                options: [
+                    "a) La inscripción o matriculación según normativa y convocatoria vigente.",
+                    "b) La inscripción o matriculación según técnica y convocatoria vigente.",
+                    "c) La inscripción o matriculación según gestión y convocatoria vigente.",
+                    "d) La inscripción o matriculación según norma y convocatoria vigente."
+                ],
+                correct: 0,
+                retro: "Debe coordinar la atención bajo las mismas condiciones que sus pares. (Art. 12a, p. 10)."
+            },
+            {
+                q: "24. ¿Qué enfoque debe tener la infraestructura escolar según el reglamento?",
+                options: [
+                    "a) Enfoque de 'Usos Universales' para eliminar barreras arquitectónicas.",
+                    "b) Enfoque de 'Usos Técnicos' para eliminar barreras arquitectónicas.",
+                    "c) Enfoque de 'Usos Lógicos' para eliminar barreras arquitectónicas.",
+                    "d) Enfoque de 'Usos Directos' para eliminar barreras arquitectónicas."
+                ],
+                correct: 0,
+                retro: "El director debe viabilizar remodelaciones ante instancias correspondientes. (Art. 12f, p. 10)."
+            },
+            {
+                q: "25. ¿Cuál es una responsabilidad clave del Maestro de Aula (Art. 13)?",
+                options: [
+                    "a) Desarrollar la Planificación Curricular de Aula y procesos educativos accesibles.",
+                    "b) Desarrollar la Planificación Curricular de Aula y procesos educativos técnicos.",
+                    "c) Desarrollar la Planificación Curricular de Aula y procesos educativos lógicos.",
+                    "d) Desarrollar la Planificación Curricular de Aula y procesos educativos directos."
+                ],
+                correct: 0,
+                retro: "Debe basarse en el DPA según las necesidades de la diversidad. (Art. 13a, p. 10)."
+            },
+            {
+                q: "26. ¿Qué debe hacer el estudiante con necesidades educativas (Art. 14)?",
+                options: [
+                    "a) Cumplir las tareas de su grado con las adecuaciones necesarias.",
+                    "b) Cumplir las tareas de su grado con las adecuaciones técnicas.",
+                    "c) Cumplir las tareas de su grado con las adecuaciones lógicas.",
+                    "d) Cumplir las tareas de su grado con las adecuaciones directas."
+                ],
+                correct: 0,
+                retro: "Se debe garantizar el respeto a su individualidad sociocultural. (Art. 14a, p. 11)."
+            },
+            {
+                q: "27. ¿Qué responsabilidad tienen los padres de familia (Art. 15)?",
+                options: [
+                    "a) Apoyar y orientar a sus hijos para generar condiciones educativas favorables.",
+                    "b) Apoyar y orientar a sus hijos para generar condiciones técnicas favorables.",
+                    "c) Apoyar y orientar a sus hijos para generar condiciones lógicas favorables.",
+                    "d) Apoyar y orientar a sus hijos para generar condiciones directas favorables."
+                ],
+                correct: 0,
+                retro: "Deben promover actitudes de respeto y empatía para la convivencia. (Art. 15a, p. 11)."
+            },
+            {
+                q: "28. ¿Qué papel juega el Director del Centro de Educación Especial (CEE)?",
+                options: [
+                    "a) Organizar y planificar las acciones técnico pedagógicas de los maestros de apoyo.",
+                    "b) Organizar y planificar las acciones técnico pedagógicas de los maestros técnicos.",
+                    "c) Organizar y planificar las acciones técnico pedagógicas de los maestros lógicos.",
+                    "d) Organizar y planificar las acciones técnico pedagógicas de los maestros directos."
+                ],
+                correct: 0,
+                retro: "Debe garantizar apoyos oportunos, pertinentes y de calidad. (Art. 16a, p. 11)."
+            },
+            {
+                q: "29. ¿Cuál es la función del Maestro de Apoyo respecto al personal docente (Art. 17)?",
+                options: [
+                    "a) Asesorar, orientar y capacitar en la aplicación del DPA y adaptaciones.",
+                    "b) Asesorar, orientar y capacitar en la aplicación de la técnica y adaptaciones.",
+                    "c) Asesorar, orientar y capacitar en la aplicación de la gestión y adaptaciones.",
+                    "d) Asesorar, orientar y capacitar en la aplicación de la norma y adaptaciones."
+                ],
+                correct: 0,
+                retro: "Debe coordinar permanentemente con los maestros de aula. (Art. 17a, p. 11)."
+            },
+            {
+                q: "30. ¿Qué informe debe reportar el Maestro de Apoyo (Art. 17)?",
+                options: [
+                    "a) Informe escrito del proceso de apoyo técnico pedagógico al CEE.",
+                    "b) Informe escrito del proceso de apoyo técnico pedagógico a la técnica.",
+                    "c) Informe escrito del proceso de apoyo técnico pedagógico a la gestión.",
+                    "d) Informe escrito del proceso de apoyo técnico pedagógico a la norma."
+                ],
+                correct: 0,
+                retro: "Requiere el visto bueno de la Institución Educativa correspondiente. (Art. 17h, p. 12)."
+            },
+            {
+                q: "31. ¿Qué perfil debe tener el Maestro de Apoyo para Discapacidad Auditiva?",
+                options: [
+                    "a) Alto nivel de conocimiento y manejo de la Lengua de Señas Boliviana (LSB).",
+                    "b) Alto nivel de conocimiento y manejo de la Lengua de Señas Técnica (LST).",
+                    "c) Alto nivel de conocimiento y manejo de la Lengua de Señas Lógica (LSL).",
+                    "d) Alto nivel de conocimiento y manejo de la Lengua de Señas Directa (LSD)."
+                ],
+                correct: 0,
+                retro: "Debe actualizarse progresivamente para el grado y nivel académico. (Art. 19a, p. 12)."
+            },
+            {
+                q: "32. ¿Cuál es el objetivo del proceso de interpretación de LSB (Art. 22)?",
+                options: [
+                    "a) Eliminar las barreras de comunicación para transmitir contenidos curriculares.",
+                    "b) Eliminar las barreras de comunicación para transmitir contenidos técnicos.",
+                    "c) Eliminar las barreras de comunicación para transmitir contenidos lógicos.",
+                    "d) Eliminar las barreras de comunicación para transmitir contenidos directos."
+                ],
+                correct: 0,
+                retro: "Busca una transmisión accesible, clara, precisa y confiable. (Art. 22, p. 13)."
+            },
+            {
+                q: "33. ¿Qué vestimenta se recomienda para el acto de interpretación?",
+                options: [
+                    "a) Adecuada y cómoda, sin distractores visuales ni joyas vistosas.",
+                    "b) Adecuada y cómoda, sin distractores técnicos ni joyas vistosas.",
+                    "c) Adecuada y cómoda, sin distractores lógicos ni joyas vistosas.",
+                    "d) Adecuada y cómoda, sin distractores directos ni joyas vistosas."
+                ],
+                correct: 0,
+                retro: "Debe respetar la cultura sorda evitando interferencias visuales. (Art. 23, p. 13)."
+            },
+            {
+                q: "34. ¿Qué debe evitar el maestro de apoyo según el Artículo 24?",
+                options: [
+                    "a) Caer en el error de hacer las tareas de los estudiantes.",
+                    "b) Caer en el error de hacer las tareas técnicas de los estudiantes.",
+                    "c) Caer en el error de hacer las tareas lógicas de los estudiantes.",
+                    "d) Caer en el error de hacer las tareas directas de los estudiantes."
+                ],
+                correct: 0,
+                retro: "Debe promover la independencia y responsabilidad del alumno. (Art. 24h, p. 14)."
+            },
+            {
+                q: "35. ¿Qué capacidad técnica requiere el Maestro de Apoyo en Discapacidad Visual?",
+                options: [
+                    "a) Dominio de la signografía Braille, macrotipo y conocimientos de tiflología.",
+                    "b) Dominio de la signografía Braille, macrotipo y conocimientos de técnica.",
+                    "c) Dominio de la signografía Braille, macrotipo y conocimientos de gestión.",
+                    "d) Dominio de la signografía Braille, macrotipo y conocimientos de norma."
+                ],
+                correct: 0,
+                retro: "Debe realizar adaptaciones en alto y bajo relieve. (Art. 27, p. 14)."
+            },
+            {
+                q: "36. ¿Qué estrategias pedagógicas prioriza el aula con estudiantes ciegos (Art. 31)?",
+                options: [
+                    "a) Privilegiar elementos sonoros y/o en relieve y macrotipo.",
+                    "b) Privilegiar elementos técnicos y/o en relieve y macrotipo.",
+                    "c) Privilegiar elementos lógicos y/o en relieve y macrotipo.",
+                    "d) Privilegiar elementos directos y/o en relieve y macrotipo."
+                ],
+                correct: 0,
+                retro: "Los materiales deben contar con contraste de color o iluminación. (Art. 31a, p. 16)."
+            },
+            {
+                q: "37. ¿Qué formación complementaria requiere el apoyo en Discapacidad Intelectual?",
+                options: [
+                    "a) Formación post gradual inherente al área de atención específica.",
+                    "b) Formación post gradual inherente al área de técnica específica.",
+                    "c) Formación post gradual inherente al área de gestión específica.",
+                    "d) Formación post gradual inherente al área de norma específica."
+                ],
+                correct: 0,
+                retro: "Debe contar con formación continua en áreas afines. (Art. 32, p. 17)."
+            },
+            {
+                q: "38. ¿Qué documento es obligatorio para estudiantes con TEA (Espectro Autista)?",
+                options: [
+                    "a) Informe de evaluación integral multidisciplinario que recomiende Educación Regular.",
+                    "b) Informe de evaluación integral multidisciplinario que recomiende técnica Regular.",
+                    "c) Informe de evaluación integral multidisciplinario que recomiende gestión Regular.",
+                    "d) Informe de evaluación integral multidisciplinario que recomiende norma Regular."
+                ],
+                correct: 0,
+                retro: "Se busca garantizar el acceso y permanencia con apoyos adecuados. (Art. 37, p. 18)."
+            },
+            {
+                q: "39. ¿Qué niveles prioriza el apoyo en Dificultades en el Aprendizaje (Art. 41)?",
+                options: [
+                    "a) Primaria Comunitaria Vocacional, énfasis de 1ro a 3ro en sentido preventivo.",
+                    "b) Primaria Comunitaria Vocacional, énfasis de 1ro a 3ro en sentido técnico.",
+                    "c) Primaria Comunitaria Vocacional, énfasis de 1ro a 3ro en sentido lógico.",
+                    "d) Primaria Comunitaria Vocacional, énfasis de 1ro a 3ro en sentido directo."
+                ],
+                correct: 0,
+                retro: "De 4to a 6to el apoyo tiene un sentido reeducativo. (Art. 41, p. 20)."
+            },
+            {
+                q: "40. ¿Quiénes son los responsables de la detección de Talento Extraordinario?",
+                options: [
+                    "a) Las maestras y maestros de aula de Educación Regular.",
+                    "b) Las maestras y maestros de aula de Educación Técnica.",
+                    "c) Las maestras y maestros de aula de Educación Lógica.",
+                    "d) Las maestras y maestros de aula de Educación Directa."
+                ],
+                correct: 0,
+                retro: "Deben remitir señales de alerta a la Comisión Técnica Pedagógica. (Art. 48, p. 22)."
+            },
+            {
+                q: "41. ¿Qué relación docente-estudiante rige para Dificultades en el Aprendizaje?",
+                options: [
+                    "a) Un ítem completo para más de 20 estudiantes atendidos.",
+                    "b) Un ítem completo para más de 15 estudiantes atendidos.",
+                    "c) Un ítem completo para más de 10 estudiantes atendidos.",
+                    "d) Un ítem completo para más de 05 estudiantes atendidos."
+                ],
+                correct: 0,
+                retro: "La carga horaria individualizada es de 4 horas promedio. (Art. 55, p. 24)."
+            },
+            {
+                q: "42. ¿Cuál es el número máximo de alumnos por ítem en Discapacidad Visual?",
+                options: [
+                    "a) Más de 5 estudiantes por ítem completo según el reglamento.",
+                    "b) Más de 4 estudiantes por ítem completo según el reglamento.",
+                    "c) Más de 3 estudiantes por ítem completo según el reglamento.",
+                    "d) Más de 2 estudiantes por ítem completo según el reglamento."
+                ],
+                correct: 0,
+                retro: "La carga horaria individualizada es de 12 horas promedio. (Art. 55, p. 24)."
+            },
+            {
+                q: "43. ¿Y para Discapacidad Auditiva, cuál es la relación?",
+                options: [
+                    "a) Más de 4 estudiantes por ítem completo con carga horaria de 8 horas.",
+                    "b) Más de 5 estudiantes por ítem completo con carga horaria de 8 horas.",
+                    "c) Más de 6 estudiantes por ítem completo con carga horaria de 8 horas.",
+                    "d) Más de 7 estudiantes por ítem completo con carga horaria de 8 horas."
+                ],
+                correct: 0,
+                retro: "Se busca un apoyo personalizado para el manejo de LSB. (Art. 55, p. 24)."
+            },
+            {
+                q: "44. ¿De quién dependen directamente los maestros de apoyo de Modalidad Indirecta?",
+                options: [
+                    "a) Dependen directamente del Centro de Educación Especial (CEE).",
+                    "b) Dependen directamente del Centro de Educación Técnica (CET).",
+                    "c) Dependen directamente del Centro de Educación Lógica (CEL).",
+                    "d) Dependen directamente del Centro de Educación Directa (CED)."
+                ],
+                correct: 0,
+                retro: "Su control está a cargo de los directores de los CEEs. (Art. 56a, p. 24)."
+            },
+            {
+                q: "45. ¿Cuándo puede extenderse el apoyo a un radio intermunicipal (Art. 57)?",
+                options: [
+                    "a) Por inexistencia de Centros de Educación Especial en el Municipio.",
+                    "b) Por inexistencia de Centros de Educación Técnica en el Municipio.",
+                    "c) Por inexistencia de Centros de Educación Lógica en el Municipio.",
+                    "d) Por inexistencia de Centros de Educación Directa en el Municipio."
+                ],
+                correct: 0,
+                retro: "También por falta de acreditación en el área requerida. (Art. 57a, p. 24)."
+            },
+            {
+                q: "46. ¿A qué poblaciones llega la cobertura de maestros itinerantes (Art. 58)?",
+                options: [
+                    "a) Lugares de difícil acceso, zonas dispersas, fronterizas y de riveras.",
+                    "b) Lugares de difícil acceso, zonas técnicas, fronterizas y de riveras.",
+                    "c) Lugares de difícil acceso, zonas lógicas, fronterizas y de riveras.",
+                    "d) Lugares de difícil acceso, zonas sociales, fronterizas y de riveras."
+                ],
+                correct: 0,
+                retro: "Garantiza el derecho sin límites territoriales o jurisdiccionales. (Art. 58a, p. 25)."
+            },
+            {
+                q: "47. ¿Qué vinculación permite el Plan de Apoyo Técnico Pedagógico?",
+                options: [
+                    "a) Vincula a los CEEs con las Instituciones Educativas Inclusivas del SEP.",
+                    "b) Vincula a los CEEs con las Instituciones Educativas Técnicas del SEP.",
+                    "c) Vincula a los CEEs con las Instituciones Educativas Lógicas del SEP.",
+                    "d) Vincula a los CEEs con las Instituciones Educativas Directas del SEP."
+                ],
+                correct: 0,
+                retro: "Crea las condiciones más adecuadas y pertinentes de aprendizaje. (Art. 59, p. 25)."
+            },
+            {
+                q: "48. ¿Bajo qué requisito se accede a los apoyos educativos del CEE?",
+                options: [
+                    "a) Matricularse de forma simultánea en el CEE y en su otro subsistema.",
+                    "b) Matricularse de forma técnica en el CEE y en su otro subsistema.",
+                    "c) Matricularse de forma lógica en el CEE y en su otro subsistema.",
+                    "d) Matricularse de forma directa en el CEE y en su otro subsistema."
+                ],
+                correct: 0,
+                retro: "Esta doble matriculación se hace con el mismo código RUDE. (Art. 61, p. 25)."
+            },
+            {
+                q: "49. ¿Para qué puede convocar la Comisión Técnica Pedagógica al apoyo (Art. 62)?",
+                options: [
+                    "a) Para fines de información, orientación, asesoramiento y capacitación.",
+                    "b) Para fines de información, técnica, asesoramiento y capacitación.",
+                    "c) Para fines de información, lógica, asesoramiento y capacitación.",
+                    "d) Para fines de información, gestión, asesoramiento y capacitación."
+                ],
+                correct: 0,
+                retro: "Es una instancia de coordinación vital para el éxito de la inclusión. (Art. 62, p. 26)."
+            },
+            {
+                q: "50. ¿Modifica este reglamento el Escalafón docente (Disposición Segunda)?",
+                options: [
+                    "a) No, los artículos mencionados en el reglamento no modifican el Escalafón.",
+                    "b) Sí, los artículos mencionados en el reglamento modifican el Escalafón.",
+                    "c) Solo los artículos referidos a la técnica modifican el Escalafón.",
+                    "d) Solo los artículos referidos a la gestión modifican el Escalafón."
+                ],
+                correct: 0,
+                retro: "Se rige bajo los Art. 36 y 67 de la Ley Avelino Siñani - Elizardo Pérez. (Final Segunda, p. 26)."
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        quizData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `<div class='question-text'><strong>${item.q}</strong></div>`;
+            const list = document.createElement('ul');
+            item.options.forEach((opt, idx) => {
+                const li = document.createElement('li');
+                li.innerText = opt;
+                li.onclick = () => {
+                    const allLi = list.querySelectorAll('li');
+                    allLi.forEach(l => l.style.pointerEvents = 'none');
+                    const fb = document.getElementById(`fb-${index}`);
+                    fb.style.display = 'block';
+                    if(idx === item.correct) {
+                        li.classList.add('selected-correct');
+                        fb.innerHTML = "¡Correcto! " + item.retro;
+                        fb.style.background = "#d4edda";
+                    } else {
+                        li.classList.add('selected-incorrect');
+                        fb.innerText = "¡Incorrrecto!";
+                        fb.style.background = "#f8d7da";
+                    }
+                };
+                list.appendChild(li);
+            });
+            card.appendChild(list);
+            const fbDiv = document.createElement('div');
+            fbDiv.id = `fb-${index}`; fbDiv.className = 'feedback';
+            card.appendChild(fbDiv);
+            container.appendChild(card);
+        });
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

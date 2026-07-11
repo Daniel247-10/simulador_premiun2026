@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño, Desarrollo e Innovación del Currículo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="header-content">
+            <div class="pc-doctor-title">PC DOCTOR</div>
+            <p class="welcome-elaborado">MATERIAL ELABORADO POR EL:</p>
+            <p class="welcome-profesor">Prof. Daniel Llanos</p>
+            <p class="welcome-celular">📱 Celular: 75136639</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="main-title">Diseño, Desarrollo e Innovación del Currículo</h1>
+        <p class="subtitle">Cuestionario de Innovación Curricular</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. Según la UNESCO (2014), ¿qué define técnicamente a la innovación educativa?",
+                options: [
+                    "a) Un acto deliberado y planificado de solución de problemas para lograr calidad.",
+                    "b) Un acto espontáneo y planificado de solución de problemas para lograr calidad.",
+                    "c) Un acto deliberado y sistemático de solución de problemas para lograr calidad.",
+                    "d) Un acto deliberado y coordinado de solución de problemas para lograr calidad."
+                ],
+                correct: 0,
+                retro: "Busca superar el paradigma tradicional y el aprendizaje pasivo [1, 2]."
+            },
+            {
+                q: "2. ¿Qué implica trascender el conocimiento academicista en la innovación?",
+                options: [
+                    "a) Pasar del aprendizaje pasivo del estudiante a una concepción de interacción social.",
+                    "b) Pasar del aprendizaje pasivo del estudiante a una concepción de interacción técnica.",
+                    "c) Pasar del aprendizaje pasivo del estudiante a una concepción de interacción lógica.",
+                    "d) Pasar del aprendizaje pasivo del estudiante a una concepción de interacción directa."
+                ],
+                correct: 0,
+                retro: "El aprendizaje es interacción y se construye entre todos los actores [1]."
+            },
+            {
+                q: "3. ¿Por qué se afirma que en educación no se parte de cero al innovar?",
+                options: [
+                    "a) Porque siempre hay un camino recorrido y una experiencia desde la cual avanzar.",
+                    "b) Porque siempre hay un camino recorrido y una normativa desde la cual avanzar.",
+                    "c) Porque siempre hay un camino recorrido y una planificación desde la cual avanzar.",
+                    "d) Porque siempre hay un camino recorrido y una metodología desde la cual avanzar."
+                ],
+                correct: 0,
+                retro: "La innovación se asienta en los contextos específicos de cada institución [3]."
+            },
+            {
+                q: "4. ¿Cuál es el motor primordial del cambio educativo según el texto de la UNESCO?",
+                options: [
+                    "a) La institución educativa es considerada como el territorio y motor del cambio.",
+                    "b) La institución educativa es considerada como el espacio y motor del cambio.",
+                    "c) La institución educativa es considerada como el núcleo y motor del cambio.",
+                    "d) La institución educativa es considerada como el centro y motor del cambio."
+                ],
+                correct: 0,
+                retro: "Se revaloriza el rol del docente como actor fundamental del cambio [4]."
+            },
+            {
+                q: "5. ¿En qué se fundamenta la innovación según la Lectura 1 de la UNESCO?",
+                options: [
+                    "a) Sobre el aprendizaje ligado a la acción transformadora del mundo real.",
+                    "b) Sobre el aprendizaje ligado a la acción pedagógica del mundo real.",
+                    "c) Sobre el aprendizaje ligado a la acción técnica del mundo real.",
+                    "d) Sobre el aprendizaje ligado a la acción didáctica del mundo real."
+                ],
+                correct: 0,
+                retro: "Produce características que no se dan por generación espontánea [5]."
+            },
+            {
+                q: "6. ¿Qué proceso grupal es necesario para que la innovación sea una resultante social?",
+                options: [
+                    "a) Un proceso mediado por el debate, el diálogo y la negociación de posiciones.",
+                    "b) Un proceso mediado por el debate, el diálogo y la integración de posiciones.",
+                    "c) Un proceso mediado por el debate, el diálogo y la unificación de posiciones.",
+                    "d) Un proceso mediado por el debate, el diálogo y la resolución de posiciones."
+                ],
+                correct: 0,
+                retro: "Es el resultado de una construcción colectiva y crítica [6, 7]."
+            },
+            {
+                q: "7. ¿Qué significa que la innovación produce 'autopoiesis' en el sistema?",
+                options: [
+                    "a) Una reorganización del sistema que hace visible su carácter de tipo abierto.",
+                    "b) Una reorganización del sistema que hace visible su carácter de tipo dinámico.",
+                    "c) Una reorganización del sistema que hace visible su carácter de tipo flexible.",
+                    "d) Una reorganización del sistema que hace visible su carácter de tipo evolutivo."
+                ],
+                correct: 0,
+                retro: "Se refiere a la organización de lo vivo y su capacidad de auto-crearse [8, 9]."
+            },
+            {
+                q: "8. ¿Cómo evita la innovación la parálisis de las instituciones educativas?",
+                options: [
+                    "a) Flexibilizando a las instituciones para dar respuesta a los cambios sociales.",
+                    "b) Flexibilizando a las instituciones para dar respuesta a los cambios técnicos.",
+                    "c) Flexibilizando a las instituciones para dar respuesta a los cambios externos.",
+                    "d) Flexibilizando a las instituciones para dar respuesta a los cambios directos."
+                ],
+                correct: 0,
+                retro: "Construye sistemas menos individualistas y mucho más participativos [8]."
+            },
+            {
+                q: "9. ¿Con qué concepto relaciona la UNESCO la 'calidad' más allá de la eficacia?",
+                options: [
+                    "a) Se relaciona directamente con el enfoque de derechos humanos en educación.",
+                    "b) Se relaciona directamente con el enfoque de rendición de cuentas en educación.",
+                    "c) Se relaciona directamente con el enfoque de competitividad en educación.",
+                    "d) Se relaciona directamente con el enfoque de estandarización en educación."
+                ],
+                correct: 0,
+                retro: "Implica relevancia, pertinencia, equidad e interculturalidad [9, 10]."
+            },
+            {
+                q: "10. ¿Qué dimensión de la calidad se refiere a la educación contextualizada territorialmente?",
+                options: [
+                    "a) La educación pertinente; adecuada a las características del entorno particular.",
+                    "b) La educación relevante; adecuada a las características del entorno particular.",
+                    "c) La educación equitativa; adecuada a las características del entorno particular.",
+                    "d) La educación eficiente; adecuada a las características del entorno particular."
+                ],
+                correct: 0,
+                retro: "La calidad exige que la educación sea afincada en matrices culturales [10]."
+            },
+            {
+                q: "11. ¿Cuál es la diferencia fundamental entre una simple mejora y una innovación?",
+                options: [
+                    "a) La innovación es una transformación y ruptura con los esquemas vigentes.",
+                    "b) La innovación es una transformación y ajuste con los esquemas vigentes.",
+                    "c) La innovación es una transformación y mejora con los esquemas vigentes.",
+                    "d) La innovación es una transformación y avance con los esquemas vigentes."
+                ],
+                correct: 0,
+                retro: "Solo ocurre innovación si el cambio apunta a transformaciones profundas [11, 12]."
+            },
+            {
+                q: "12. ¿Por qué introducir computadoras no es necesariamente una innovación?",
+                options: [
+                    "a) Porque son mejoras importantes que no siempre transforman el enfoque educativo.",
+                    "b) Porque son mejoras importantes que no siempre transforman la técnica educativa.",
+                    "c) Porque son mejoras importantes que no siempre transforman la gestión educativa.",
+                    "d) Porque son mejoras importantes que no siempre transforman la norma educativa."
+                ],
+                correct: 0,
+                retro: "Requiere cambios estructurales en el rol docente y las estrategias [12]."
+            },
+            {
+                q: "13. ¿Qué son los 'modelos mentales' según la Lectura 1 de la Unidad 2?",
+                options: [
+                    "a) Estructuras de pensamiento que condicionan formas de pensar y actuar.",
+                    "b) Estructuras de pensamiento que condicionan formas de guiar y actuar.",
+                    "c) Estructuras de pensamiento que condicionan formas de ver y actuar.",
+                    "d) Estructuras de pensamiento que condicionan formas de juzgar y actuar."
+                ],
+                correct: 0,
+                retro: "Operan sin que la persona se dé cuenta, manteniendo prejuicios [13]."
+            },
+            {
+                q: "14. ¿Cuál es el primer paso para modificar modelos mentales limitantes?",
+                options: [
+                    "a) Identificarlos, observarlos y reconocer el efecto sobre nuestras acciones.",
+                    "b) Identificarlos, observarlos y reconocer el efecto sobre nuestras teorías.",
+                    "c) Identificarlos, observarlos y reconocer el efecto sobre nuestras lógicas.",
+                    "d) Identificarlos, observarlos y reconocer el efecto sobre nuestras normas."
+                ],
+                correct: 0,
+                retro: "Solo tras el reconocimiento es posible optar por modificarlos [14]."
+            },
+            {
+                q: "15. ¿Qué supone toda innovación respecto al terreno de lo conocido?",
+                options: [
+                    "a) Entrar en el terreno de lo desconocido; implica riesgo e incertidumbre.",
+                    "b) Entrar en el terreno de lo desconocido; implica riesgo y desorden.",
+                    "c) Entrar en el terreno de lo desconocido; implica riesgo y conflicto.",
+                    "d) Entrar en el terreno de lo desconocido; implica riesgo y ruptura."
+                ],
+                correct: 0,
+                retro: "No hay aprendizaje sin desequilibrio ni conflicto cognitivo [15]."
+            },
+            {
+                q: "16. ¿Por qué es vital un clima de confianza durante la innovación?",
+                options: [
+                    "a) Para atreverse a asumir riesgos y no censurar los errores de aprendizaje.",
+                    "b) Para atreverse a asumir riesgos y no censurar las dudas de aprendizaje.",
+                    "c) Para atreverse a asumir riesgos y no censurar las fallas de aprendizaje.",
+                    "d) Para atreverse a asumir riesgos y no censurar los cambios de aprendizaje."
+                ],
+                correct: 0,
+                retro: "El error forma parte del proceso y es fuente de aprendizaje [15]."
+            },
+            {
+                q: "17. ¿A qué se refiere la 'micropolítica' institucional según Blase (2002)?",
+                options: [
+                    "a) Al uso del poder formal e informal por individuos para alcanzar metas.",
+                    "b) Al uso del poder formal e informal por individuos para alcanzar planes.",
+                    "c) Al uso del poder formal e informal por individuos para alcanzar temas.",
+                    "d) Al uso del poder formal e informal por individuos para alcanzar actos."
+                ],
+                correct: 0,
+                retro: "Las escuelas son organizaciones políticas donde el poder es central [16]."
+            },
+            {
+                q: "18. ¿Cómo afecta la fuerza del 'status quo' al cambio institucional?",
+                options: [
+                    "a) Casi descarta automáticamente el cambio por parecer incorrecto o antinatural.",
+                    "b) Casi descarta automáticamente el cambio por parecer inadecuado o antinatural.",
+                    "c) Casi descarta automáticamente el cambio por parecer inservible o antinatural.",
+                    "d) Casi descarta automáticamente el cambio por parecer inútil o antinatural."
+                ],
+                correct: 0,
+                retro: "El status quo se defiende mediante tradiciones y relaciones de poder [17]."
+            },
+            {
+                q: "19. ¿Qué favoreció el sentido de eficacia política docente según Blase?",
+                options: [
+                    "a) El empleo de un enfoque basado en el liderazgo facilitador del director.",
+                    "b) El empleo de un enfoque basado en el liderazgo directivo del director.",
+                    "c) El empleo de un enfoque basado en el liderazgo técnico del director.",
+                    "d) El empleo de un enfoque basado en el liderazgo jerárquico del director."
+                ],
+                correct: 0,
+                retro: "Fomenta la autonomía y la aceptación de riesgos en el equipo [18, 19]."
+            },
+            {
+                q: "20. ¿Qué se requiere para una implementación exitosa de la reestructuración?",
+                options: [
+                    "a) Proteger a las escuelas de interferencias y contar con apoyo político oficial.",
+                    "b) Proteger a las escuelas de interferencias y contar con apoyo técnico oficial.",
+                    "c) Proteger a las escuelas de interferencias y contar con apoyo social oficial.",
+                    "d) Proteger a las escuelas de interferencias y contar con apoyo docente oficial."
+                ],
+                correct: 0,
+                retro: "El apoyo de las autoridades es vital para sostener nuevos programas [20]."
+            },
+            {
+                q: "21. ¿Qué es la 'Fase 1: Intencionalidad' del proceso innovador?",
+                options: [
+                    "a) La comunidad se interroga acerca de lo que quiere transformar y por qué.",
+                    "b) La comunidad se interroga acerca de lo que quiere gestionar y por qué.",
+                    "c) La comunidad se interroga acerca de lo que quiere técnica y por qué.",
+                    "d) La comunidad se interroga acerca de lo que quiere norma y por qué."
+                ],
+                correct: 0,
+                retro: "Define el horizonte hacia el cual se quiere llegar como grupo [21]."
+            },
+            {
+                q: "22. ¿Qué se requiere en la 'Fase 2: Planificación' según el ciclo?",
+                options: [
+                    "a) Elaborar una programación que permita conocer cómo implementar el cambio.",
+                    "b) Elaborar una programación que permita conocer cómo gestionar el cambio.",
+                    "c) Elaborar una programación que permita conocer cómo técnica el cambio.",
+                    "d) Elaborar una programación que permita conocer cómo norma el cambio."
+                ],
+                correct: 0,
+                retro: "Requiere información clara sobre la situación de partida del centro [22]."
+            },
+            {
+                q: "23. ¿Qué recursos se deben identificar en la Fase 3 del proceso?",
+                options: [
+                    "a) Materiales, humanos, tecnológicos e infraestructura disponibles y requeridos.",
+                    "b) Materiales, humanos, tecnológicos e institucionales disponibles y requeridos.",
+                    "c) Materiales, humanos, tecnológicos e administrativos disponibles y requeridos.",
+                    "d) Materiales, humanos, tecnológicos e pedagógicos disponibles y requeridos."
+                ],
+                correct: 0,
+                retro: "Permite establecer la viabilidad real del proyecto innovador [23]."
+            },
+            {
+                q: "24. ¿Qué factor es fundamental en la Fase 4 de Implementación?",
+                options: [
+                    "a) La flexibilidad para tomar en consideración los imprevistos que surjan.",
+                    "b) La flexibilidad para tomar en consideración los técnicos que surjan.",
+                    "c) La flexibilidad para tomar en consideración los normas que surjan.",
+                    "d) La flexibilidad para tomar en consideración los gestiones que surjan."
+                ],
+                correct: 0,
+                retro: "Se deben registrar acciones y resultados para ajustes necesarios [24]."
+            },
+            {
+                q: "25. ¿Qué es la 'Fase 6: Sistematización' en el proceso de la UNESCO?",
+                options: [
+                    "a) Proceso de construcción colectiva del saber donde se registra el proceso.",
+                    "b) Proceso de construcción colectiva del saber donde se registra la técnica.",
+                    "c) Proceso de construcción colectiva del saber donde se registra la norma.",
+                    "d) Proceso de construcción colectiva del saber donde se registra la guía."
+                ],
+                correct: 0,
+                retro: "Implica la redefinición de la experiencia y el liderazgo [25]."
+            },
+            {
+                q: "26. En el caso 'El agua asunto vital', ¿cuál era la problemática central?",
+                options: [
+                    "a) El consumo de agua de baja calidad que ocasionaba problemas de salud.",
+                    "b) El consumo de agua de baja calidad que ocasionaba problemas de técnica.",
+                    "c) El consumo de agua de baja calidad que ocasionaba problemas de gestión.",
+                    "d) El consumo de agua de baja calidad que ocasionaba problemas de norma."
+                ],
+                correct: 0,
+                retro: "La escuela vinculó saberes escolares con la realidad local del agua [26]."
+            },
+            {
+                q: "27. ¿Qué metodología fundamentó la investigación del caso colombiano?",
+                options: [
+                    "a) La investigación-acción participativa sobre imaginarios de la comunidad.",
+                    "b) La investigación-acción técnica sobre imaginarios de la comunidad.",
+                    "c) La investigación-acción directa sobre imaginarios de la comunidad.",
+                    "d) La investigación-acción lógica sobre imaginarios de la comunidad."
+                ],
+                correct: 0,
+                retro: "Se realizaron entrevistas sobre leyendas y rituales vinculados al agua [27]."
+            },
+            {
+                q: "28. ¿Qué tensión surgió en el proyecto respecto al saber escolar?",
+                options: [
+                    "a) Entre mantener el saber mágico religioso o posibilitar el científico.",
+                    "b) Entre mantener el saber mágico religioso o posibilitar el técnico.",
+                    "c) Entre mantener el saber mágico religioso o posibilitar el directo.",
+                    "d) Entre mantener el saber mágico religioso o posibilitar el lógico."
+                ],
+                correct: 0,
+                retro: "Es una tensión consustancial al sentido del saber institucional [28]."
+            },
+            {
+                q: "29. ¿Qué áreas curriculares pretendía involucrar el trabajo por proyectos?",
+                options: [
+                    "a) Castellano, naturales, sociales y educación de tipo artística.",
+                    "b) Castellano, naturales, sociales y educación de tipo técnica.",
+                    "c) Castellano, naturales, sociales y educación de tipo lógica.",
+                    "d) Castellano, naturales, sociales y educación de tipo directa."
+                ],
+                correct: 0,
+                retro: "Buscaba eliminar los compartimentos aislados del saber [29]."
+            },
+            {
+                q: "30. ¿Cuál es el riesgo de considerar la innovación solo como un producto?",
+                options: [
+                    "a) Se corre el riesgo de caer en la rutina y modelos fijos instalados.",
+                    "b) Se corre el riesgo de caer en la rutina y modelos técnicos instalados.",
+                    "c) Se corre el riesgo de caer en la rutina y modelos directos instalados.",
+                    "d) Se corre el riesgo de caer en la rutina y modelos lógicos instalados."
+                ],
+                correct: 0,
+                retro: "La innovación es un proceso siempre inconcluso y en revisión [30]."
+            },
+            {
+                q: "31. ¿Qué se entiende por 'encrucijada de culturas' en el proyecto?",
+                options: [
+                    "a) Confluencia de rasgos de la cultura campesina y de las culturas urbanas.",
+                    "b) Confluencia de rasgos de la cultura campesina y de las culturas técnicas.",
+                    "c) Confluencia de rasgos de la cultura campesina y de las culturas lógicas.",
+                    "d) Confluencia de rasgos de la cultura campesina y de las culturas directas."
+                ],
+                correct: 0,
+                retro: "Lo pedagógico se convierte en factor de reconocimiento de diversidad [31]."
+            },
+            {
+                q: "32. ¿Qué es la 'conciencia utópica' mencionada por Paulo Freire?",
+                options: [
+                    "a) La movilización e intencionalidad para crear un nuevo orden de prácticas.",
+                    "b) La movilización e intencionalidad para crear un nuevo orden de técnicas.",
+                    "c) La movilización e intencionalidad para crear un nuevo orden de gestiones.",
+                    "d) La movilización e intencionalidad para crear un nuevo orden de normas."
+                ],
+                correct: 0,
+                retro: "Supone alterar el sentido de las prácticas educacionales corrientes [32]."
+            },
+            {
+                q: "33. ¿Cómo deben ser las relaciones en el trabajo colaborativo?",
+                options: [
+                    "a) Relaciones más horizontales y de complementariedad entre los actores.",
+                    "b) Relaciones más horizontales y de complementariedad entre los técnicos.",
+                    "c) Relaciones más horizontales y de complementariedad entre los gestores.",
+                    "d) Relaciones más horizontales y de complementariedad entre los expertos."
+                ],
+                correct: 0,
+                retro: "Incluye la colaboración con familias y entre estudiantes [33]."
+            },
+            {
+                q: "34. ¿Qué caracteriza a las innovaciones de los años 90?",
+                options: [
+                    "a) Asociadas a modelos de descentralización y autonomía de los centros.",
+                    "b) Asociadas a modelos de descentralización y autonomía de los técnicos.",
+                    "c) Asociadas a modelos de descentralización y autonomía de los gestores.",
+                    "d) Asociadas a modelos de descentralización y autonomía de los expertos."
+                ],
+                correct: 0,
+                retro: "Promovieron la participación en los cambios educativos locales [34]."
+            },
+            {
+                q: "35. ¿Cuál es el papel del saber previo en el proceso de innovación?",
+                options: [
+                    "a) Es sometido a prueba en los diferentes niveles de la experiencia grupal.",
+                    "b) Es sometido a prueba en los diferentes niveles de la experiencia técnica.",
+                    "c) Es sometido a prueba en los diferentes niveles de la experiencia lógica.",
+                    "d) Es sometido a prueba en los diferentes niveles de la experiencia directa."
+                ],
+                correct: 0,
+                retro: "Permite aprender de los errores mediante la reflexión permanente [6, 8]."
+            },
+            {
+                q: "36. ¿Qué sucede durante los periodos de estabilidad política escolar?",
+                options: [
+                    "a) El poder político suele darse por sentado cimentado en la cultura.",
+                    "b) El poder político suele darse por sentado cimentado en la técnica.",
+                    "c) El poder político suele darse por sentado cimentado en la lógica.",
+                    "d) El poder político suele darse por sentado cimentado en la gestión."
+                ],
+                correct: 0,
+                retro: "Las estructuras trabajan para preservar el status quo organizacional [17]."
+            },
+            {
+                q: "37. ¿Qué efecto tiene la falta de certeza en las interacciones micropolíticas?",
+                options: [
+                    "a) Las dinámicas de cambio provocan e intensifican tales interacciones.",
+                    "b) Las dinámicas de cambio provocan e intensifican tales técnicas.",
+                    "c) Las dinámicas de cambio provocan e intensifican tales lógicas.",
+                    "d) Las dinámicas de cambio provocan e intensifican tales gestiones."
+                ],
+                correct: 0,
+                retro: "La ambigüedad hace que el poder y la política sean más visibles [35]."
+            },
+            {
+                q: "38. ¿Qué se recomienda para evaluar el proceso de innovación (Fase 5)?",
+                options: [
+                    "a) Utilizar indicadores de resultados, de procesos y de estrategias educativas.",
+                    "b) Utilizar indicadores de resultados, de procesos y de estrategias técnicas.",
+                    "c) Utilizar indicadores de resultados, de procesos y de estrategias lógicas.",
+                    "d) Utilizar indicadores de resultados, de procesos y de estrategias directas."
+                ],
+                correct: 0,
+                retro: "Se pueden incluir diarios y bitácoras para la sistematización [36]."
+            },
+            {
+                q: "39. ¿Cuál es el propósito del Carnaval Soloriental en el caso colombiano?",
+                options: [
+                    "a) Establecer un puente entre escuelas para dotar de sentido al trabajo escolar.",
+                    "b) Establecer un puente entre escuelas para dotar de sentido al trabajo técnico.",
+                    "c) Establecer un puente entre escuelas para dotar de sentido al trabajo lógico.",
+                    "d) Establecer un puente entre escuelas para dotar de sentido al trabajo directo."
+                ],
+                correct: 0,
+                retro: "Surgió como una celebración alternativa con participación comunal [37, 38]."
+            },
+            {
+                q: "40. ¿Qué se espera del estudiante al finalizar un proyecto de innovación?",
+                options: [
+                    "a) Que conozca la realidad y se relacione con ella de modo ético y protector.",
+                    "b) Que conozca la realidad y se relacione con ella de modo técnico y protector.",
+                    "c) Que conozca la realidad y se relacione con ella de modo lógico y protector.",
+                    "d) Que conozca la realidad y se relacione con ella de modo directo y protector."
+                ],
+                correct: 0,
+                retro: "Busca incidir en las problemáticas que afectan a las comunidades [39]."
+            },
+            {
+                q: "41. ¿Cuál es el significado etimológico de 'innovar' según el texto?",
+                options: [
+                    "a) Del latín innovare; que significa mudar o alterar las cosas introduciendo novedades.",
+                    "b) Del latín innovare; que significa hallar o descubrir una cosa nueva o desconocida.",
+                    "c) Del latín innovare; que significa crear u organizar las cosas introduciendo novedades.",
+                    "d) Del latín innovare; que significa fijar o estructurar las cosas introduciendo novedades."
+                ],
+                correct: 0,
+                retro: "Se diferencia de 'inventar', que es hallar algo desconocido [40]."
+            },
+            {
+                q: "42. ¿Qué actitud permite aprender de la experiencia en la escuela innovadora?",
+                options: [
+                    "a) La indagación constante de nuevas ideas o propuestas de enseñanza en el aula.",
+                    "b) La indagación constante de nuevas ideas o propuestas de gestión en el aula.",
+                    "c) La indagación constante de nuevas ideas o propuestas de técnica en el aula.",
+                    "d) La indagación constante de nuevas ideas o propuestas de norma en el aula."
+                ],
+                correct: 0,
+                retro: "La indagación evita bloquear el camino hacia el aprendizaje docente [41]."
+            },
+            {
+                q: "43. ¿Por qué se dice que la innovación tiene un 'carácter sistémico'?",
+                options: [
+                    "a) Porque introducir cambios en un componente repercute inmediatamente en los otros.",
+                    "b) Porque introducir cambios en un componente repercute lógicamente en los otros.",
+                    "c) Porque introducir cambios en un componente repercute directamente en los otros.",
+                    "d) Porque introducir cambios en un componente repercute técnicamente en los otros."
+                ],
+                correct: 0,
+                retro: "Cualquier cambio implica repensar todo el orden de la institución [42]."
+            },
+            {
+                q: "44. ¿Qué metáfora musical se utiliza para la innovación educativa?",
+                options: [
+                    "a) Tocar una pieza de jazz; donde se va creando y corriendo límites al tocar.",
+                    "b) Tocar una pieza de jazz; donde se va creando y corriendo metas al tocar.",
+                    "c) Tocar una pieza de jazz; donde se va creando y corriendo actos al tocar.",
+                    "d) Tocar una pieza de jazz; donde se va creando y corriendo temas al tocar."
+                ],
+                correct: 0,
+                retro: "Se opone a la música clásica donde se sigue un libreto sin cambios [43]."
+            },
+            {
+                q: "45. ¿Qué significa pasar del lenguaje de los 'actores' al de los 'autores'?",
+                options: [
+                    "a) El autor es la persona que crea, define su papel y es causa de una acción.",
+                    "b) El autor es la persona que crea, define su papel y es causa de una técnica.",
+                    "c) El autor es la persona que crea, define su papel y es causa de una norma.",
+                    "d) El autor es la persona que crea, define su papel y es causa de una gestión."
+                ],
+                correct: 0,
+                retro: "El actor solo ejecuta un papel previamente definido por otros [43]."
+            },
+            {
+                q: "46. ¿Por qué es fundamental que la escuela deje de ser una institución aislada?",
+                options: [
+                    "a) Para conectarse con el mundo global a través de la participación en redes.",
+                    "b) Para conectarse con el mundo global a través de la participación en grupos.",
+                    "c) Para conectarse con el mundo global a través de la participación en centros.",
+                    "d) Para conectarse con el mundo global a través de la participación en aulas."
+                ],
+                correct: 0,
+                retro: "El intercambio con otros docentes enriquece el proceso innovador [44]."
+            },
+            {
+                q: "47. ¿Qué tipo de pensamiento juega un papel clave en el trabajo en equipo?",
+                options: [
+                    "a) El pensamiento divergente; que valora la diversidad como algo enriquecedor.",
+                    "b) El pensamiento divergente; que valora la diversidad como algo técnico.",
+                    "c) El pensamiento divergente; que valora la diversidad como algo normativo.",
+                    "d) El pensamiento divergente; que valora la diversidad como algo orientativo."
+                ],
+                correct: 0,
+                retro: "Presupone múltiples puntos de vista frente a una misma realidad [45]."
+            },
+            {
+                q: "48. ¿Qué caracteriza a las innovaciones de los años 90 históricamente?",
+                options: [
+                    "a) Estuvieron asociadas a modelos de descentralización y autonomía de centros.",
+                    "b) Estuvieron asociadas a modelos de descentralización y autonomía técnica.",
+                    "c) Estuvieron asociadas a modelos de descentralización y autonomía de gestión.",
+                    "d) Estuvieron asociadas a modelos de descentralización y autonomía de expertos."
+                ],
+                correct: 0,
+                retro: "Promovieron la participación en los cambios educativos locales [34]."
+            },
+            {
+                q: "49. ¿Cuál es el Objetivo Estratégico 2 mencionado en el texto de la UNESCO?",
+                options: [
+                    "a) Estudiantes e instituciones que logran aprendizajes pertinentes y de calidad.",
+                    "b) Estudiantes e instituciones que logran aprendizajes técnicos y de calidad.",
+                    "c) Estudiantes e instituciones que logran aprendizajes directos y de calidad.",
+                    "d) Estudiantes e instituciones que logran aprendizajes lógicos y de calidad."
+                ],
+                correct: 0,
+                retro: "La innovación debe estar alineada con los objetivos del país [46, 47]."
+            },
+            {
+                q: "50. ¿Cuál es la conclusión principal de la innovación docente según el texto?",
+                options: [
+                    "a) Revaloriza el rol del docente como protagonista del aprendizaje estudiantil.",
+                    "b) Revaloriza el rol del docente como protagonista del aprendizaje técnico.",
+                    "c) Revaloriza el rol del docente como protagonista del aprendizaje lógico.",
+                    "d) Revaloriza el rol del docente como protagonista del aprendizaje directo."
+                ],
+                correct: 0,
+                retro: "Permite que asuman un papel activo y protagónico en su práctica [48]."
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        quizData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `<div class='question-text'><strong>${item.q}</strong></div>`;
+            const list = document.createElement('ul');
+            item.options.forEach((opt, idx) => {
+                const li = document.createElement('li');
+                li.innerText = opt;
+                li.onclick = () => {
+                    const allLi = list.querySelectorAll('li');
+                    allLi.forEach(l => l.style.pointerEvents = 'none');
+                    const fb = document.getElementById(`fb-${index}`);
+                    fb.style.display = 'block';
+                    if(idx === item.correct) {
+                        li.classList.add('selected-correct');
+                        fb.innerHTML = "¡Correcto! " + item.retro;
+                        fb.style.background = "#d4edda";
+                    } else {
+                        li.classList.add('selected-incorrect');
+                        fb.innerText = "¡Incorrrecto!";
+                        fb.style.background = "#f8d7da";
+                    }
+                };
+                list.appendChild(li);
+            });
+            card.appendChild(list);
+            const fbDiv = document.createElement('div');
+            fbDiv.id = `fb-${index}`; fbDiv.className = 'feedback';
+            card.appendChild(fbDiv);
+            container.appendChild(card);
+        });
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

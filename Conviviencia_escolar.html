@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convivencia Escolar y Resolución de Conflictos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1 class="main-title">Convivencia Escolar y Resolución Pacífica de Conflictos</h1>
+        <p class="subtitle">Cuestionario de Convivencia Escolar</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. ¿Cómo se define la convivencia escolar en el marco de la Cultura de Paz?",
+                options: [
+                    "a) Como un proceso caracterizado por una especial relación comunicativa entre los miembros.",
+                    "b) Como un proceso caracterizado por una especial relación técnica entre los miembros.",
+                    "c) Como un proceso caracterizado por una especial relación lógica entre los miembros.",
+                    "d) Como un proceso caracterizado por una especial relación directa entre los miembros."
+                ],
+                correct: 0,
+                retro: "Busca construir espacios de confianza y consenso entre la comunidad educativa. [2]"
+            },
+            {
+                q: "2. Según el modelo ecológico, ¿qué analiza el nivel 'Individual'?",
+                options: [
+                    "a) Factores biológicos y de la historia personal que influyen en el comportamiento.",
+                    "b) Factores técnicos y de la historia personal que influyen en el comportamiento.",
+                    "c) Factores sociales y de la historia personal que influyen en el comportamiento.",
+                    "d) Factores lógicos y de la historia personal que influyen en el comportamiento."
+                ],
+                correct: 0,
+                retro: "Se centra en características como la impulsividad o el bajo nivel educativo. [3, 4]"
+            },
+            {
+                q: "3. ¿Qué indaga el nivel 'Relacional' dentro del modelo ecológico de prevención?",
+                options: [
+                    "a) El modo en que las relaciones sociales cercanas aumentan el riesgo de violencia.",
+                    "b) El modo en que las relaciones técnicas cercanas aumentan el riesgo de violencia.",
+                    "c) El modo en que las relaciones lógicas cercanas aumentan el riesgo de violencia.",
+                    "d) El modo en que las relaciones directas cercanas aumentan el riesgo de violencia."
+                ],
+                correct: 0,
+                retro: "Analiza la influencia de la pareja, compañeros y miembros de la familia. [3, 4]"
+            },
+            {
+                q: "4. ¿Cuál es el enfoque del nivel 'Comunitario' en la identificación de la violencia?",
+                options: [
+                    "a) Examina los contextos de la comunidad en los que se inscriben las relaciones sociales.",
+                    "b) Examina los contextos de la técnica en los que se inscriben las relaciones sociales.",
+                    "c) Examina los contextos de la gestión en los que se inscriben las relaciones sociales.",
+                    "d) Examina los contextos de la norma en los que se inscriben las relaciones sociales."
+                ],
+                correct: 0,
+                retro: "Identifica características de entornos como la escuela o el lugar de trabajo. [3, 4]"
+            },
+            {
+                q: "5. ¿Qué factores se incluyen en el nivel 'Social' del modelo ecológico?",
+                options: [
+                    "a) Factores sociales generales que determinan las tasas de violencia y crean su aceptación.",
+                    "b) Factores técnicos generales que determinan las tasas de violencia y crean su aceptación.",
+                    "c) Factores lógicos generales que determinan las tasas de violencia y crean su aceptación.",
+                    "d) Factores directos generales que determinan las tasas de violencia y crean su aceptación."
+                ],
+                correct: 0,
+                retro: "Incluye la brecha entre segmentos sociales y tensiones entre países. [3, 4]"
+            },
+            {
+                q: "6. ¿Qué se entiende por 'Prevención Primaria' en las intervenciones de convivencia?",
+                options: [
+                    "a) Actuaciones dirigidas a prevenir la violencia antes de que esta ocurra.",
+                    "b) Actuaciones dirigidas a gestionar la violencia antes de que esta ocurra.",
+                    "c) Actuaciones dirigidas a técnica la violencia antes de que esta ocurra.",
+                    "d) Actuaciones dirigidas a norma la violencia antes de que esta ocurra."
+                ],
+                correct: 0,
+                retro: "Se define desde un punto de vista puramente temporal y proactivo. [4, 5]"
+            },
+            {
+                q: "7. ¿En qué se centran las intervenciones de 'Prevención Terciaria'?",
+                options: [
+                    "a) En la atención prolongada después de que han ocurrido actos violentos.",
+                    "b) En la atención técnica después de que han ocurrido actos violentos.",
+                    "c) En la atención lógica después de que han ocurrido actos violentos.",
+                    "d) En la atención directa después de que han ocurrido actos violentos."
+                ],
+                correct: 0,
+                retro: "Busca reducir las consecuencias a largo plazo del conflicto o agresión. [4, 5]"
+            },
+            {
+                q: "8. ¿Cuál es la filosofía de los programas de 'Intervención/Sanción'?",
+                options: [
+                    "a) Son de naturaleza reactiva y se basan en la filosofía de Tolerancia Cero.",
+                    "b) Son de naturaleza técnica y se basan en la filosofía de Tolerancia Cero.",
+                    "c) Son de naturaleza lógica y se basan en la filosofía de Tolerancia Cero.",
+                    "d) Son de naturaleza directa y se basan en la filosofía de Tolerancia Cero."
+                ],
+                correct: 0,
+                retro: "Actúan cuando un individuo ya ha tenido una conducta violenta. [4, 5]"
+            },
+            {
+                q: "9. ¿En qué principio se fundamentan los 'Programas de Conducta Esperada'?",
+                options: [
+                    "a) Impedir la conducta inaceptable mediante reglas de convivencia equitativas.",
+                    "b) Impedir la conducta inaceptable mediante reglas de convivencia técnicas.",
+                    "c) Impedir la conducta inaceptable mediante reglas de convivencia lógicas.",
+                    "d) Impedir la conducta inaceptable mediante reglas de convivencia directas."
+                ],
+                correct: 0,
+                retro: "Plantean consecuencias pero con una actitud preventiva ante la violencia. [4, 5]"
+            },
+            {
+                q: "10. ¿Qué implica la 'Orientación Comunitaria' en los programas proactivos?",
+                options: [
+                    "a) Coordinación con instituciones externas al colegio para resolver los conflictos.",
+                    "b) Coordinación con instituciones técnicas al colegio para resolver los conflictos.",
+                    "c) Coordinación con instituciones lógicas al colegio para resolver los conflictos.",
+                    "d) Coordinación con instituciones directas al colegio para resolver los conflictos."
+                ],
+                correct: 0,
+                retro: "Considera que los orígenes profundos de la violencia están fuera del centro. [5, 6]"
+            },
+            {
+                q: "11. ¿Qué factor es indispensable para alcanzar resultados preventivos duraderos?",
+                options: [
+                    "a) Fundarse en una perspectiva ecológica que sea a la vez global y sistémica.",
+                    "b) Fundarse en una perspectiva técnica que sea a la vez global y sistémica.",
+                    "c) Fundarse en una perspectiva lógica que sea a la vez global y sistémica.",
+                    "d) Fundarse en una perspectiva directa que sea a la vez global y sistémica."
+                ],
+                correct: 0,
+                retro: "Debe comenzar en la familia, seguir en el centro y apoyarse en lo socio-comunitario. [7, 8]"
+            },
+            {
+                q: "12. ¿A qué se refiere la 'Coherencia' como característica de la política de prevención?",
+                options: [
+                    "a) Todas las actuaciones del centro educativo deben estar ligadas unas a otras.",
+                    "b) Todas las actuaciones del centro educativo deben estar técnicas unas a otras.",
+                    "c) Todas las actuaciones del centro educativo deben estar lógicas unas a otras.",
+                    "d) Todas las actuaciones del centro educativo deben estar directas unas a otras."
+                ],
+                correct: 0,
+                retro: "Evita que las acciones sean fragmentadas o contradictorias entre sí. [9, 10]"
+            },
+            {
+                q: "13. ¿Qué supone la 'Totalidad' en el desarrollo de la comunidad educativa?",
+                options: [
+                    "a) Implicación de todos los miembros en el desarrollo de las políticas preventivas.",
+                    "b) Implicación de todos los miembros en el desarrollo de las políticas técnicas.",
+                    "c) Implicación de todos los miembros en el desarrollo de las políticas lógicas.",
+                    "d) Implicación de todos los miembros en el desarrollo de las políticas directas."
+                ],
+                correct: 0,
+                retro: "Nadie queda excluido de la responsabilidad de mejorar la convivencia. [9, 10]"
+            },
+            {
+                q: "14. ¿Cuál es la definición técnica de 'Clima Escolar' según el documento?",
+                options: [
+                    "a) Conjunto de interacciones y transacciones que se generan en la tarea educativa.",
+                    "b) Conjunto de interacciones y transacciones que se generan en la tarea técnica.",
+                    "c) Conjunto de interacciones y transacciones que se generan en la tarea lógica.",
+                    "d) Conjunto de interacciones y transacciones que se generan en la tarea directa."
+                ],
+                correct: 0,
+                retro: "Está determinado por factores físicos, estructurales y personales. [11, 12]"
+            },
+            {
+                q: "15. ¿Qué caracteriza al 'Clima Relacional' dentro del centro educativo?",
+                options: [
+                    "a) Referencia al ambiente en las relaciones socio-afectivas entre los miembros.",
+                    "b) Referencia al ambiente en las relaciones técnicas-afectivas entre los miembros.",
+                    "c) Referencia al ambiente en las relaciones lógicas-afectivas entre los miembros.",
+                    "d) Referencia al ambiente en las relaciones directas-afectivas entre los miembros."
+                ],
+                correct: 0,
+                retro: "Depende de la bondad de los contactos interpersonales y el apoyo mutuo. [13, 14]"
+            },
+            {
+                q: "16. ¿Cómo influye el 'Clima Educativo' positivo en el aprendizaje?",
+                options: [
+                    "a) El centro es un lugar donde el alumnado alcanza metas académicas exitosas.",
+                    "b) El centro es un lugar donde el alumnado alcanza metas técnicas exitosas.",
+                    "c) El centro es un lugar donde el alumnado alcanza metas lógicas exitosas.",
+                    "d) El centro es un lugar donde el alumnado alcanza metas directas exitosas."
+                ],
+                correct: 0,
+                retro: "Favorece la educación en valores y da sentido a los aprendizajes. [15, 16]"
+            },
+            {
+                q: "17. ¿Qué función cumple el profesorado en el nivel 'Formativo' del clima?",
+                options: [
+                    "a) Orienta al alumnado para que se conozca mejor y se integre socialmente.",
+                    "b) Orienta al alumnado para que se conozca mejor y se integre técnicamente.",
+                    "c) Orienta al alumnado para que se conozca mejor y se integre lógicamente.",
+                    "d) Orienta al alumnado para que se conozca mejor y se integre directamente."
+                ],
+                correct: 0,
+                retro: "Trasciende lo puramente instructivo para formar personas. [15, 16]"
+            },
+            {
+                q: "18. ¿Qué remite el 'Clima de Seguridad' en la escuela?",
+                options: [
+                    "a) Al orden y tranquilidad necesarios para que se produzca el proceso educativo.",
+                    "b) Al orden y tranquilidad necesarios para que se produzca el proceso técnico.",
+                    "c) Al orden y tranquilidad necesarios para que se produzca el proceso lógico.",
+                    "d) Al orden y tranquilidad necesarios para que se produzca el proceso directo."
+                ],
+                correct: 0,
+                retro: "Reduce el riesgo de violencia y favorece los buenos sentimientos. [17, 18]"
+            },
+            {
+                q: "19. ¿Cuál es un rasgo esencial de las escuelas seguras respecto a la violencia?",
+                options: [
+                    "a) Discuten temas de seguridad abiertamente y enseñan estrategias apropiadas.",
+                    "b) Discuten temas de seguridad abiertamente y enseñan estrategias técnicas.",
+                    "c) Discuten temas de seguridad abiertamente y enseñan estrategias lógicas.",
+                    "d) Discuten temas de seguridad abiertamente y enseñan estrategias directas."
+                ],
+                correct: 0,
+                retro: "Fomenta la inteligencia emocional para resolver conflictos. [14, 19]"
+            },
+            {
+                q: "20. ¿Qué define a un 'Clima Escolar Justo' según Piaget?",
+                options: [
+                    "a) Aquel donde se reconoce la legitimidad y equidad de las reglas aplicadas.",
+                    "b) Aquel donde se reconoce la legitimidad y equidad de las reglas técnicas.",
+                    "c) Aquel donde se reconoce la legitimidad y equidad de las reglas lógicas.",
+                    "d) Aquel donde se reconoce la legitimidad y equidad de las reglas directas."
+                ],
+                correct: 0,
+                retro: "El alumnado experimenta directamente las realidades morales. [14, 16, 20]"
+            },
+            {
+                q: "21. ¿En qué se basa el 'Clima de Pertenencia' en la comunidad?",
+                options: [
+                    "a) En la cohesión de los grupos y los lazos establecidos entre sus miembros.",
+                    "b) En la cohesión de los grupos y los lazos establecidos entre sus técnicos.",
+                    "c) En la cohesión de los grupos y los lazos establecidos entre sus gestores.",
+                    "d) En la cohesión de los grupos y los lazos establecidos entre sus normas."
+                ],
+                correct: 0,
+                retro: "Facilita la asunción de responsabilidades y actividades colectivas. [16, 20]"
+            },
+            {
+                q: "22. ¿Por qué el reglamento escolar no debe ser confuso ni ambiguo?",
+                options: [
+                    "a) Para evitar que las normas puedan aplicarse de manera arbitraria.",
+                    "b) Para evitar que las normas puedan aplicarse de manera técnica.",
+                    "c) Para evitar que las normas puedan aplicarse de manera lógica.",
+                    "d) Para evitar que las normas puedan aplicarse de manera directa."
+                ],
+                correct: 0,
+                retro: "La arbitrariedad crea un sentimiento de injusticia en el alumnado. [19, 21]"
+            },
+            {
+                q: "23. Según Cohen (1995), ¿qué oportunidad ofrece el conflicto?",
+                options: [
+                    "a) El conflicto es una oportunidad de aprendizaje y crecimiento personal.",
+                    "b) El conflicto es una oportunidad de aprendizaje y crecimiento técnico.",
+                    "c) El conflicto es una oportunidad de aprendizaje y crecimiento lógico.",
+                    "d) El conflicto es una oportunidad de aprendizaje y crecimiento directo."
+                ],
+                correct: 0,
+                retro: "Permite el desarrollo socio-afectivo si se gestiona pacíficamente. [22, 23]"
+            },
+            {
+                q: "24. ¿Cómo define Vinyamata (1999) los conflictos sociales?",
+                options: [
+                    "a) Como el motor y la expresión de las relaciones entre las personas.",
+                    "b) Como el motor y la expresión de las relaciones entre las técnicas.",
+                    "c) Como el motor y la expresión de las relaciones entre las lógicas.",
+                    "d) Como el motor y la expresión de las relaciones entre las gestiones."
+                ],
+                correct: 0,
+                retro: "Se fundamentan en la interacción humana constante. [22, 23]"
+            },
+            {
+                q: "25. ¿Qué caracteriza a un 'Conflicto Curricular'?",
+                options: [
+                    "a) Referido a las diferentes formas de conocer, construir y legitimar saberes.",
+                    "b) Referido a las diferentes formas de conocer, construir y legitimar técnicas.",
+                    "c) Referido a las diferentes formas de conocer, construir y legitimar normas.",
+                    "d) Referido a las diferentes formas de conocer, construir y legitimar gestiones."
+                ],
+                correct: 0,
+                retro: "Aparece en la mediación pedagógica y los contenidos de enseñanza. [24, 25]"
+            },
+            {
+                q: "26. ¿Qué atiende el 'Conflicto Relacional' en los centros?",
+                options: [
+                    "a) Comportamientos que alteran la neutralidad y desequilibran el poder.",
+                    "b) Comportamientos que alteran la neutralidad y desequilibran la técnica.",
+                    "c) Comportamientos que alteran la neutralidad y desequilibran la lógica.",
+                    "d) Comportamientos que alteran la neutralidad y desequilibran la norma."
+                ],
+                correct: 0,
+                retro: "Involucra dispositivos de control y jerarquías entre docentes y alumnos. [24, 25]"
+            },
+            {
+                q: "27. ¿Cuándo se produce un 'Conflicto Cultural' según el texto?",
+                options: [
+                    "a) Al desvelar contradicciones entre la cultura escolar formal e invisible.",
+                    "b) Al desvelar contradicciones entre la cultura escolar formal y técnica.",
+                    "c) Al desvelar contradicciones entre la cultura escolar formal y lógica.",
+                    "d) Al desvelar contradicciones entre la cultura escolar formal y directa."
+                ],
+                correct: 0,
+                retro: "Se da a nivel de representaciones o constructos simbólicos. [24, 25]"
+            },
+            {
+                q: "28. ¿Qué busca la 'Negociación Razonada' (yo gano - tú ganas)?",
+                options: [
+                    "a) Eliminar la necesidad de que alguien pierda para que otro pueda ganar.",
+                    "b) Eliminar la necesidad de que alguien pierda para que otro pueda técnica.",
+                    "c) Eliminar la necesidad de que alguien pierda para que otro pueda lógica.",
+                    "d) Eliminar la necesidad de que alguien pierda para que otro pueda directa."
+                ],
+                correct: 0,
+                retro: "Persigue que todos los implicados obtengan beneficios del acuerdo. [26-28]"
+            },
+            {
+                q: "29. ¿Qué define técnicamente a la 'Mediación'?",
+                options: [
+                    "a) Intervención de un tercero que facilita el logro de acuerdos entre partes.",
+                    "b) Intervención de un tercero que facilita el logro de acuerdos entre técnicas.",
+                    "c) Intervención de un tercero que facilita el logro de acuerdos entre lógicas.",
+                    "d) Intervención de un tercero que facilita el logro de acuerdos entre normas."
+                ],
+                correct: 0,
+                retro: "El mediador no tiene poder de imponer una solución. [29-31]"
+            },
+            {
+                q: "30. ¿En qué consiste la 'Conciliación' como técnica de resolución?",
+                options: [
+                    "a) Intervención de un tercero neutral que propone soluciones a las partes.",
+                    "b) Intervención de un tercero neutral que impone soluciones a las partes.",
+                    "c) Intervención de un tercero neutral que registra soluciones a las partes.",
+                    "d) Intervención de un tercero neutral que evalúa soluciones a las partes."
+                ],
+                correct: 0,
+                retro: "Es más activa que la mediación, pues sugiere salidas al conflicto. [29, 30]"
+            },
+            {
+                q: "31. ¿Qué es el 'Arbitraje' según la clasificación del documento?",
+                options: [
+                    "a) Proceso donde las partes someten la solución a la decisión de un tercero.",
+                    "b) Proceso donde las partes someten la solución a la decisión de un técnico.",
+                    "c) Proceso donde las partes someten la solución a la decisión de un gestor.",
+                    "d) Proceso donde las partes someten la solución a la decisión de un norma."
+                ],
+                correct: 0,
+                retro: "El árbitro es elegido por su autoridad y credibilidad. [29, 30]"
+            },
+            {
+                q: "32. ¿Qué caracteriza a un 'Facilitador' en la resolución de disputas?",
+                options: [
+                    "a) Dirige un debate entre partes para que expresen percepciones y sentimientos.",
+                    "b) Dirige un debate entre partes para que expresen técnicas y sentimientos.",
+                    "c) Dirige un debate entre partes para que expresen normas y sentimientos.",
+                    "d) Dirige un debate entre partes para que expresen gestiones y sentimientos."
+                ],
+                correct: 0,
+                retro: "Es un proceso más preventivo que resolutivo de corto plazo. [32, 33]"
+            },
+            {
+                q: "33. ¿Qué condición es fundamental para gestionar un conflicto positivamente?",
+                options: [
+                    "a) Un grado mínimo de confianza para buscar soluciones a las controversias.",
+                    "b) Un grado mínimo de técnica para buscar soluciones a las controversias.",
+                    "c) Un grado mínimo de lógica para buscar soluciones a las controversias.",
+                    "d) Un grado mínimo de gestión para buscar soluciones a las controversias."
+                ],
+                correct: 0,
+                retro: "Sin confianza, el proceso de comunicación se bloquea. [25, 34]"
+            },
+            {
+                q: "34. ¿Qué es la 'Provención' según Francisco Cascón (2001)?",
+                options: [
+                    "a) Anticiparse a los conflictos antes de que estallen y generen daño.",
+                    "b) Anticiparse a los conflictos antes de que estallen y generen técnica.",
+                    "c) Anticiparse a los conflictos antes de que estallen y generen lógica.",
+                    "d) Anticiparse a los conflictos antes de que estallen y generen norma."
+                ],
+                correct: 0,
+                retro: "Requiere poner en práctica programas de educación para la paz. [35, 36]"
+            },
+            {
+                q: "35. ¿Cuál es el primer paso de la 'Fase Previa' en la planificación de la acción?",
+                options: [
+                    "a) Identificar y conocer actitudes de la comunidad ante la Cultura de Paz.",
+                    "b) Identificar y conocer actitudes técnicas ante la Cultura de Paz.",
+                    "c) Identificar y conocer actitudes lógicas ante la Cultura de Paz.",
+                    "d) Identificar y conocer actitudes directas ante la Cultura de Paz."
+                ],
+                correct: 0,
+                retro: "Permite diagnosticar las necesidades reales del centro educativo. [37, 38]"
+            },
+            {
+                q: "36. ¿Qué se hace en la 'Fase de Diseño' del proyecto de convivencia?",
+                options: [
+                    "a) Formulación de fundamentos teóricos, fines, objetivos y destinatarios.",
+                    "b) Formulación de fundamentos técnicos, fines, objetivos y destinatarios.",
+                    "c) Formulación de fundamentos lógicos, fines, objetivos y destinatarios.",
+                    "d) Formulación de fundamentos directos, fines, objetivos y destinatarios."
+                ],
+                correct: 0,
+                retro: "Establece los mecanismos e instrumentos de evaluación y revisión. [39, 40]"
+            },
+            {
+                q: "37. ¿Qué implica la 'Fase Evaluadora' en el ciclo de mejora?",
+                options: [
+                    "a) Evaluar resultados y modificar el proyecto introduciendo mejoras oportunas.",
+                    "b) Evaluar resultados y modificar el proyecto introduciendo mejoras técnicas.",
+                    "c) Evaluar resultados y modificar el proyecto introduciendo mejoras lógicas.",
+                    "d) Evaluar resultados y modificar el proyecto introduciendo mejoras directas."
+                ],
+                correct: 0,
+                retro: "Debe incluir una memoria final para la retroalimentación continua. [39, 40]"
+            },
+            {
+                q: "38. ¿Qué exige educar para la 'Perspectiva Positiva del Conflicto'?",
+                options: [
+                    "a) Descubrir su complejidad y encontrar soluciones pacíficamente.",
+                    "b) Descubrir su técnica y encontrar soluciones pacíficamente.",
+                    "c) Descubrir su lógica y encontrar soluciones pacíficamente.",
+                    "d) Descubrir su gestión y encontrar soluciones pacíficamente."
+                ],
+                correct: 0,
+                retro: "Transforma la sociedad hacia mayores cotas de justicia. [23, 29]"
+            },
+            {
+                q: "39. ¿Qué establece el 'Principio de Moralidad' de Cortina (1997)?",
+                options: [
+                    "a) Necesidad de encontrar soluciones justas para los implicados en un conflicto.",
+                    "b) Necesidad de encontrar soluciones técnicas para los implicados en un conflicto.",
+                    "c) Necesidad de encontrar soluciones lógicas para los implicados en un conflicto.",
+                    "d) Necesidad de encontrar soluciones directas para los implicados en un conflicto."
+                ],
+                correct: 0,
+                retro: "Tiene por meta final la paz y la justicia social. [32, 34]"
+            },
+            {
+                q: "40. ¿Cuál es el objetivo del 'Arreglo Normativo' en la resolución?",
+                options: [
+                    "a) Resolver el conflicto mediante una solución acorde a las normas del centro.",
+                    "b) Resolver el conflicto mediante una solución acorde a las normas de la técnica.",
+                    "c) Resolver el conflicto mediante una solución acorde a las normas de la gestión.",
+                    "d) Resolver el conflicto mediante una solución acorde a las normas de la lógica."
+                ],
+                correct: 0,
+                retro: "Aplica reglas establecidas previamente en el aula o institución. [29, 30]"
+            },
+            {
+                q: "41. ¿Qué es el 'Saber Escuchar' en la negociación razonada?",
+                options: [
+                    "a) Comprender racionalmente las razones (ideas y sentimientos) de quien habla.",
+                    "b) Comprender racionalmente las razones técnicas de quien habla.",
+                    "c) Comprender racionalmente las razones lógicas de quien habla.",
+                    "d) Comprender racionalmente las razones directas de quien habla."
+                ],
+                correct: 0,
+                retro: "Evita la intransigencia y facilita el entendimiento mutuo. [32, 33]"
+            },
+            {
+                q: "42. ¿Qué significa 'Despersonalizar la Disputa' según Fisher y Ury?",
+                options: [
+                    "a) Separar a las personas del problema durante la negociación.",
+                    "b) Separar a las personas de la técnica durante la negociación.",
+                    "c) Separar a las personas de la lógica durante la negociación.",
+                    "d) Separar a las personas de la gestión durante la negociación."
+                ],
+                correct: 0,
+                retro: "Permite enfocarse en los intereses sin atacar la dignidad personal. [28, 41]"
+            },
+            {
+                q: "43. ¿Por qué es vital 'Objetivizar los Criterios' del acuerdo?",
+                options: [
+                    "a) Para que el resultado obtenido esté basado en razones objetivas y no caprichos.",
+                    "b) Para que el resultado obtenido esté basado en razones técnicas y no caprichos.",
+                    "c) Para que el resultado obtenido esté basado en razones lógicas y no caprichos.",
+                    "d) Para que el resultado obtenido esté basado en razones directas y no caprichos."
+                ],
+                correct: 0,
+                retro: "Asegura que el acuerdo sea percibido como justo por ambas partes. [35, 42]"
+            },
+            {
+                q: "44. ¿Qué importancia tiene la 'Reparación' en la educación para el conflicto?",
+                options: [
+                    "a) Restablecer la situación que existía antes de que el conflicto estallara.",
+                    "b) Restablecer la técnica que existía antes de que el conflicto estallara.",
+                    "c) Restablecer la lógica que existía antes de que el conflicto estallara.",
+                    "d) Restablecer la gestión que existía antes de que el conflicto estallara."
+                ],
+                correct: 0,
+                retro: "Busca reconstruir los vínculos dañados por la disputa. [31, 33]"
+            },
+            {
+                q: "45. ¿Cuál es el requisito de 'Honestidad' para los alumnos en mediación?",
+                options: [
+                    "a) Ser honestos y sinceros durante todo el proceso de diálogo.",
+                    "b) Ser honestos y técnicos durante todo el proceso de diálogo.",
+                    "c) Ser honestos y lógicos durante todo el proceso de diálogo.",
+                    "d) Ser honestos y directos durante todo el proceso de diálogo."
+                ],
+                correct: 0,
+                retro: "Es una de las seis condiciones para una mediación efectiva. [31, 43]"
+            },
+            {
+                q: "46. ¿Qué define a la mediación como 'Arte y Ciencia' según Boqué (2002)?",
+                options: [
+                    "a) Integrar componentes creativos y herramientas éticas donde no hay jerarquías.",
+                    "b) Integrar componentes técnicos y herramientas éticas donde no hay jerarquías.",
+                    "c) Integrar componentes lógicos y herramientas éticas donde no hay jerarquías.",
+                    "d) Integrar componentes directos y herramientas éticas donde no hay jerarquías."
+                ],
+                correct: 0,
+                retro: "La comunicación pasa a ser horizontal entre los participantes. [44, 45]"
+            },
+            {
+                q: "47. ¿Qué garantiza un proceso de mediación 'Transparente'?",
+                options: [
+                    "a) Que las reglas del juego sean claras y aceptadas por todos.",
+                    "b) Que las reglas del juego sean técnicas y aceptadas por todos.",
+                    "c) Que las reglas del juego sean lógicas y aceptadas por todos.",
+                    "d) Que las reglas del juego sean directas y aceptadas por todos."
+                ],
+                correct: 0,
+                retro: "Permite poner sobre la mesa todas las preocupaciones sin miedo. [32, 33]"
+            },
+            {
+                q: "48. ¿En qué consiste la 'Fase de Implantación' del proyecto?",
+                options: [
+                    "a) Poner en marcha el proyecto de modo que se rentabilice su uso y minimicen obstáculos.",
+                    "b) Poner en marcha el proyecto de modo que se técnica su uso y minimicen obstáculos.",
+                    "c) Poner en marcha el proyecto de modo que se lógica su uso y minimicen obstáculos.",
+                    "d) Poner en marcha el proyecto de modo que se gestión su uso y minimicen obstáculos."
+                ],
+                correct: 0,
+                retro: "Incluye reuniones del equipo coordinador e información pública. [39, 40]"
+            },
+            {
+                q: "49. ¿Qué busca la 'Fase de Generalización' educativa?",
+                options: [
+                    "a) Continuar la aplicación del proyecto en cursos escolares posteriores.",
+                    "b) Continuar la aplicación del proyecto en cursos técnicos posteriores.",
+                    "c) Continuar la aplicación del proyecto en cursos lógicos posteriores.",
+                    "d) Continuar la aplicación del proyecto en cursos directos posteriores."
+                ],
+                correct: 0,
+                retro: "Convierte la convivencia en seña de identidad permanente del centro. [39, 40]"
+            },
+            {
+                q: "50. ¿Cuál es la conclusión sobre el conflicto en las relaciones humanas?",
+                options: [
+                    "a) El conflicto es connatural a toda relación humana y es motor de cambio.",
+                    "b) El conflicto es técnico a toda relación humana y es motor de cambio.",
+                    "c) El conflicto es lógico a toda relación humana y es motor de cambio.",
+                    "d) El conflicto es directo a toda relación humana y es motor de cambio."
+                ],
+                correct: 0,
+                retro: "Lo razonable es aprender a negociar correctamente las diferencias. [26, 32]"
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        quizData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `<div class='question-text'><strong>${item.q}</strong></div>`;
+            const list = document.createElement('ul');
+            item.options.forEach((opt, idx) => {
+                const li = document.createElement('li');
+                li.innerText = opt;
+                li.onclick = () => {
+                    const allLi = list.querySelectorAll('li');
+                    allLi.forEach(l => l.style.pointerEvents = 'none');
+                    const fb = document.getElementById(`fb-${index}`);
+                    fb.style.display = 'block';
+                    if(idx === item.correct) {
+                        li.classList.add('selected-correct');
+                        fb.innerHTML = "¡Correcto! " + item.retro;
+                        fb.style.background = "#d4edda";
+                    } else {
+                        li.classList.add('selected-incorrect');
+                        fb.innerText = "¡Incorrrecto!";
+                        fb.style.background = "#f8d7da";
+                    }
+                };
+                list.appendChild(li);
+            });
+            card.appendChild(list);
+            const fbDiv = document.createElement('div');
+            fbDiv.id = `fb-${index}`; fbDiv.className = 'feedback';
+            card.appendChild(fbDiv);
+            container.appendChild(card);
+        });
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

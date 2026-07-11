@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía para la Identificación y Denuncia de la Violencia Intrafamiliar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="header-content">
+            <div class="pc-doctor-title">PC DOCTOR</div>
+            <p class="welcome-elaborado">MATERIAL ELABORADO POR EL:</p>
+            <p class="welcome-profesor">Prof. Daniel Llanos</p>
+            <p class="welcome-celular">📱 Celular: 75136639</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="main-title">Guía para la Identificación y Denuncia de la Violencia Intrafamiliar</h1>
+        <p class="subtitle">Cuestionario de Identificación y Denuncia de Violencia</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. ¿Cuál es el objetivo principal de esta guía según los aspectos generales?",
+                options: [
+                    "a) Orientar la actuación de la comunidad educativa frente a situaciones de violencia intrafamiliar.",
+                    "b) Orientar la actuación de la comunidad educativa frente a situaciones de gestión intrafamiliar.",
+                    "c) Orientar la actuación de la comunidad educativa frente a situaciones de técnica intrafamiliar.",
+                    "d) Orientar la actuación de la comunidad educativa frente a situaciones de norma intrafamiliar."
+                ],
+                correct: 0,
+                retro: "Busca garantizar la prevención, identificación temprana y referencia oportuna. (Guía Violencia, p. 13)."
+            },
+            {
+                q: "2. Según el Artículo 2.2, ¿cuál es el alcance de aplicación de esta guía orientadora?",
+                options: [
+                    "a) Se establece para casos identificados en unidades del Subsistema de Educación Regular.",
+                    "b) Se establece para casos identificados en unidades del Subsistema de Educación Técnica.",
+                    "c) Se establece para casos identificados en unidades del Subsistema de Educación Superior.",
+                    "d) Se establece para casos identificados en unidades del Subsistema de Educación Especial."
+                ],
+                correct: 0,
+                retro: "Define las actuaciones de autoridades y maestros en el sistema regular. (Guía Violencia, p. 13)."
+            },
+            {
+                q: "3. ¿Cómo se define técnicamente la 'violencia en el ámbito familiar'?",
+                options: [
+                    "a) Maltrato entre miembros de la familia donde componentes con mayor poder abusan de otros.",
+                    "b) Maltrato entre miembros de la familia donde componentes con mayor fuerza abusan de otros.",
+                    "c) Maltrato entre miembros de la familia donde componentes con mayor rango abusan de otros.",
+                    "d) Maltrato entre miembros de la familia donde componentes con mayor nivel abusan de otros."
+                ],
+                correct: 0,
+                retro: "El abuso se basa en una asimetría de poder deliberada y recurrente. (Guía Violencia, p. 13)."
+            },
+            {
+                q: "4. ¿Qué constituye la 'violencia contra la niñez y adolescencia' según el punto 2.3.1?",
+                options: [
+                    "a) Cuando los encargados de la custodia ponen en peligro la integridad física o psicológica.",
+                    "b) Cuando los encargados de la custodia ponen en peligro la integridad física o pedagógica.",
+                    "c) Cuando los encargados de la custodia ponen en peligro la integridad física o institucional.",
+                    "d) Cuando los encargados de la custodia ponen en peligro la integridad física o administrativa."
+                ],
+                correct: 0,
+                retro: "Atenta contra los derechos individuales y colectivos reconocidos por ley. (Guía Violencia, p. 13)."
+            },
+            {
+                q: "5. ¿Cómo se clasifica técnicamente la violencia según el tipo de comportamiento?",
+                options: [
+                    "a) La violencia se puede clasificar técnicamente como acción, omisión y supresión.",
+                    "b) La violencia se puede clasificar técnicamente como acción, descuido y supresión.",
+                    "c) La violencia se puede clasificar técnicamente como acción, negligencia y supresión.",
+                    "d) La violencia se puede clasificar técnicamente como acción, abandono y supresión."
+                ],
+                correct: 0,
+                retro: "Esta clasificación ayuda a identificar la naturaleza de la agresión. (Guía Violencia, p. 14)."
+            },
+            {
+                q: "6. ¿Cuál es la definición técnica de 'violencia física' según el documento?",
+                options: [
+                    "a) Conjunto de acciones intencionadas que causan daño corporal que no son accidentales.",
+                    "b) Conjunto de acciones intencionadas que causan daño corporal que no son incidentales.",
+                    "c) Conjunto de acciones intencionadas que causan daño corporal que no son eventuales.",
+                    "d) Conjunto de acciones intencionadas que causan daño corporal que no son fortuitas."
+                ],
+                correct: 0,
+                retro: "Incluye lesiones crónicas o incidentes aislados de abuso físico. (Guía Violencia, p. 15)."
+            },
+            {
+                q: "7. ¿En qué consiste específicamente la 'violencia psicológica o emocional'?",
+                options: [
+                    "a) Es un acto intencionado que trata de socavar la valoración que la víctima tiene de sí misma.",
+                    "b) Es un acto intencionado que trata de socavar la valoración que la víctima tiene de su conducta.",
+                    "c) Es un acto intencionado que trata de socavar la valoración que la víctima tiene de su entorno.",
+                    "d) Es un acto intencionado que trata de socavar la valoración que la víctima tiene de su grupo."
+                ],
+                correct: 0,
+                retro: "Se manifiesta mediante insultos, burlas, desprecio o amenazas. (Guía Violencia, p. 15)."
+            },
+            {
+                q: "8. ¿Cómo se define la 'violencia sexual' en el marco de esta guía?",
+                options: [
+                    "a) Cualquier tipo de contacto sexual por parte de un adulto o tutor hacia un menor de edad.",
+                    "b) Cualquier tipo de contacto sexual por parte de un adulto o tutor hacia un niño escolar.",
+                    "c) Cualquier tipo de contacto sexual por parte de un adulto o tutor hacia un sujeto pasivo.",
+                    "d) Cualquier tipo de contacto sexual por parte de un adulto o tutor hacia un grupo vulnerable."
+                ],
+                correct: 0,
+                retro: "Es el tipo de violencia que más daño genera en el desarrollo de la víctima. (Guía Violencia, p. 15)."
+            },
+            {
+                q: "9. Según la Tabla 1, ¿cuál es la pena máxima por el delito de Violación?",
+                options: [
+                    "a) La sanción penal establece una pena máxima de privación de libertad de 15 años.",
+                    "b) La sanción penal establece una pena máxima de privación de libertad de 20 años.",
+                    "c) La sanción penal establece una pena máxima de privación de libertad de 25 años.",
+                    "d) La sanción penal establece una pena máxima de privación de libertad de 30 años."
+                ],
+                correct: 0,
+                retro: "Se aplica ante relaciones sexuales forzadas con penetración o introducción de objetos. (Guía Violencia, p. 16)."
+            },
+            {
+                q: "10. ¿Cómo se define el 'Abuso Sexual' cuando la víctima es un menor?",
+                options: [
+                    "a) Actos sexuales no constitutivos de penetración con una pena de diez a quince años.",
+                    "b) Actos sexuales no constitutivos de penetración con una pena de cinco a diez años.",
+                    "c) Actos sexuales no constitutivos de penetración con una pena de ocho a doce años.",
+                    "d) Actos sexuales no constitutivos de penetración con una pena de doce a veinte años."
+                ],
+                correct: 0,
+                retro: "La pena se agrava significativamente si la víctima es niña, niño o adolescente. (Guía Violencia, p. 16)."
+            },
+            {
+                q: "11. ¿En qué consiste el delito de 'Estupro' según la tipología legal?",
+                options: [
+                    "a) Relaciones sexuales con menor de 14 a 17 años a través del engaño y la seducción.",
+                    "b) Relaciones sexuales con menor de 12 a 17 años a través del engaño y la seducción.",
+                    "c) Relaciones sexuales con menor de 10 a 17 años a través del engaño y la seducción.",
+                    "d) Relaciones sexuales con menor de 13 a 17 años a través del engaño y la seducción."
+                ],
+                correct: 0,
+                retro: "La pena máxima para este delito es de 6 años de prisión. (Guía Violencia, p. 16)."
+            },
+            {
+                q: "12. ¿Qué se entiende por 'Trata y Tráfico' de seres humanos?",
+                options: [
+                    "a) Reclutamiento o traslado forzoso de personas para fines de explotación sexual o laboral.",
+                    "b) Reclutamiento o traslado forzoso de personas para fines de gestión sexual o laboral.",
+                    "c) Reclutamiento o traslado forzoso de personas para fines de técnica sexual o laboral.",
+                    "d) Reclutamiento o traslado forzoso de personas para fines de acción sexual o laboral."
+                ],
+                correct: 0,
+                retro: "Involucra el uso de engaños, amenazas o fuerza física. (Guía Violencia, p. 16)."
+            },
+            {
+                q: "13. ¿Cuál es una manifestación de violencia sexual sin contacto físico?",
+                options: [
+                    "a) Exponer o facilitar a niñas, niños y adolescentes al acceso de material de pornografía.",
+                    "b) Exponer o facilitar a niñas, niños y adolescentes al acceso de material de propaganda.",
+                    "c) Exponer o facilitar a niñas, niños y adolescentes al acceso de material de publicidad.",
+                    "d) Exponer o facilitar a niñas, niños y adolescentes al acceso de material de instrucción."
+                ],
+                correct: 0,
+                retro: "Incluye fotos íntimas y el uso de internet o celulares para este fin. (Guía Violencia, p. 16)."
+            },
+            {
+                q: "14. ¿Cuándo se considera técnicamente que el trabajo es 'explotación laboral'?",
+                options: [
+                    "a) Cuando impide el acceso a la educación o atenta contra la dignidad y autoestima del menor.",
+                    "b) Cuando impide el acceso a la educación o atenta contra la conducta y autoestima del menor.",
+                    "c) Cuando impide el acceso a la educación o atenta contra la identidad y autoestima del menor.",
+                    "d) Cuando impide el acceso a la educación o atenta contra la voluntad y autoestima del menor."
+                ],
+                correct: 0,
+                retro: "También incluye recibir un salario inadecuado o trabajar demasiadas horas. (Guía Violencia, p. 17)."
+            },
+            {
+                q: "15. ¿Cómo se define la violencia por 'omisión y supresión'?",
+                options: [
+                    "a) Desatención de necesidades básicas para el desarrollo físico, emocional o cognitivo.",
+                    "b) Desatención de necesidades básicas para el desarrollo físico, técnico o cognitivo.",
+                    "c) Desatención de necesidades básicas para el desarrollo físico, pedagógico o cognitivo.",
+                    "d) Desatención de necesidades básicas para el desarrollo físico, administrativo o cognitivo."
+                ],
+                correct: 0,
+                retro: "Representa un maltrato pasivo que causa perjuicio en el desarrollo. (Guía Violencia, p. 17)."
+            },
+            {
+                q: "16. ¿Cuál es una señal emocional de violencia en la niñez a corto plazo?",
+                options: [
+                    "a) Sentimientos de culpa e impotencia frente a situaciones de tipo familiar.",
+                    "b) Sentimientos de duda e impotencia frente a situaciones de tipo familiar.",
+                    "c) Sentimientos de ira e impotencia frente a situaciones de tipo familiar.",
+                    "d) Sentimientos de miedo e impotencia frente a situaciones de tipo familiar."
+                ],
+                correct: 0,
+                retro: "Se presentan también temores inexplicables hacia ciertas personas. (Guía Violencia, p. 18)."
+            },
+            {
+                q: "17. ¿Qué consecuencia cognitiva se observa en adolescentes víctimas de violencia?",
+                options: [
+                    "a) Disminución del rendimiento escolar y de la capacidad de atención y concentración.",
+                    "b) Disminución del rendimiento escolar y de la capacidad de memoria y concentración.",
+                    "c) Disminución del rendimiento escolar y de la capacidad de lógica y concentración.",
+                    "d) Disminución del rendimiento escolar y de la capacidad de técnica y concentración."
+                ],
+                correct: 0,
+                retro: "El trauma interfiere directamente con los procesos de aprendizaje. (Guía Violencia, p. 19)."
+            },
+            {
+                q: "18. ¿Qué señal conductual es típica de la violencia sexual en menores?",
+                options: [
+                    "a) Interés exagerado por conductas sexuales de adultos y conductas no apropiadas para su edad.",
+                    "b) Interés exagerado por conductas técnicas de adultos y conductas no apropiadas para su edad.",
+                    "c) Interés exagerado por conductas sociales de adultos y conductas no apropiadas para su edad.",
+                    "d) Interés exagerado por conductas lógicas de adultos y conductas no apropiadas para su edad."
+                ],
+                correct: 0,
+                retro: "Suele manifestarse en juegos o comentarios erotizados precoces. (Guía Violencia, p. 19)."
+            },
+            {
+                q: "19. ¿Cuál es una consecuencia a largo plazo en el área cognitiva para la niñez?",
+                options: [
+                    "a) Alteraciones en funciones ejecutivas como la memoria, el autocontrol y flexibilidad cognitiva.",
+                    "b) Alteraciones en funciones ejecutivas como la técnica, el autocontrol y flexibilidad cognitiva.",
+                    "c) Alteraciones en funciones ejecutivas como la lógica, el autocontrol y flexibilidad cognitiva.",
+                    "d) Alteraciones en funciones ejecutivas como la acción, el autocontrol y flexibilidad cognitiva."
+                ],
+                correct: 0,
+                retro: "Esto deriva frecuentemente en fracaso o abandono escolar. (Guía Violencia, p. 20)."
+            },
+            {
+                q: "20. ¿Qué factor de riesgo individual se asocia a la niña, niño o adolescente?",
+                options: [
+                    "a) Nacer de un embarazo no deseado o con impedimentos físicos o psíquicos.",
+                    "b) Nacer de un embarazo no deseado o con impedimentos técnicos o psíquicos.",
+                    "c) Nacer de un embarazo no deseado o con impedimentos lógicos o psíquicos.",
+                    "d) Nacer de un embarazo no deseado o con impedimentos sociales o psíquicos."
+                ],
+                correct: 0,
+                retro: "Estas condiciones pueden incrementar la vulnerabilidad al maltrato. (Guía Violencia, p. 22)."
+            },
+            {
+                q: "21. ¿Qué factor de riesgo familiar se destaca en los padres agresores?",
+                options: [
+                    "a) Historias de vida de malos tratos y reducida capacidad de control de impulsos.",
+                    "b) Historias de vida de malos tratos y reducida capacidad de control de planes.",
+                    "c) Historias de vida de malos tratos y reducida capacidad de control de normas.",
+                    "d) Historias de vida de malos tratos y reducida capacidad de control de técnicas."
+                ],
+                correct: 0,
+                retro: "El modelo de crianza basado en el castigo es un predictor clave. (Guía Violencia, p. 21)."
+            },
+            {
+                q: "22. ¿Cuál es un factor de riesgo comunitario y social mencionado?",
+                options: [
+                    "a) Normas sociales y costumbres comunitarias que toleran o refuerzan el comportamiento violento.",
+                    "b) Normas sociales y costumbres comunitarias que toleran o refuerzan el comportamiento técnico.",
+                    "c) Normas sociales y costumbres comunitarias que toleran o refuerzan el comportamiento lógico.",
+                    "d) Normas sociales y costumbres comunitarias que toleran o refuerzan el comportamiento directo."
+                ],
+                correct: 0,
+                retro: "La pobreza y marginalidad exacerban la violencia intrafamiliar. (Guía Violencia, p. 22)."
+            },
+            {
+                q: "23. ¿Cómo influye el castigo físico en la autoestima del menor (Art. 2.5)?",
+                options: [
+                    "a) Genera miedo y sumisión, disminuyendo su capacidad para crecer de forma autónoma.",
+                    "b) Genera miedo y sumisión, disminuyendo su capacidad para crecer de forma técnica.",
+                    "c) Genera miedo y sumisión, disminuyendo su capacidad para crecer de forma lógica.",
+                    "d) Genera miedo y sumisión, disminuyendo su capacidad para crecer de forma directa."
+                ],
+                correct: 0,
+                retro: "La falta de autoestima limita el deseo de comportarse bien, creando un círculo vicioso. (Guía Violencia, p. 23)."
+            },
+            {
+                q: "24. ¿Qué debe hacerse si un familiar refiere una situación de violencia en el hogar?",
+                options: [
+                    "a) Se debe informar inmediatamente a la maestra, maestro o autoridad para el abordaje del caso.",
+                    "b) Se debe informar inmediatamente a la maestra, maestro o autoridad para la gestión del caso.",
+                    "c) Se debe informar inmediatamente a la maestra, maestro o autoridad para la técnica del caso.",
+                    "d) Se debe informar inmediatamente a la maestra, maestro o autoridad para la revisión del caso."
+                ],
+                correct: 0,
+                retro: "La escuela es fundamental para detectar lo que otras instituciones no ven. (Guía Violencia, p. 27)."
+            },
+            {
+                q: "25. ¿Qué recurso pedagógico puede ayudar a detectar violencia según el documento?",
+                options: [
+                    "a) Espacios de dibujo y poesía que permitan manifestar emociones y sentimientos.",
+                    "b) Espacios de dibujo y poesía que permitan manifestar planes y sentimientos.",
+                    "c) Espacios de dibujo y poesía que permitan manifestar metas y sentimientos.",
+                    "d) Espacios de dibujo y poesía que permitan manifestar tareas y sentimientos."
+                ],
+                correct: 0,
+                retro: "Permiten la expresión libre sin forzar un interrogatorio directo. (Guía Violencia, p. 27)."
+            },
+            {
+                q: "26. ¿Cuál es un signo físico evidente de maltrato que debe observarse?",
+                options: [
+                    "a) Lesiones o fracturas sin explicación coherente o que no concuerden con la causa.",
+                    "b) Lesiones o fracturas sin explicación técnica o que no concuerden con la causa.",
+                    "c) Lesiones o fracturas sin explicación lógica o que no concuerden con la causa.",
+                    "d) Lesiones o fracturas sin explicación directa o que no concuerden con la causa."
+                ],
+                correct: 0,
+                retro: "También deben observarse somatizaciones como mareos o vómitos. (Guía Violencia, p. 28)."
+            },
+            {
+                q: "27. ¿Qué comportamiento escolar es un indicador de posible violencia intrafamiliar?",
+                options: [
+                    "a) Temor a permanecer en el establecimiento o miedo extremo de volver a su casa.",
+                    "b) Temor a permanecer en el establecimiento o miedo extremo de volver a su centro.",
+                    "c) Temor a permanecer en el establecimiento o miedo extremo de volver a su aula.",
+                    "d) Temor a permanecer en el establecimiento o miedo extremo de volver a su grupo."
+                ],
+                correct: 0,
+                retro: "La disminución del rendimiento y el desinterés son señales clave. (Guía Violencia, p. 28)."
+            },
+            {
+                q: "28. Al aclarar sospechas, ¿qué tipo de preguntas deben fundamentar la conversación?",
+                options: [
+                    "a) La conversación debe estar fundada en preguntas abiertas para obtener información.",
+                    "b) La conversación debe estar fundada en preguntas cerradas para obtener información.",
+                    "c) La conversación debe estar fundada en preguntas directas para obtener información.",
+                    "d) La conversación debe estar fundada en preguntas técnicas para obtener información."
+                ],
+                correct: 0,
+                retro: "Se debe evitar que parezca un interrogatorio policial. (Guía Violencia, p. 29)."
+            },
+            {
+                q: "29. ¿Qué NO se debe hacer durante la detección de la violencia?",
+                options: [
+                    "a) No se debe juzgar, regañar o tomar partido, ni minimizar la situación relatada.",
+                    "b) No se debe juzgar, regañar o tomar partido, ni gestionar la situación relatada.",
+                    "c) No se debe juzgar, regañar o tomar partido, ni técnica la situación relatada.",
+                    "d) No se debe juzgar, regañar o tomar partido, ni revisar la situación relatada."
+                ],
+                correct: 0,
+                retro: "Es vital creer y aceptar lo que escuchamos del estudiante. (Guía Violencia, p. 29)."
+            },
+            {
+                q: "30. ¿Qué acción es incorrecta durante la intervención (Tabla 5, Momento 2)?",
+                options: [
+                    "a) Confrontar a la niña o al niño con su agresor para aclarar los hechos sucedidos.",
+                    "b) Confrontar a la niña o al niño con su agresor para aclarar los planes sucedidos.",
+                    "c) Confrontar a la niña o al niño con su agresor para aclarar los temas sucedidos.",
+                    "d) Confrontar a la niña o al niño con su agresor para aclarar los actos sucedidos."
+                ],
+                correct: 0,
+                retro: "La confrontación directa revictimiza y pone en riesgo al menor. (Guía Violencia, p. 29)."
+            },
+            {
+                q: "31. ¿Quién debe realizar preferentemente la conversación si se sospecha de abuso sexual?",
+                options: [
+                    "a) Deberá ser realizada por una maestra en un ambiente tranquilo y con privacidad.",
+                    "b) Deberá ser realizada por una maestra en un ambiente técnico y con privacidad.",
+                    "c) Deberá ser realizada por una maestra en un ambiente directo y con privacidad.",
+                    "d) Deberá ser realizada por una maestra en un ambiente social y con privacidad."
+                ],
+                correct: 0,
+                retro: "Busca generar empatía en una relación de confianza estudiante-maestra. (Guía Violencia, p. 30)."
+            },
+            {
+                q: "32. ¿Qué se debe hacer si hay inconsistencias graves entre el relato del padre y del niño?",
+                options: [
+                    "a) Considerar una derivación hacia el centro de salud más cercano para una revisión física.",
+                    "b) Considerar una derivación hacia el centro de salud más cercano para una revisión técnica.",
+                    "c) Considerar una derivación hacia el centro de salud más cercano para una revisión lógica.",
+                    "d) Considerar una derivación hacia el centro de salud más cercano para una revisión directa."
+                ],
+                correct: 0,
+                retro: "El personal de salud podrá verificar lesiones no visibles a simple vista. (Guía Violencia, p. 30)."
+            },
+            {
+                q: "33. ¿Cuál es el rol fundamental del maestro según el punto 3.2?",
+                options: [
+                    "a) Es un puente entre las niñas, niños, adolescentes, sus familiares y servicios necesarios.",
+                    "b) Es un puente entre las niñas, niños, adolescentes, sus familiares y planes necesarios.",
+                    "c) Es un puente entre las niñas, niños, adolescentes, sus familiares y guías necesarios.",
+                    "d) Es un puente entre las niñas, niños, adolescentes, sus familiares y normas necesarios."
+                ],
+                correct: 0,
+                retro: "Debe garantizar la protección frente a cualquier tipo de explotación. (Guía Violencia, p. 31)."
+            },
+            {
+                q: "34. ¿Qué debe hacer un maestro si siente que tiene limitaciones por un trauma personal previo?",
+                options: [
+                    "a) Lo mejor será traspasar el caso a un colega que pueda atenderlo de manera objetiva.",
+                    "b) Lo mejor será traspasar el caso a un colega que pueda atenderlo de manera técnica.",
+                    "c) Lo mejor será traspasar el caso a un colega que pueda atenderlo de manera directa.",
+                    "d) Lo mejor será traspasar el caso a un colega que pueda atenderlo de manera lógica."
+                ],
+                correct: 0,
+                retro: "Se debe evitar que experiencias personales sesguen la intervención. (Guía Violencia, p. 31)."
+            },
+            {
+                q: "35. ¿Qué implica la 'contención emocional de emergencia'?",
+                options: [
+                    "a) Procedimientos de primeros auxilios psicológicos para iniciar el trabajo de apoyo.",
+                    "b) Procedimientos de primeros auxilios psicológicos para iniciar el trabajo de gestión.",
+                    "c) Procedimientos de primeros auxilios psicológicos para iniciar el trabajo de técnica.",
+                    "d) Procedimientos de primeros auxilios psicológicos para iniciar el trabajo de norma."
+                ],
+                correct: 0,
+                retro: "Permite estabilizar emocionalmente a la víctima tras la revelación. (Guía Violencia, p. 31)."
+            },
+            {
+                q: "36. ¿A qué se refiere la valoración de 'Riesgo Bajo' en omisión (Tabla 7)?",
+                options: [
+                    "a) Descuidos que no afectan significativamente el crecimiento, salud o educación del NNA.",
+                    "b) Descuidos que no afectan significativamente la técnica, salud o educación del NNA.",
+                    "c) Descuidos que no afectan significativamente la lógica, salud o educación del NNA.",
+                    "d) Descuidos que no afectan significativamente la gestión, salud o educación del NNA."
+                ],
+                correct: 0,
+                retro: "Se verifica que aún existe una relación de afecto y atención. (Guía Violencia, p. 33)."
+            },
+            {
+                q: "37. ¿Qué caracteriza al 'Riesgo Alto' en el maltrato físico?",
+                options: [
+                    "a) Uso de la fuerza que ocasiona lesiones que ponen en riesgo la vida del menor.",
+                    "b) Uso de la fuerza que ocasiona lesiones que ponen en riesgo la técnica del menor.",
+                    "c) Uso de la fuerza que ocasiona lesiones que ponen en riesgo la lógica del menor.",
+                    "d) Uso de la fuerza que ocasiona lesiones que ponen en riesgo la acción del menor."
+                ],
+                correct: 0,
+                retro: "Requiere atención médica urgente y denuncia inmediata. (Guía Violencia, p. 34)."
+            },
+            {
+                q: "38. ¿Cómo se consideran técnicamente todos los hechos de violencia sexual?",
+                options: [
+                    "a) Los hechos de violencia sexual son considerados siempre como situaciones de riesgo alto.",
+                    "b) Los hechos de violencia sexual son considerados siempre como situaciones de riesgo medio.",
+                    "c) Los hechos de violencia sexual son considerados siempre como situaciones de riesgo técnico.",
+                    "d) Los hechos de violencia sexual son considerados siempre como situaciones de riesgo directo."
+                ],
+                correct: 0,
+                retro: "Deben denunciarse inmediatamente ante la Defensoría de la Niñez (DNA). (Guía Violencia, p. 34)."
+            },
+            {
+                q: "39. ¿Cuál es una señal de alerta máxima de riesgo vital para el estudiante?",
+                options: [
+                    "a) Presencia de ideas de muerte o autoeliminación manifestadas por el propio estudiante.",
+                    "b) Presencia de ideas de muerte o autoeliminación manifestadas por el propio centro.",
+                    "c) Presencia de ideas de muerte o autoeliminación manifestadas por el propio grupo.",
+                    "d) Presencia de ideas de muerte o autoeliminación manifestadas por el propio tutor."
+                ],
+                correct: 0,
+                retro: "Involucra también el acceso libre del agresor a la víctima. (Guía Violencia, p. 35)."
+            },
+            {
+                q: "40. ¿Qué se recomienda NO realizar para aclarar sospechas (punto 3.3)?",
+                options: [
+                    "a) Realizar interrogatorios exhaustivos previos o solicitar detalles de signos no visibles.",
+                    "b) Realizar interrogatorios exhaustivos previos o solicitar detalles de signos no técnicos.",
+                    "c) Realizar interrogatorios exhaustivos previos o solicitar detalles de signos no lógicos.",
+                    "d) Realizar interrogatorios exhaustivos previos o solicitar detalles de signos no directos."
+                ],
+                correct: 0,
+                retro: "Esta labor debe ser realizada por personal especializado para no entorpecer la justicia. (Guía Violencia, p. 35)."
+            },
+            {
+                q: "41. ¿Cuál es el protocolo de actuación si la madre vive violencia sexual?",
+                options: [
+                    "a) Brindarle información para realizar la denuncia y recomendar asistencia psicológica externa.",
+                    "b) Brindarle información para realizar la denuncia y recomendar asistencia técnica externa.",
+                    "c) Brindarle información para realizar la denuncia y recomendar asistencia social externa.",
+                    "d) Brindarle información para realizar la denuncia y recomendar asistencia lógica externa."
+                ],
+                correct: 0,
+                retro: "El maestro debe apoyar la restitución de derechos de todo el núcleo. (Guía Violencia, p. 36)."
+            },
+            {
+                q: "42. ¿Qué es la línea 'Familia Segura' mencionada en la guía?",
+                options: [
+                    "a) Servicio gratuito de apoyo psicoemocional para prevenir y atender la violencia (800113040).",
+                    "b) Servicio gratuito de apoyo psicoemocional para prevenir y atender la técnica (800113040).",
+                    "c) Servicio gratuito de apoyo psicoemocional para prevenir y atender la gestión (800113040).",
+                    "d) Servicio gratuito de apoyo psicoemocional para prevenir y atender la norma (800113040)."
+                ],
+                correct: 0,
+                retro: "Atiende los siete días de la semana de 6:00 a.m. a media noche. (Guía Violencia, p. 38)."
+            },
+            {
+                q: "43. ¿Qué restricción absoluta existe en casos de violencia sexual (Art. 3.3)?",
+                options: [
+                    "a) Nunca existe la opción de mediación con el agresor ni arreglos extrajudiciales.",
+                    "b) Nunca existe la opción de mediación con el agresor ni arreglos técnicos.",
+                    "c) Nunca existe la opción de mediación con el agresor ni arreglos directos.",
+                    "d) Nunca existe la opción de mediación con el agresor ni arreglos lógicos."
+                ],
+                correct: 0,
+                retro: "La denuncia debe ser inmediata sin importar quién sea el agresor. (Guía Violencia, p. 37)."
+            },
+            {
+                q: "44. ¿Cuál es el plazo máximo para comunicar un riesgo alto a la DNA?",
+                options: [
+                    "a) La comunicación debe realizarse de manera inmediata dentro las 24 horas de conocido.",
+                    "b) La comunicación debe realizarse de manera inmediata dentro las 48 horas de conocido.",
+                    "c) La comunicación debe realizarse de manera inmediata dentro las 12 horas de conocido.",
+                    "d) La comunicación debe realizarse de manera inmediata dentro las 72 horas de conocido."
+                ],
+                correct: 0,
+                retro: "Busca garantizar la protección urgente de la integridad del menor. (Guía Violencia, p. 38)."
+            },
+            {
+                q: "45. ¿Qué puede hacer un maestro si recibe amenazas tras denunciar?",
+                options: [
+                    "a) Presentar otra demanda por intimidación y solicitar medidas de protección personal.",
+                    "b) Presentar otra demanda por intimidación y solicitar medidas de gestión personal.",
+                    "c) Presentar otra demanda por intimidación y solicitar medidas de técnica personal.",
+                    "d) Presentar otra demanda por intimidación y solicitar medidas de revisión personal."
+                ],
+                correct: 0,
+                retro: "Puede acudir al departamento jurídico de la Dirección Departamental (DDE). (Guía Violencia, p. 38)."
+            },
+            {
+                q: "46. ¿Qué debe contener el seguimiento de un caso derivado (Contrarreferencia)?",
+                options: [
+                    "a) Estar atento a la evolución académica, física, emocional y social del estudiante.",
+                    "b) Estar atento a la evolución académica, física, técnica y social del estudiante.",
+                    "c) Estar atento a la evolución académica, física, lógica y social del estudiante.",
+                    "d) Estar atento a la evolución académica, física, directa y social del estudiante."
+                ],
+                correct: 0,
+                retro: "El maestro debe reportar a la instancia que atiende el caso si nota cambios. (Guía Violencia, p. 39)."
+            },
+            {
+                q: "47. Según la Guía, ¿cuál es el lugar donde coinciden las responsabilidades del Estado?",
+                options: [
+                    "a) La unidad educativa; donde se busca la formación integral de las hijas e hijos.",
+                    "b) La unidad educativa; donde se busca la formación técnica de las hijas e hijos.",
+                    "c) La unidad educativa; donde se busca la formación directa de las hijas e hijos.",
+                    "d) La unidad educativa; donde se busca la formación social de las hijas e hijos."
+                ],
+                correct: 0,
+                retro: "Es el entorno clave para detectar situaciones de violencia hogareña. (Guía Violencia, p. 7)."
+            },
+            {
+                q: "48. ¿A qué se refiere el 'Modelo Ecológico' de la violencia?",
+                options: [
+                    "a) Identifica factores de influencia en el niño, la familia, la comunidad y la sociedad.",
+                    "b) Identifica factores de influencia en el niño, la técnica, la comunidad y la sociedad.",
+                    "c) Identifica factores de influencia en el niño, la lógica, la comunidad y la sociedad.",
+                    "d) Identifica factores de influencia en el niño, la gestión, la comunidad y la sociedad."
+                ],
+                correct: 0,
+                retro: "Explica la multifactorialidad de las agresiones contra la infancia. (Guía Violencia, p. 9)."
+            },
+            {
+                q: "49. ¿Qué establece el Comité de los Derechos del Niño sobre el castigo corporal?",
+                options: [
+                    "a) Recomienda su prohibición por ser una violación a la dignidad humana del menor.",
+                    "b) Recomienda su prohibición por ser una violación a la técnica humana del menor.",
+                    "c) Recomienda su prohibición por ser una violación a la lógica humana del menor.",
+                    "d) Recomienda su prohibición por ser una violación a la gestión humana del menor."
+                ],
+                correct: 0,
+                retro: "Enseña erróneamente que la violencia es una forma aceptable de resolver conflictos. (Guía Violencia, p. 11)."
+            },
+            {
+                q: "50. ¿Cuál es el propósito final de la 'disciplina positiva' en el hogar?",
+                options: [
+                    "a) Ayudar al niño a comportarse de forma apropiada, saludable y positiva sin violencia.",
+                    "b) Ayudar al niño a comportarse de forma técnica, saludable y positiva sin violencia.",
+                    "c) Ayudar al niño a comportarse de forma lógica, saludable y positiva sin violencia.",
+                    "d) Ayudar al niño a comportarse de forma directa, saludable y positiva sin violencia."
+                ],
+                correct: 0,
+                retro: "Fomenta el crecimiento como persona autónoma y responsable. (Guía Violencia, p. 24)."
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        quizData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `<div class='question-text'><strong>${item.q}</strong></div>`;
+            const list = document.createElement('ul');
+            item.options.forEach((opt, idx) => {
+                const li = document.createElement('li');
+                li.innerText = opt;
+                li.onclick = () => {
+                    const allLi = list.querySelectorAll('li');
+                    allLi.forEach(l => l.style.pointerEvents = 'none');
+                    const fb = document.getElementById(`fb-${index}`);
+                    fb.style.display = 'block';
+                    if(idx === item.correct) {
+                        li.classList.add('selected-correct');
+                        fb.innerHTML = "¡Correcto! " + item.retro;
+                        fb.style.background = "#d4edda";
+                    } else {
+                        li.classList.add('selected-incorrect');
+                        fb.innerText = "¡Incorrrecto!";
+                        fb.style.background = "#f8d7da";
+                    }
+                };
+                list.appendChild(li);
+            });
+            card.appendChild(list);
+            const fbDiv = document.createElement('div');
+            fbDiv.id = `fb-${index}`; fbDiv.className = 'feedback';
+            card.appendChild(fbDiv);
+            container.appendChild(card);
+        });
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

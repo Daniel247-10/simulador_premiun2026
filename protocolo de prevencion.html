@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo de Prevención, Actuación y Denuncia</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="header-content">
+            <div class="pc-doctor-title">PC DOCTOR</div>
+            <p class="welcome-elaborado">MATERIAL ELABORADO POR EL:</p>
+            <p class="welcome-profesor">Prof. Daniel Llanos</p>
+            <p class="welcome-celular">📱 Celular: 75136639</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="main-title">Protocolo de Prevención, Actuación y Denuncia (Violencia)</h1>
+        <p class="subtitle">Cuestionario de Protocolo de Prevención</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. ¿Cómo se define técnicamente un 'protocolo' según los aspectos generales del documento?",
+                options: [
+                    "a) Es un instrumento de actuación que define los pasos a seguir en una determinada situación.",
+                    "b) Es un instrumento de actuación que define las reglas a seguir en una determinada situación.",
+                    "c) Es un instrumento de actuación que define las normas a seguir en una determinada situación.",
+                    "d) Es un instrumento de actuación que define los planes a seguir en una determinada situación."
+                ],
+                correct: 0,
+                retro: "Un protocolo permite a las personas saber qué deben hacer al estar involucradas en una situación. [1]."
+            },
+            {
+                q: "2. ¿Cuál es el objeto primordial del presente protocolo en el ámbito educativo?",
+                options: [
+                    "a) Definir los lineamientos, directrices y procedimientos para la prevención, actuación y denuncia.",
+                    "b) Definir los lineamientos, directrices y procedimientos para la prevención, actuación y gestión.",
+                    "c) Definir los lineamientos, directrices y procedimientos para la prevención, actuación y control.",
+                    "d) Definir los lineamientos, directrices y procedimientos para la prevención, actuación y técnica."
+                ],
+                correct: 0,
+                retro: "Busca salvaguardar la integridad de los estudiantes mediante respuestas oportunas. [2]."
+            },
+            {
+                q: "3. Según la Ley N° 548, ¿qué constituye técnicamente el concepto de 'violencia'?",
+                options: [
+                    "a) La acción u omisión que ocasione privaciones, lesiones, daños, sufrimientos o perjuicios.",
+                    "b) La acción u omisión que ocasione privaciones, lesiones, daños, sufrimientos o problemas.",
+                    "c) La acción u omisión que ocasione privaciones, lesiones, daños, sufrimientos o maltratos.",
+                    "d) La acción u omisión que ocasione privaciones, lesiones, daños, sufrimientos o fracturas."
+                ],
+                correct: 0,
+                retro: "La violencia puede afectar la salud física, mental, afectiva o sexual del menor. [3]."
+            },
+            {
+                q: "4. ¿En qué consiste específicamente la 'violencia psicológica' en el entorno escolar?",
+                options: [
+                    "a) Agresión verbal con expresiones descalificadoras que buscan menoscabar la autoestima.",
+                    "b) Agresión verbal con expresiones descalificadoras que buscan menoscabar la conducta.",
+                    "c) Agresión verbal con expresiones descalificadoras que buscan menoscabar la identidad.",
+                    "d) Agresión verbal con expresiones descalificadoras que buscan menoscabar la voluntad."
+                ],
+                correct: 0,
+                retro: "Incluye humillaciones, amenazas, manipulación y hostigamiento sin contacto físico. [3]."
+            },
+            {
+                q: "5. ¿Cómo se manifiesta la 'violencia física' según la tipificación del protocolo?",
+                options: [
+                    "a) Acción intencional que ocasiona lesiones, daño o sufrimientos físicos internos o externos.",
+                    "b) Acción intencional que ocasiona lesiones, daño o sufrimientos físicos directos o externos.",
+                    "c) Acción intencional que ocasiona lesiones, daño o sufrimientos físicos reales o externos.",
+                    "d) Acción intencional que ocasiona lesiones, daño o sufrimientos físicos totales o externos."
+                ],
+                correct: 0,
+                retro: "Se emplea fuerza física, armas o cualquier otro medio para causar daño. [4]."
+            },
+            {
+                q: "6. ¿Qué define a la 'violencia por omisión o negligencia' como una forma pasiva de agresión?",
+                options: [
+                    "a) Es la omisión y/o descuido por parte de los adultos en el cumplimiento de sus obligaciones.",
+                    "b) Es la omisión y/o descuido por parte de los adultos en el cumplimiento de sus labores.",
+                    "c) Es la omisión y/o descuido por parte de los adultos en el cumplimiento de sus tareas.",
+                    "d) Es la omisión y/o descuido por parte de los adultos en el cumplimiento de sus planes."
+                ],
+                correct: 0,
+                retro: "Se refiere a la desatención de necesidades básicas, afectivas o educativas del menor. [5, 6]."
+            },
+            {
+                q: "7. ¿Cuál es un ejemplo claro de negligencia en el ámbito del personal docente?",
+                options: [
+                    "a) Inasistencia e impuntualidad de las y los maestros, dejando desatendidos a los estudiantes.",
+                    "b) Inasistencia e impuntualidad de las y los maestros, dejando desatendidos a los registros.",
+                    "c) Inasistencia e impuntualidad de las y los maestros, dejando desatendidos a los padres.",
+                    "d) Inasistencia e impuntualidad de las y los maestros, dejando desatendidos a los directores."
+                ],
+                correct: 0,
+                retro: "El abandono del aula o la falta de supervisión es una forma de violencia por omisión. [7, 8]."
+            },
+            {
+                q: "8. Según UNICEF, ¿qué elemento central opera en el abuso sexual infantil?",
+                options: [
+                    "a) Existe una asimetría de poder y opera la coerción por parte del adulto agresor.",
+                    "b) Existe una asimetría de poder y opera la intención por parte del adulto agresor.",
+                    "c) Existe una asimetría de poder y opera la voluntad por parte del adulto agresor.",
+                    "d) Existe una asimetría de poder y opera la reacción por parte del adulto agresor."
+                ],
+                correct: 0,
+                retro: "El niño no puede consentir libremente debido a su edad y falta de desarrollo. [9]."
+            },
+            {
+                q: "9. ¿Cómo se tipifica el delito de 'Violación' en el Código Penal boliviano?",
+                options: [
+                    "a) Actos sexuales no consentidos que impliquen acceso carnal por vía vaginal, anal u oral.",
+                    "b) Actos sexuales no consentidos que impliquen contacto carnal por vía vaginal, anal u oral.",
+                    "c) Actos sexuales no consentidos que impliquen instinto carnal por vía vaginal, anal u oral.",
+                    "d) Actos sexuales no consentidos que impliquen impulso carnal por vía vaginal, anal u oral."
+                ],
+                correct: 0,
+                retro: "La pena se agrava si se usa intimidación, violencia física o psicológica. [10]."
+            },
+            {
+                q: "10. ¿Cuál es la pena por 'Violación de infante, niña, niño o adolescente' (menor de 14 años)?",
+                options: [
+                    "a) Sanción con privación de libertad de veinte (20) a veinticinco (25) años de duración.",
+                    "b) Sanción con privación de libertad de quince (15) a veinte (20) años de duración.",
+                    "c) Sanción con privación de libertad de diez (10) a quince (15) años de duración.",
+                    "d) Sanción con privación de libertad de veinticinco (25) a treinta (30) años de duración."
+                ],
+                correct: 0,
+                retro: "Se aplica aunque no haya uso de fuerza y se alegue supuesto consentimiento. [11]."
+            },
+            {
+                q: "11. ¿Qué caracteriza al 'Acoso Sexual' cometido por un servidor público?",
+                options: [
+                    "a) Valerse de la posición jerárquica para hostigar y obligar a actos de contenido sexual.",
+                    "b) Valerse de la posición jerárquica para vigilar y obligar a actos de contenido sexual.",
+                    "c) Valerse de la posición jerárquica para observar y obligar a actos de contenido sexual.",
+                    "d) Valerse de la posición jerárquica para controlar y obligar a actos de contenido sexual."
+                ],
+                correct: 0,
+                retro: "La pena se agrava en un tercio y conlleva la destitución del cargo. [12]."
+            },
+            {
+                q: "12. ¿En qué rango de edad se tipifica el delito de 'Estupro'?",
+                options: [
+                    "a) Acceso carnal con persona mayor de catorce (14) y menor de dieciocho (18) años.",
+                    "b) Acceso carnal con persona mayor de doce (12) y menor de dieciocho (18) años.",
+                    "c) Acceso carnal con persona mayor de diez (10) y menor de dieciocho (18) años.",
+                    "d) Acceso carnal con persona mayor de trece (13) y menor de dieciocho (18) años."
+                ],
+                correct: 0,
+                retro: "El estupro requiere que haya mediado seducción o engaño para consumarse. [13]."
+            },
+            {
+                q: "13. ¿Cuándo se considera el 'Abuso Sexual' según el Artículo 312 del Código Penal?",
+                options: [
+                    "a) Cuando se realizan actos sexuales no constitutivos de penetración o acceso carnal.",
+                    "b) Cuando se realizan actos sexuales no constitutivos de aproximación o acceso carnal.",
+                    "c) Cuando se realizan actos sexuales no constitutivos de vinculación o acceso carnal.",
+                    "d) Cuando se realizan actos sexuales no constitutivos de cercanía o acceso carnal."
+                ],
+                correct: 0,
+                retro: "Si la víctima es niño o adolescente, la pena es de diez a quince años. [14]."
+            },
+            {
+                q: "14. ¿Qué sanción establece el Código Penal para el delito de 'Infanticidio'?",
+                options: [
+                    "a) Pena de presidio de treinta (30) años, sin derecho a indulto, según la normativa.",
+                    "b) Pena de presidio de veinticinco (25) años, sin derecho a indulto, según la normativa.",
+                    "c) Pena de presidio de veinte (20) años, sin derecho a indulto, según la normativa.",
+                    "d) Pena de presidio de quince (15) años, sin derecho a indulto, según la normativa."
+                ],
+                correct: 0,
+                retro: "Aplica para quien asesine a un niño desde su nacimiento hasta los 12 años. [15]."
+            },
+            {
+                q: "15. ¿Cuál es un efecto cognitivo a corto plazo de la violencia en estudiantes?",
+                options: [
+                    "a) Disminución en el rendimiento escolar y de la capacidad de atención y concentración.",
+                    "b) Disminución en el rendimiento escolar y de la capacidad de memoria y concentración.",
+                    "c) Disminución en el rendimiento escolar y de la capacidad de lógica y concentración.",
+                    "d) Disminución en el rendimiento escolar y de la capacidad de reflejos y concentración."
+                ],
+                correct: 0,
+                retro: "La violencia desmotiva hacia las actividades y tareas escolares inmediatas. [16]."
+            },
+            {
+                q: "16. ¿Qué consecuencia conductual a mediano plazo se asocia con el maltrato?",
+                options: [
+                    "a) Consumo de alcohol y otras drogas, deserción escolar o comportamiento delictivo.",
+                    "b) Consumo de alcohol y otras drogas, deserción escolar o comportamiento técnico.",
+                    "c) Consumo de alcohol y otras drogas, deserción escolar o comportamiento directo.",
+                    "d) Consumo de alcohol y otras drogas, deserción escolar o comportamiento pasivo."
+                ],
+                correct: 0,
+                retro: "A mediano plazo, el estudiante puede vulnerar la autoridad o abandonar el hogar. [17]."
+            },
+            {
+                q: "17. ¿Cómo debe reaccionar el adulto si un niño relata haber sufrido violencia sexual?",
+                options: [
+                    "a) Debe creer en su relato, no ponerlo en duda ni culpabilizar a la víctima.",
+                    "b) Debe dudar de su relato, no ponerlo en duda ni culpabilizar a la víctima.",
+                    "c) Debe juzgar su relato, no ponerlo en duda ni culpabilizar a la víctima.",
+                    "d) Debe filtrar su relato, no ponerlo en duda ni culpabilizar a la víctima."
+                ],
+                correct: 0,
+                retro: "Es fundamental validar la narración del menor para romper el silencio. [18]."
+            },
+            {
+                q: "18. ¿Qué papel tiene el Ministerio de Educación en la prevención de la violencia?",
+                options: [
+                    "a) Fortalecer procesos de coordinación interinstitucional para la investigación y sanción.",
+                    "b) Fortalecer procesos de coordinación interinstitucional para la gestión y sanción.",
+                    "c) Fortalecer procesos de coordinación interinstitucional para la técnica y sanción.",
+                    "d) Fortalecer procesos de coordinación interinstitucional para el plan y sanción."
+                ],
+                correct: 0,
+                retro: "Debe formular políticas, planes y programas de prevención a nivel nacional. [19, 20]."
+            },
+            {
+                q: "19. ¿Cuál es el plazo máximo para que un abogado defensor denuncie nuevos hechos de violencia?",
+                options: [
+                    "a) Denunciar ante la autoridad competente en un plazo máximo de cuarenta y ocho (48) horas.",
+                    "b) Denunciar ante la autoridad competente en un plazo máximo de veinticuatro (24) horas.",
+                    "c) Denunciar ante la autoridad competente en un plazo máximo de doce (12) horas.",
+                    "d) Denunciar ante la autoridad competente en un plazo máximo de setenta y dos (72) horas."
+                ],
+                correct: 0,
+                retro: "Posteriormente tiene 72 horas para formalizar la Querella correspondiente. [21]."
+            },
+            {
+                q: "20. ¿Qué debe garantizar el Director Departamental de Educación en cada unidad educativa?",
+                options: [
+                    "a) Que cuenten con un Plan de Convivencia Armónica y Pacífica que prevenga la violencia.",
+                    "b) Que cuenten con un Plan de Gestión Armónica y Pacífica que prevenga la violencia.",
+                    "c) Que cuenten con un Plan de Acción Armónica y Pacífica que prevenga la violencia.",
+                    "d) Que cuenten con un Plan de Técnica Armónica y Pacífica que prevenga la violencia."
+                ],
+                correct: 0,
+                retro: "Es responsable de asegurar el cumplimiento de las políticas de protección. [22]."
+            },
+            {
+                q: "21. ¿Qué atribución tiene el Director Distrital sobre el personal sindicado de delitos sexuales?",
+                options: [
+                    "a) Iniciar el proceso disciplinario hasta su culminación e informar al Director Departamental.",
+                    "b) Iniciar el proceso administrativo hasta su culminación e informar al Director Departamental.",
+                    "c) Iniciar el proceso judicial hasta su culminación e informar al Director Departamental.",
+                    "d) Iniciar el proceso técnico hasta su culminación e informar al Director Departamental."
+                ],
+                correct: 0,
+                retro: "Debe actuar inmediatamente al conocer una falta grave relativa a violencia. [23]."
+            },
+            {
+                q: "22. ¿Qué aspecto de la infraestructura escolar se debe asegurar para prevenir riesgos?",
+                options: [
+                    "a) Identificar lugares inseguros y organizar la vigilancia de baños, canchas y áreas comunes.",
+                    "b) Identificar lugares inseguros y organizar la vigilancia de aulas, canchas y áreas comunes.",
+                    "c) Identificar lugares inseguros y organizar la vigilancia de oficinas, canchas y áreas comunes.",
+                    "d) Identificar lugares inseguros y organizar la vigilancia de laboratorios, canchas y áreas comunes."
+                ],
+                correct: 0,
+                retro: "Los espacios poco visibles deben ser supervisados para evitar agresiones. [24]."
+            },
+            {
+                q: "23. ¿Qué restricción existe sobre la comunicación entre maestros y estudiantes?",
+                options: [
+                    "a) Se prohíben las llamadas o mensajes por redes sociales de manera individual.",
+                    "b) Se prohíben las llamadas o mensajes por redes sociales de manera grupal.",
+                    "c) Se prohíben las llamadas o mensajes por redes sociales de manera escolar.",
+                    "d) Se prohíben las llamadas o mensajes por redes sociales de manera docente."
+                ],
+                correct: 0,
+                retro: "Si es necesario, la comunicación será a través de los padres y vía dirección. [25]."
+            },
+            {
+                q: "24. ¿Qué obligación tienen los porteros respecto a las puertas del establecimiento?",
+                options: [
+                    "a) Bajo ningún motivo deben permanecer abiertas sin control ni permitir personas ajenas.",
+                    "b) Bajo ningún motivo deben permanecer abiertas sin registro ni permitir personas ajenas.",
+                    "c) Bajo ningún motivo deben permanecer abiertas sin vigilancia ni permitir personas ajenas.",
+                    "d) Bajo ningún motivo deben permanecer abiertas sin seguro ni permitir personas ajenas."
+                ],
+                correct: 0,
+                retro: "Deben permanecer al cuidado de la entrada en ingresos, recreos y salidas. [26, 27]."
+            },
+            {
+                q: "25. ¿Qué acción debe evitar un maestro según las prohibiciones del protocolo?",
+                options: [
+                    "a) Permanecer a solas con un estudiante en el aula u otro ambiente de la unidad educativa.",
+                    "b) Permanecer a solas con un estudiante en el patio u otro ambiente de la unidad educativa.",
+                    "c) Permanecer a solas con un estudiante en el baño u otro ambiente de la unidad educativa.",
+                    "d) Permanecer a solas con un estudiante en el centro u otro ambiente de la unidad educativa."
+                ],
+                correct: 0,
+                retro: "Esta medida previene situaciones de riesgo y protege la integridad del menor. [28]."
+            },
+            {
+                q: "26. ¿A qué se refiere la educación sobre el cuerpo como 'territorio privado'?",
+                options: [
+                    "a) Enseñar que nadie puede tocar su cuerpo sin permiso y diferenciar caricias buenas de malas.",
+                    "b) Enseñar que nadie puede tocar su cuerpo sin permiso y diferenciar caricias reales de malas.",
+                    "c) Enseñar que nadie puede tocar su cuerpo sin permiso y diferenciar caricias directas de malas.",
+                    "d) Enseñar que nadie puede tocar su cuerpo sin permiso y diferenciar caricias físicas de malas."
+                ],
+                correct: 0,
+                retro: "Fomenta la autoprotección y el reconocimiento de partes íntimas desde la infancia. [29]."
+            },
+            {
+                q: "27. ¿Qué es el 'mutismo selectivo' como indicador psicológico de violencia?",
+                options: [
+                    "a) Dejar de hablar en ciertos contextos tras un evento traumático o agresión sufrida.",
+                    "b) Dejar de hablar en ciertos contextos tras un evento técnico o agresión sufrida.",
+                    "c) Dejar de hablar en ciertos contextos tras un evento lógico o agresión sufrida.",
+                    "d) Dejar de hablar en ciertos contextos tras un evento directo o agresión sufrida."
+                ],
+                correct: 0,
+                retro: "Es una señal de alerta junto con la tristeza permanente y conductas agresivas. [30]."
+            },
+            {
+                q: "28. ¿Cuál es un indicio físico específico de posible violencia sexual?",
+                options: [
+                    "a) Sangrado en genitales externos, dificultades para caminar o sentarse y embarazo.",
+                    "b) Sangrado en genitales externos, dificultades para correr o sentarse y embarazo.",
+                    "c) Sangrado en genitales externos, dificultades para jugar o sentarse y embarazo.",
+                    "d) Sangrado en genitales externos, dificultades para saltar o sentarse y embarazo."
+                ],
+                correct: 0,
+                retro: "Estos signos requieren atención inmediata y derivación a especialistas. [31]."
+            },
+            {
+                q: "29. ¿Qué debe hacerse si la autoridad o personal del centro son los presuntos agresores?",
+                options: [
+                    "a) Los procedimientos deben ser realizados por la Dirección Distrital Educativa.",
+                    "b) Los procedimientos deben ser realizados por la Dirección Departamental Educativa.",
+                    "c) Los procedimientos deben ser realizados por el Ministerio de Educación.",
+                    "d) Los procedimientos deben ser realizados por la Defensoría de la Niñez."
+                ],
+                correct: 0,
+                retro: "Se evita que el presunto agresor tenga control sobre el proceso de denuncia. [32]."
+            },
+            {
+                q: "30. ¿Qué implica garantizar la 'no revictimización' de la niña o niño?",
+                options: [
+                    "a) Respetar la privacidad y no obligar a repetir el relato del trauma innecesariamente.",
+                    "b) Respetar la privacidad y no obligar a repetir el relato del trauma públicamente.",
+                    "c) Respetar la privacidad y no obligar a repetir el relato del trauma oficialmente.",
+                    "d) Respetar la privacidad y no obligar a repetir el relato del trauma legalmente."
+                ],
+                correct: 0,
+                retro: "Bajo ningún concepto se deben realizar preguntas adicionales para evitar más daño. [33, 34]."
+            },
+            {
+                q: "31. ¿Cómo se define el proceso de 'Contención' emocional?",
+                options: [
+                    "a) Es el acto de recibir, acoger, proteger o cuidar a una persona que requiere ayuda.",
+                    "b) Es el acto de recibir, acoger, proteger o cuidar a una persona que requiere guías.",
+                    "c) Es el acto de recibir, acoger, proteger o cuidar a una persona que requiere planes.",
+                    "d) Es el acto de recibir, acoger, proteger o cuidar a una persona que requiere normas."
+                ],
+                correct: 0,
+                retro: "Requiere escuchar sin interrumpir y evitar juicios de valor sobre el agresor. [35, 36]."
+            },
+            {
+                q: "32. ¿Qué consecuencia legal tiene omitir la denuncia de un hecho de violencia?",
+                options: [
+                    "a) Se puede ser acusado de complicidad por la omisión de denuncia según el Código Penal.",
+                    "b) Se puede ser acusado de negligencia por la omisión de denuncia según el Código Penal.",
+                    "c) Se puede ser acusado de abandono por la omisión de denuncia según el Código Penal.",
+                    "d) Se puede ser acusado de infracción por la omisión de denuncia según el Código Penal."
+                ],
+                correct: 0,
+                retro: "La denuncia no es opcional para los miembros de la comunidad educativa. [37]."
+            },
+            {
+                q: "33. ¿Cuál es el plazo máximo para denunciar un hecho de violencia conocido?",
+                options: [
+                    "a) Obligación de denunciar en un plazo máximo de veinticuatro (24) horas.",
+                    "b) Obligación de denunciar en un plazo máximo de cuarenta y ocho (48) horas.",
+                    "c) Obligación de denunciar en un plazo máximo de doce (12) horas.",
+                    "d) Obligación de denunciar en un plazo máximo de setenta y dos (72) horas."
+                ],
+                correct: 0,
+                retro: "Se debe acudir a la Defensoría de la Niñez, Ministerio Público o FELCV. [37]."
+            },
+            {
+                q: "34. ¿Qué instancia es la garante de los derechos de la niñez con equipos interdisciplinarios?",
+                options: [
+                    "a) La Defensoría de la Niñez y Adolescencia (DNA).",
+                    "b) El Servicio Departamental de Salud (SEDES).",
+                    "c) La Dirección Departamental de Educación (DDE).",
+                    "d) El Ministerio de Justicia y Transparencia."
+                ],
+                correct: 0,
+                retro: "Cuenta con abogados, trabajadores sociales y psicólogos para la atención. [38]."
+            },
+            {
+                q: "35. ¿Qué medida pedagógica debe tomarse si un alumno falta por recuperación de maltrato?",
+                options: [
+                    "a) Los maestros deben realizar adaptaciones curriculares para compensar los días de inasistencia.",
+                    "b) Los maestros deben realizar adaptaciones curriculares para compensar los días de evaluación.",
+                    "c) Los maestros deben realizar adaptaciones curriculares para compensar los días de registro.",
+                    "d) Los maestros deben realizar adaptaciones curriculares para compensar los días de gestión."
+                ],
+                correct: 0,
+                retro: "Se debe garantizar que el estudiante continúe su derecho a la educación. [39]."
+            },
+            {
+                q: "36. ¿A qué se refiere la 'resiliencia' en el proceso de acompañamiento?",
+                options: [
+                    "a) Capacidad de recuperarse y adaptarse con éxito frente a la adversidad del maltrato.",
+                    "b) Capacidad de recuperarse y adaptarse con éxito frente a la técnica del maltrato.",
+                    "c) Capacidad de recuperarse y adaptarse con éxito frente a la lógica del maltrato.",
+                    "d) Capacidad de recuperarse y adaptarse con éxito frente a la directiva del maltrato."
+                ],
+                correct: 0,
+                retro: "El maestro debe ayudar a desarrollar competencias a pesar del estrés sufrido. [40, 41]."
+            },
+            {
+                q: "37. ¿Qué autoridad sanciona castigos físicos que no llegan a ser delitos penales?",
+                options: [
+                    "a) La Jueza o el Juez Público en materia de Niñez y Adolescencia.",
+                    "b) El Director de la Unidad Educativa correspondiente.",
+                    "c) El Fiscal de Materia del distrito jurisdiccional.",
+                    "d) El Director Distrital de Educación del ramo."
+                ],
+                correct: 0,
+                retro: "Sanciona infracciones que degraden o afecten la dignidad del menor. [42]."
+            },
+            {
+                q: "38. ¿Qué es la 'contrarreferencia' en la gestión de casos?",
+                options: [
+                    "a) Respuesta de la instancia a quien se derivó el caso informando las acciones realizadas.",
+                    "b) Respuesta de la instancia a quien se derivó el caso informando los planes realizados.",
+                    "c) Respuesta de la instancia a quien se derivó el caso informando los temas realizados.",
+                    "d) Respuesta de la instancia a quien se derivó el caso informando los actos realizados."
+                ],
+                correct: 0,
+                retro: "Permite a la escuela conocer el estado de la denuncia y recomendaciones. [43, 44]."
+            },
+            {
+                q: "39. ¿Cuál es el propósito del registro anual de casos en la unidad educativa?",
+                options: [
+                    "a) Es principalmente estadístico y orienta las acciones de prevención a realizar.",
+                    "b) Es principalmente administrativo y orienta las acciones de prevención a realizar.",
+                    "c) Es principalmente judicial y orienta las acciones de prevención a realizar.",
+                    "d) Es principalmente técnico y orienta las acciones de prevención a realizar."
+                ],
+                correct: 0,
+                retro: "Se utiliza el Anexo 3 para consolidar la información a fin de gestión. [45]."
+            },
+            {
+                q: "40. ¿Quién es el 'garante principal' de los derechos de los niños según la presentación?",
+                options: [
+                    "a) El Estado es el garante principal de los derechos fundamentales de la niñez.",
+                    "b) La Familia es el garante principal de los derechos fundamentales de la niñez.",
+                    "c) La Escuela es el garante principal de los derechos fundamentales de la niñez.",
+                    "d) La Sociedad es el garante principal de los derechos fundamentales de la niñez."
+                ],
+                correct: 0,
+                retro: "Los padres de familia actúan como co-garantes de dichos derechos. [46]."
+            },
+            {
+                q: "41. ¿Qué pilar de la Ley 070 se menciona como base de este protocolo?",
+                options: [
+                    "a) La convivencia pacífica para erradicar toda forma de violencia en el ámbito educativo.",
+                    "b) La convivencia pacífica para erradicar toda forma de conflicto en el ámbito educativo.",
+                    "c) La convivencia pacífica para erradicar toda forma de desorden en el ámbito educativo.",
+                    "d) La convivencia pacífica para erradicar toda forma de malestar en el ámbito educativo."
+                ],
+                correct: 0,
+                retro: "Contribuye al desarrollo de una sociedad sustentada en la cultura de paz. [47]."
+            },
+            {
+                q: "42. ¿Qué significa 'Vivir Bien contigo y conmigo' en el enfoque del Ministerio?",
+                options: [
+                    "a) Convivencia comunitaria sin asimetrías de poder y en equilibrio con lo que nos rodea.",
+                    "b) Convivencia comunitaria sin asimetrías de fuerza y en equilibrio con lo que nos rodea.",
+                    "c) Convivencia comunitaria sin asimetrías de rango y en equilibrio con lo que nos rodea.",
+                    "d) Convivencia comunitaria sin asimetrías de nivel y en equilibrio con lo que nos rodea."
+                ],
+                correct: 0,
+                retro: "Se diferencia del concepto de 'vivir mejor' a costa de los demás. [48]."
+            },
+            {
+                q: "43. ¿Qué principio rige la atención preferente de la niñez según el protocolo?",
+                options: [
+                    "a) Interés superior de la niña, del niño o adolescente.",
+                    "b) Interés general de la niña, del niño o adolescente.",
+                    "c) Interés técnico de la niña, del niño o adolescente.",
+                    "d) Interés directo de la niña, del niño o adolescente."
+                ],
+                correct: 0,
+                retro: "Obliga a dar prioridad absoluta y celeridad en la prevención y atención. [49]."
+            },
+            {
+                q: "44. ¿Cómo se manifiesta el castigo físico prohibido por la Ley 548?",
+                options: [
+                    "a) Golpes, patadas, pellizcos, bofetadas o ingestión forzada de substancias.",
+                    "b) Golpes, patadas, pellizcos, bofetadas o ingestión técnica de substancias.",
+                    "c) Golpes, patadas, pellizcos, bofetadas o ingestión lógica de substancias.",
+                    "d) Golpes, patadas, pellizcos, bofetadas o ingestión directa de substancias."
+                ],
+                correct: 0,
+                retro: "Incluye cualquier medio que ocasione lesiones o sufrimientos físicos. [5]."
+            },
+            {
+                q: "45. ¿Cuál es un ejemplo de violencia por omisión en necesidades médicas?",
+                options: [
+                    "a) Restringir atenciones o tratamientos psicológicos en caso de requerirlos.",
+                    "b) Restringir atenciones o tratamientos técnicos en caso de requerirlos.",
+                    "c) Restringir atenciones o tratamientos directos en caso de requerirlos.",
+                    "d) Restringir atenciones o tratamientos lógicos en caso de requerirlos."
+                ],
+                correct: 0,
+                retro: "No proveer el cuidado necesario atenta contra el desarrollo integral. [7]."
+            },
+            {
+                q: "46. ¿Qué se tipifica como 'Proxenetismo' en el Código Penal?",
+                options: [
+                    "a) Promover o contribuir a la prostitución de una persona para satisfacer deseos ajenos.",
+                    "b) Promover o contribuir a la prostitución de una persona para satisfacer planes ajenos.",
+                    "c) Promover o contribuir a la prostitución de una persona para satisfacer metas ajenas.",
+                    "d) Promover o contribuir a la prostitución de una persona para satisfacer actos ajenos."
+                ],
+                correct: 0,
+                retro: "La sanción es de diez a quince años de privación de libertad. [50]."
+            },
+            {
+                q: "47. ¿Qué agrava la pena por pornografía según la Ley N° 054?",
+                options: [
+                    "a) Se agrava en un tercio cuando la víctima es niña, niño o adolescente.",
+                    "b) Se agrava en un medio cuando la víctima es niña, niño o adolescente.",
+                    "c) Se agrava en un cuarto cuando la víctima es niña, niño o adolescente.",
+                    "d) Se agrava en un quinto cuando la víctima es niña, niño o adolescente."
+                ],
+                correct: 0,
+                retro: "Incluye grabar, fotografiar, distribuir o vender material pornográfico. [15]."
+            },
+            {
+                q: "48. ¿A qué se refiere la 'corresponsabilidad' en la prevención?",
+                options: [
+                    "a) Todos los miembros de la comunidad educativa deben actuar para evitar la violencia.",
+                    "b) Todos los miembros de la comunidad educativa deben registrar para evitar la violencia.",
+                    "c) Todos los miembros de la comunidad educativa deben guiar para evitar la violencia.",
+                    "d) Todos los miembros de la comunidad educativa deben mandar para evitar la violencia."
+                ],
+                correct: 0,
+                retro: "Implica a directores, maestros, administrativos, padres y estudiantes. [2, 49]."
+            },
+            {
+                q: "49. ¿Qué debe contener un informe de situación según el Anexo 1?",
+                options: [
+                    "a) Datos de identificación del estudiante y una breve descripción del caso.",
+                    "b) Datos de identificación del estudiante y una breve evaluación del caso.",
+                    "c) Datos de identificación del estudiante y una breve revisión del caso.",
+                    "d) Datos de identificación del estudiante y una breve sanción del caso."
+                ],
+                correct: 0,
+                retro: "El informe debe ser objetivo, evitando juicios de valor o supuestos. [34, 51]."
+            },
+            {
+                q: "50. ¿Bajo qué principio se debe autorizar el uso de redes sociales en la escuela?",
+                options: [
+                    "a) Deben ser grupos aprobados por dirección y padres para actividades pedagógicas.",
+                    "b) Deben ser grupos aprobados por dirección y padres para actividades sociales.",
+                    "c) Deben ser grupos aprobados por dirección y padres para actividades técnicas.",
+                    "d) Deben ser grupos aprobados por dirección y padres para actividades lógicas."
+                ],
+                correct: 0,
+                retro: "El uso de WhatsApp o Facebook debe ser institucional, nunca comunicación individual privada. [52]."
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        quizData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `<div class='question-text'><strong>${item.q}</strong></div>`;
+            const list = document.createElement('ul');
+            item.options.forEach((opt, idx) => {
+                const li = document.createElement('li');
+                li.innerText = opt;
+                li.onclick = () => {
+                    const allLi = list.querySelectorAll('li');
+                    allLi.forEach(l => l.style.pointerEvents = 'none');
+                    const fb = document.getElementById(`fb-${index}`);
+                    fb.style.display = 'block';
+                    if(idx === item.correct) {
+                        li.classList.add('selected-correct');
+                        fb.innerHTML = "¡Correcto! " + item.retro;
+                        fb.style.background = "#d4edda";
+                    } else {
+                        li.classList.add('selected-incorrect');
+                        fb.innerText = "¡Incorrrecto!";
+                        fb.style.background = "#f8d7da";
+                    }
+                };
+                list.appendChild(li);
+            });
+            card.appendChild(list);
+            const fbDiv = document.createElement('div');
+            fbDiv.id = `fb-${index}`; fbDiv.className = 'feedback';
+            card.appendChild(fbDiv);
+            container.appendChild(card);
+        });
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

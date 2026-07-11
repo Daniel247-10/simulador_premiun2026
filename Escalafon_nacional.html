@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reglamento del Escalafón Nacional</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="header-content">
+            <div class="pc-doctor-title">PC DOCTOR</div>
+            <p class="welcome-elaborado">MATERIAL ELABORADO POR EL:</p>
+            <p class="welcome-profesor">Prof. Daniel Llanos</p>
+            <p class="welcome-celular">📱 Celular: 75136639</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="main-title">Reglamento del Escalafón Nacional del Servicio de Educación</h1>
+        <p class="subtitle">Cuestionario de Escalafón Nacional</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. ¿Cuál es la definición técnica exacta del Escalafón Nacional según el Artículo 1°?",
+                options: [
+                    "a) Es el registro sistemático, permanente y centralizado de los datos personales y profesionales.",
+                    "b) Es el registro sistemático, permanente y centralizado de los datos personales y administrativos.",
+                    "c) Es el registro sistemático, permanente y centralizado de los datos personales y institucionales.",
+                    "d) Es el registro sistemático, permanente y centralizado de los datos personales y pedagógicos."
+                ],
+                correct: 0,
+                retro: "El Escalafón centraliza los datos de maestros y funcionarios del servicio educativo. (DS 04688, p. 2)."
+            },
+            {
+                q: "2. Según el Artículo 2°, ¿cuál es una de las finalidades principales del Escalafón Nacional?",
+                options: [
+                    "a) Regula el ingreso y garantiza la continuidad de los maestros y funcionarios del ramo.",
+                    "b) Regula el ingreso y garantiza la estabilidad de los maestros y funcionarios del ramo.",
+                    "c) Regula el ingreso y garantiza la efectividad de los maestros y funcionarios del ramo.",
+                    "d) Regula el ingreso y garantiza la seguridad de los maestros y funcionarios del ramo."
+                ],
+                correct: 0,
+                retro: "Busca asegurar la carrera docente y administrativa de forma regulada. (DS 04688, p. 2)."
+            },
+            {
+                q: "3. ¿Qué establece el inciso b) del Artículo 2° para el desarrollo de la carrera docente?",
+                options: [
+                    "a) Establece la Escala de Categoría y la Escala Jerárquica para el desarrollo de la carrera.",
+                    "b) Establece la Escala de Categoría y la Escala Institucional para el desarrollo de la carrera.",
+                    "c) Establece la Escala de Categoría y la Escala Profesional para el desarrollo de la carrera.",
+                    "d) Establece la Escala de Categoría y la Escala Administrativa para el desarrollo de la carrera."
+                ],
+                correct: 0,
+                retro: "Define las estructuras de ascenso tanto en méritos como en tiempo. (DS 04688, p. 3)."
+            },
+            {
+                q: "4. ¿Qué entidad es la Agencia Central encargada de atender el Escalafón Nacional?",
+                options: [
+                    "a) El Departamento de Estadística y Personal, dependiente del Ministerio de Educación.",
+                    "b) El Departamento de Estadística y Personal, dependiente del Ministerio de Planeamiento.",
+                    "c) El Departamento de Estadística y Personal, dependiente del Ministerio de Gobierno.",
+                    "d) El Departamento de Estadística y Personal, dependiente del Ministerio de Finanzas."
+                ],
+                correct: 0,
+                retro: "Es la oficina técnica que gestiona el registro nacional. (DS 04688, p. 3)."
+            },
+            {
+                q: "5. Según el Artículo 4°, ¿cuáles son los dos sectores que comprende el Servicio de Educación?",
+                options: [
+                    "a) El sector docente y el administrativo; encargados de atender el sistema y las reparticiones.",
+                    "b) El sector docente y el institucional; encargados de atender el sistema y las reparticiones.",
+                    "c) El sector docente y el técnico; encargados de atender el sistema y las reparticiones.",
+                    "d) El sector docente y el directivo; encargados de atender el sistema y las reparticiones."
+                ],
+                correct: 0,
+                retro: "Diferencia las funciones directas de enseñanza de las de apoyo logístico. (DS 04688, p. 6)."
+            },
+            {
+                q: "6. ¿Cuál es el requisito de edad para ingresar en el sector docente según el Artículo 5°?",
+                options: [
+                    "a) Tener no menos de 18 ni más de 50 años de edad para ejercer el magisterio fiscal.",
+                    "b) Tener no menos de 18 ni más de 55 años de edad para ejercer el magisterio fiscal.",
+                    "c) Tener no menos de 21 ni más de 50 años de edad para ejercer el magisterio fiscal.",
+                    "d) Tener no menos de 21 ni más de 55 años de edad para ejercer el magisterio fiscal."
+                ],
+                correct: 0,
+                retro: "Establece los límites biológicos legales para la incorporación. (DS 04688, p. 7)."
+            },
+            {
+                q: "7. ¿Cómo se define técnicamente a los maestros normalistas en el Artículo 8°?",
+                options: [
+                    "a) Son los que siguen el curso regular de formación pedagógica y obtienen certificado profesional.",
+                    "b) Son los que siguen el curso regular de formación pedagógica y obtienen certificado de egreso.",
+                    "c) Son los que siguen el curso regular de formación pedagógica y obtienen certificado de capacidad.",
+                    "d) Son los que siguen el curso regular de formación pedagógica y obtienen certificado de idoneidad."
+                ],
+                correct: 0,
+                retro: "Son los profesionales formados específicamente para la docencia. (DS 04688, p. 7)."
+            },
+            {
+                q: "8. ¿Qué requisito de instrucción se exige para ser maestro interino en el ciclo primario?",
+                options: [
+                    "a) Diploma de Bachiller para enseñar en el ciclo primario; a falta de elemento capacitado.",
+                    "b) Diploma de Bachiller para enseñar en el ciclo primario; previo examen de competencia.",
+                    "c) Diploma de Bachiller para enseñar en el ciclo primario; previa resolución distrital.",
+                    "d) Diploma de Bachiller para enseñar en el ciclo primario; mediante designación directa."
+                ],
+                correct: 0,
+                retro: "Es el grado mínimo de formación académica para interinatos básicos. (DS 04688, p. 7)."
+            },
+            {
+                q: "9. ¿Quiénes son considerados maestros titulares según el Artículo 10°?",
+                options: [
+                    "a) Los interinos que después de 10 años de servicios aprueban un examen de capacidad técnica.",
+                    "b) Los interinos que después de 10 años de servicios aprueban un examen de capacidad docente.",
+                    "c) Los interinos que después de 10 años de servicios aprueban un examen de capacidad profesional.",
+                    "d) Los interinos que después de 10 años de servicios aprueban un examen de capacidad académica."
+                ],
+                correct: 0,
+                retro: "La titularidad definitiva requiere una década de servicio y evaluación. (DS 04688, p. 8)."
+            },
+            {
+                q: "10. ¿Cuál de las siguientes es una causa para no ser admitido en el ejercicio docente?",
+                options: [
+                    "a) Los que padezcan de enfermedades graves o defectos que les impidan trabajar normalmente.",
+                    "b) Los que padezcan de enfermedades crónicas o defectos que les impidan trabajar normalmente.",
+                    "c) Los que padezcan de enfermedades leves o defectos que les impidan trabajar normalmente.",
+                    "d) Los que padezcan de enfermedades técnicas o defectos que les impidan trabajar normalmente."
+                ],
+                correct: 0,
+                retro: "Salvaguarda la salud pública y la eficiencia del servicio. (DS 04688, p. 8)."
+            },
+            {
+                q: "11. ¿A qué edad se prohíbe técnicamente la admisión al servicio docente?",
+                options: [
+                    "a) No podrán ser admitidos los mayores de 60 años de edad en el magisterio fiscal.",
+                    "b) No podrán ser admitidos los mayores de 65 años de edad en el magisterio fiscal.",
+                    "c) No podrán ser admitidos los mayores de 55 años de edad en el magisterio fiscal.",
+                    "d) No podrán ser admitidos los mayores de 70 años de edad en el magisterio fiscal."
+                ],
+                correct: 0,
+                retro: "La norma establece el cese de ingreso por razones de jubilación obligatoria. (DS 04688, p. 9)."
+            },
+            {
+                q: "12. ¿Cuál es el tiempo de servicio requerido para que un interino opte a la inscripción?",
+                options: [
+                    "a) Tendrán opción a inscripción en el Escalafón después de cumplir cinco años de servicio.",
+                    "b) Tendrán opción a inscripción en el Escalafón después de cumplir ocho años de servicio.",
+                    "c) Tendrán opción a inscripción en el Escalafón después de cumplir tres años de servicio.",
+                    "d) Tendrán opción a inscripción en el Escalafón después de cumplir diez años de servicio."
+                ],
+                correct: 0,
+                retro: "Es el periodo de prueba de idoneidad antes del registro oficial. (DS 04688, p. 11)."
+            },
+            {
+                q: "13. ¿Qué ocurre si un maestro titular no aprueba el examen de capacidad al cabo de 10 años?",
+                options: [
+                    "a) Será diferida por un año su declaratoria de titular y sufrirá una segunda reprobación.",
+                    "b) Será diferida por un año su declaratoria de titular y sufrirá una segunda calificación.",
+                    "c) Será diferida por un año su declaratoria de titular y sufrirá una segunda evaluación.",
+                    "d) Será diferida por un año su declaratoria de titular y sufrirá una segunda revisión."
+                ],
+                correct: 0,
+                retro: "La norma otorga una oportunidad de gracia antes de la inhabilitación. (DS 04688, p. 12)."
+            },
+            {
+                q: "14. ¿En qué consisten las 'promociones de categoría' según el Artículo 18°?",
+                options: [
+                    "a) Se desarrollan en función de la antigüedad en el servicio docente y administrativo.",
+                    "b) Se desarrollan en función de la calidad en el servicio docente y administrativo.",
+                    "c) Se desarrollan en función de la eficacia en el servicio docente y administrativo.",
+                    "d) Se desarrollan en función de la capacidad en el servicio docente y administrativo."
+                ],
+                correct: 0,
+                retro: "La categoría recompensa exclusivamente el tiempo de permanencia. (DS 04688, p. 13)."
+            },
+            {
+                q: "15. ¿Cuántas promociones de categoría establece la escala oficial del Reglamento?",
+                options: [
+                    "a) Se establece una escala de cinco promociones de categoría para recompensar el tiempo.",
+                    "b) Se establece una escala de seis promociones de categoría para recompensar el tiempo.",
+                    "c) Se establece una escala de cuatro promociones de categoría para recompensar el tiempo.",
+                    "d) Se establece una escala de siete promociones de categoría para recompensar el tiempo."
+                ],
+                correct: 0,
+                retro: "Corresponden a la 5ta, 4ta, 3ra, 2da y 1ra categoría. (DS 04688, p. 14)."
+            },
+            {
+                q: "16. ¿Cuál es el cargo de mayor rango en la escala jerárquica docente?",
+                options: [
+                    "a) Director General de Educación; es el rango superior de la escala jerárquica.",
+                    "b) Oficial Mayor de Educación; es el rango superior de la escala jerárquica.",
+                    "c) Ministro de Educación; es el rango superior de la escala jerárquica.",
+                    "d) Director Nacional de Educación; es el rango superior de la escala jerárquica."
+                ],
+                correct: 0,
+                retro: "Es el vértice técnico-pedagógico del servicio educativo. (DS 04688, p. 14)."
+            },
+            {
+                q: "17. ¿Cómo se determina el ascenso a los cargos de directores según el Artículo 22°?",
+                options: [
+                    "a) Serán determinados por concurso de méritos y examen de competencia en cumplimiento de ley.",
+                    "b) Serán determinados por concurso de méritos y examen de capacidad en cumplimiento de ley.",
+                    "c) Serán determinados por concurso de méritos y examen de idoneidad en cumplimiento de ley.",
+                    "d) Serán determinados por concurso de méritos y examen de suficiencia en cumplimiento de ley."
+                ],
+                correct: 0,
+                retro: "Combina la valoración de la trayectoria con la demostración de aptitud. (DS 04688, p. 17)."
+            },
+            {
+                q: "18. ¿Cuántos puntos asigna el Reglamento por la inscripción en el Escalafón?",
+                options: [
+                    "a) La inscripción en el escalafón se califica con una asignación de 5 puntos.",
+                    "b) La inscripción en el escalafón se califica con una asignación de 10 puntos.",
+                    "c) La inscripción en el escalafón se califica con una asignación de 2 puntos.",
+                    "d) La inscripción en el escalafón se califica con una asignación de 15 puntos."
+                ],
+                correct: 0,
+                retro: "Es el puntaje base otorgado al iniciar formalmente la carrera. (DS 04688, p. 18)."
+            },
+            {
+                q: "19. ¿Cuál es la puntuación por poseer el Título de Bachiller en el registro de méritos?",
+                options: [
+                    "a) El Título de Bachiller se califica con una asignación fija de 5 puntos.",
+                    "b) El Título de Bachiller se califica con una asignación fija de 10 puntos.",
+                    "c) El Título de Bachiller se califica con una asignación fija de 2 puntos.",
+                    "d) El Título de Bachiller se califica con una asignación fija de 15 puntos."
+                ],
+                correct: 0,
+                retro: "Valora la formación académica básica del docente. (DS 04688, p. 18)."
+            },
+            {
+                q: "20. ¿Qué puntaje se asigna por la alfabetización voluntaria y no remunerada?",
+                options: [
+                    "a) Por cada 10 sujetos alfabetizados se asignan 5 puntos, hasta un máximo de 20.",
+                    "b) Por cada 10 sujetos alfabetizados se asignan 5 puntos, hasta un máximo de 10.",
+                    "c) Por cada 10 sujetos alfabetizados se asignan 5 puntos, hasta un máximo de 30.",
+                    "d) Por cada 10 sujetos alfabetizados se asignan 5 puntos, hasta un máximo de 15."
+                ],
+                correct: 0,
+                retro: "Premia el compromiso social extraordinario del maestro. (DS 04688, p. 19)."
+            },
+            {
+                q: "21. ¿Cómo se califica técnicamente el tiempo de servicios según el Artículo 27°?",
+                options: [
+                    "a) Se califica con la asignación de 1 punto por cada trimestre de trabajo efectivo.",
+                    "b) Se califica con la asignación de 1 punto por cada semestre de trabajo efectivo.",
+                    "c) Se califica con la asignación de 1 punto por cada año de trabajo efectivo.",
+                    "d) Se califica con la asignación de 1 punto por cada bimestre de trabajo efectivo."
+                ],
+                correct: 0,
+                retro: "La unidad de medida para la antigüedad es trimestral. (DS 04688, p. 19)."
+            },
+            {
+                q: "22. ¿Cuál es el beneficio de antigüedad para normalistas en zonas fronterizas?",
+                options: [
+                    "a) Prestar 2 años de servicio da derecho al cómputo de 4 años de antigüedad.",
+                    "b) Prestar 2 años de servicio da derecho al cómputo de 3 años de antigüedad.",
+                    "c) Prestar 2 años de servicio da derecho al cómputo de 5 años de antigüedad.",
+                    "d) Prestar 2 años de servicio da derecho al cómputo de 6 años de antigüedad."
+                ],
+                correct: 0,
+                retro: "Es un incentivo por servicios en zonas de difícil acceso o riesgo. (DS 04688, p. 20)."
+            },
+            {
+                q: "23. ¿Qué puntaje resta el demerito por 'Abandono de funciones'?",
+                options: [
+                    "a) Se juzga con una deducción de puntos que va de 1 a 20 puntos demeritados.",
+                    "b) Se juzga con una deducción de puntos que va de 1 a 10 puntos demeritados.",
+                    "c) Se juzga con una deducción de puntos que va de 1 a 30 puntos demeritados.",
+                    "d) Se juzga con una deducción de puntos que va de 1 a 05 puntos demeritados."
+                ],
+                correct: 0,
+                retro: "Es una de las faltas de asistencia más severamente sancionadas. (DS 04688, p. 21)."
+            },
+            {
+                q: "24. ¿En qué consisten las faltas de rendimiento por reprobación masiva?",
+                options: [
+                    "a) Tener más del 30% de reprobados en el curso se califica de 1 a 5 puntos.",
+                    "b) Tener más del 40% de reprobados en el curso se califica de 1 a 5 puntos.",
+                    "c) Tener más del 20% de reprobados en el curso se califica de 1 a 5 puntos.",
+                    "d) Tener más del 50% de reprobados en el curso se califica de 1 a 5 puntos."
+                ],
+                correct: 0,
+                retro: "Busca medir la efectividad del proceso de enseñanza-aprendizaje. (DS 04688, p. 22)."
+            },
+            {
+                q: "25. ¿Cuál es el porcentaje de bonificación para la 5ta categoría?",
+                options: [
+                    "a) Corresponde una bonificación sobre el haber básico del cargo con el 30%.",
+                    "b) Corresponde una bonificación sobre el haber básico del cargo con el 45%.",
+                    "c) Corresponde una bonificación sobre el haber básico del cargo con el 25%.",
+                    "d) Corresponde una bonificación sobre el haber básico del cargo con el 20%."
+                ],
+                correct: 0,
+                retro: "Es el primer nivel de recompensa económica por antigüedad. (DS 04688, p. 26)."
+            },
+            {
+                q: "26. ¿Qué porcentaje de bonificación corresponde a la 1ra categoría?",
+                options: [
+                    "a) Corresponde una bonificación sobre el haber básico del cargo con el 100%.",
+                    "b) Corresponde una bonificación sobre el haber básico del cargo con el 80%.",
+                    "c) Corresponde una bonificación sobre el haber básico del cargo con el 90%.",
+                    "d) Corresponde una bonificación sobre el haber básico del cargo con el 120%."
+                ],
+                correct: 0,
+                retro: "Es el nivel máximo de ascenso por años de servicio. (DS 04688, p. 26)."
+            },
+            {
+                q: "27. ¿A los cuántos años asciende un interino a la 3ra categoría?",
+                options: [
+                    "a) El ascenso a la 3ra categoría se produce a los 15 años de servicio cumplidos.",
+                    "b) El ascenso a la 3ra categoría se produce a los 10 años de servicio cumplidos.",
+                    "c) El ascenso a la 3ra categoría se produce a los 20 años de servicio cumplidos.",
+                    "d) El ascenso a la 3ra categoría se produce a los 12 años de servicio cumplidos."
+                ],
+                correct: 0,
+                retro: "Sigue la escala regular de promociones quinquenales. (DS 04688, p. 27)."
+            },
+            {
+                q: "28. ¿Qué medio se establece para abreviar el proceso de promociones de categoría?",
+                options: [
+                    "a) Se establece la opción a examen voluntario como medio de abreviar el proceso.",
+                    "b) Se establece la opción a examen obligatorio como medio de abreviar el proceso.",
+                    "c) Se establece la opción a examen de méritos como medio de abreviar el proceso.",
+                    "d) Se establece la opción a examen de suficiencia como medio de abreviar el proceso."
+                ],
+                correct: 0,
+                retro: "Incentiva la capacitación continua para ascender más rápido. (DS 04688, p. 27)."
+            },
+            {
+                q: "29. ¿A los cuántos años puede un normalista rendir examen para la 1ra categoría?",
+                options: [
+                    "a) A la 1ra categoría puede optar con 16 años de servicio y examen aprobado.",
+                    "b) A la 1ra categoría puede optar con 20 años de servicio y examen aprobado.",
+                    "c) A la 1ra categoría puede optar con 12 años de servicio y examen aprobado.",
+                    "d) A la 1ra categoría puede optar con 18 años de servicio y examen aprobado."
+                ],
+                correct: 0,
+                retro: "Reduce el tiempo de espera de 20 a 16 años si demuestra capacidad. (DS 04688, p. 28)."
+            },
+            {
+                q: "30. ¿Qué sucede con un interino que no rinde prueba de idoneidad tras 6 años?",
+                options: [
+                    "a) Quedará inhabilitado para el ejercicio de la docencia por razones de negligencia.",
+                    "b) Quedará suspendido para el ejercicio de la docencia por razones de negligencia.",
+                    "c) Quedará observado para el ejercicio de la docencia por razones de negligencia.",
+                    "d) Quedará multado para el ejercicio de la docencia por razones de negligencia."
+                ],
+                correct: 0,
+                retro: "La norma exige la regularización profesional en un plazo perentorio. (DS 04688, p. 30)."
+            },
+            {
+                q: "31. ¿Qué función tiene la Comisión Nacional del Escalafón según el Artículo 46°?",
+                options: [
+                    "a) Actúa como Tribunal de Apelación con facultades revisoras y supervisoras técnicas.",
+                    "b) Actúa como Tribunal de Apelación con facultades directivas y supervisoras técnicas.",
+                    "c) Actúa como Tribunal de Apelación con facultades legales y supervisoras técnicas.",
+                    "d) Actúa como Tribunal de Apelación con facultades ejecutivas y supervisoras técnicas."
+                ],
+                correct: 0,
+                retro: "Es la instancia máxima de resolución de conflictos del registro. (DS 04688, p. 31)."
+            },
+            {
+                q: "32. ¿Cuál es el plazo para apelar ante la Comisión Nacional de Calificaciones?",
+                options: [
+                    "a) Podrá apelar dentro del término de 10 días a partir de su notificación.",
+                    "b) Podrá apelar dentro del término de 05 días a partir de su notificación.",
+                    "c) Podrá apelar dentro del término de 15 días a partir de su notificación.",
+                    "d) Podrá apelar dentro del término de 20 días a partir de su notificación."
+                ],
+                correct: 0,
+                retro: "Establece el periodo legal para manifestar disconformidad con los méritos. (DS 04688, p. 33)."
+            },
+            {
+                q: "33. ¿Qué requisitos se exigen para optar al cargo de Director de Escuela?",
+                options: [
+                    "a) Título pedagógico, capacidad directiva, 5 años de servicio y 100 puntos.",
+                    "b) Título pedagógico, capacidad directiva, 8 años de servicio y 120 puntos.",
+                    "c) Título pedagógico, capacidad directiva, 3 años de servicio y 080 puntos.",
+                    "d) Título pedagógico, capacidad directiva, 10 años de servicio y 150 puntos."
+                ],
+                correct: 0,
+                retro: "Define el perfil mínimo para asumir la gestión de un establecimiento. (DS 04688, p. 35)."
+            },
+            {
+                q: "34. ¿Qué se requiere para ser Director General de Educación (Art. 54 inciso d)?",
+                options: [
+                    "a) Formación pedagógica superior, cargos jerárquicos, 15 años y 200 puntos.",
+                    "b) Formación pedagógica superior, cargos jerárquicos, 20 años y 250 puntos.",
+                    "c) Formación pedagógica superior, cargos jerárquicos, 10 años y 150 puntos.",
+                    "d) Formación pedagógica superior, cargos jerárquicos, 12 años y 180 puntos."
+                ],
+                correct: 0,
+                retro: "Es la exigencia máxima para el cargo de mayor jerarquía técnica. (DS 04688, p. 36)."
+            },
+            {
+                q: "35. ¿Cómo se define técnicamente la 'acumulación' en el servicio docente?",
+                options: [
+                    "a) Consiste en el desempeño de un cargo principal y de otro cargo docente.",
+                    "b) Consiste en el desempeño de un cargo principal y de otro cargo administrativo.",
+                    "c) Consiste en el desempeño de un cargo principal y de otro cargo directivo.",
+                    "d) Consiste en el desempeño de un cargo principal y de otro cargo técnico."
+                ],
+                correct: 0,
+                retro: "Regula la posibilidad de tener carga horaria extra o doble función. (DS 04688, p. 40)."
+            },
+            {
+                q: "36. ¿A cuántas horas puede acumular un profesor de Primera Categoría en secundaria?",
+                options: [
+                    "a) Tiene opción a desempeñar su cargo principal y hasta 10 horas semanales.",
+                    "b) Tiene opción a desempeñar su cargo principal y hasta 08 horas semanales.",
+                    "c) Tiene opción a desempeñar su cargo principal y hasta 12 horas semanales.",
+                    "d) Tiene opción a desempeñar su cargo principal y hasta 06 horas semanales."
+                ],
+                correct: 0,
+                retro: "La capacidad de acumulación aumenta con la categoría del docente. (DS 04688, p. 41)."
+            },
+            {
+                q: "37. ¿Qué restricción existe para los Directores de Colegios Secundarios (Art. 69)?",
+                options: [
+                    "a) Es incompatible la acumulación de horas de trabajo en otro establecimiento.",
+                    "b) Es incompatible la acumulación de horas de trabajo en el mismo establecimiento.",
+                    "c) Es incompatible la acumulación de horas de trabajo en establecimientos privados.",
+                    "d) Es incompatible la acumulación de horas de trabajo en establecimientos nocturnos."
+                ],
+                correct: 0,
+                retro: "Busca que el director dedique exclusividad a su unidad educativa. (DS 04688, p. 43)."
+            },
+            {
+                q: "38. ¿A quién se considera 'jefe de familia' para efectos del Reglamento?",
+                options: [
+                    "a) Se considera jefe de familia a quien tenga por lo menos un hijo menor a su cargo.",
+                    "b) Se considera jefe de familia a quien esté legalmente casado en el registro civil.",
+                    "c) Se considera jefe de familia a quien sostenga económicamente a sus ascendientes.",
+                    "d) Se considera jefe de familia a quien posea vivienda propia debidamente registrada."
+                ],
+                correct: 0,
+                retro: "Es una condición necesaria para solicitar acumulación de cargos. (DS 04688, p. 44)."
+            },
+            {
+                q: "39. ¿Qué establece el Artículo 73° sobre la 'inamovilidad docente'?",
+                options: [
+                    "a) Los maestros inscritos en el Escalafón son inamovibles en la función docente.",
+                    "b) Los maestros inscritos en el Escalafón son inamovibles en el cargo administrativo.",
+                    "c) Los maestros inscritos en el Escalafón son inamovibles en la sede distrital.",
+                    "d) Los maestros inscritos en el Escalafón son inamovibles en el centro departamental."
+                ],
+                correct: 0,
+                retro: "Garantiza que el maestro no sea removido arbitrariamente sin proceso. (DS 04688, p. 45)."
+            },
+            {
+                q: "40. ¿Bajo qué causas puede un maestro ser retirado culpablemente del servicio?",
+                options: [
+                    "a) Por ser condenado a pena corporal por delitos comunes o por sentencia en proceso.",
+                    "b) Por ser condenado a pena de multa por delitos comunes o por sentencia en proceso.",
+                    "c) Por ser condenado a pena de censura por delitos comunes o por sentencia en proceso.",
+                    "d) Por ser condenado a pena de sanción por delitos comunes o por sentencia en proceso."
+                ],
+                correct: 0,
+                retro: "La pérdida de inamovilidad ocurre ante faltas graves probadas. (DS 04688, p. 47)."
+            },
+            {
+                q: "41. ¿Cómo se acredita el tiempo de servicios en la educación fiscal?",
+                options: [
+                    "a) Mediante certificados expedidos por la Contraloría u otras oficinas pagadoras.",
+                    "b) Mediante certificados expedidos por la Dirección u otras oficinas distritales.",
+                    "c) Mediante certificados expedidos por la Prefectura u otras oficinas estatales.",
+                    "d) Mediante certificados expedidos por la Federación u otras oficinas sindicales."
+                ],
+                correct: 0,
+                retro: "El registro financiero oficial es la prueba legal del tiempo servido. (DS 04688, p. 48)."
+            },
+            {
+                q: "42. ¿Qué dispone el Artículo 78° sobre las asignaciones por categoría?",
+                options: [
+                    "a) Son parte integrante del haber y se toman en cuenta para efectos de jubilación.",
+                    "b) Son parte opcional del haber y se toman en cuenta para efectos de jubilación.",
+                    "c) Son parte temporal del haber y se toman en cuenta para efectos de jubilación.",
+                    "d) Son parte variable del haber y se toman en cuenta para efectos de jubilación."
+                ],
+                correct: 0,
+                retro: "Consolida la bonificación como un derecho salarial pleno. (DS 04688, p. 50)."
+            },
+            {
+                q: "43. ¿Cuántos años deben servir los normalistas rurales en escuelas campesinas?",
+                options: [
+                    "a) Deberán servir, cuando menos, durante cinco años en las escuelas campesinas.",
+                    "b) Deberán servir, cuando menos, durante tres años en las escuelas campesinas.",
+                    "c) Deberán servir, cuando menos, durante dos años en las escuelas campesinas.",
+                    "d) Deberán servir, cuando menos, durante seis años en las escuelas campesinas."
+                ],
+                correct: 0,
+                retro: "Establece el tiempo mínimo de servicio social en el área rural. (DS 04688, p. 51)."
+            },
+            {
+                q: "44. ¿Qué plazo tienen los normalistas para recabar su título tras el egreso?",
+                options: [
+                    "a) Están obligados a recabar el Título en el término de 2 años después de su egreso.",
+                    "b) Están obligados a recabar el Título en el término de 1 año después de su egreso.",
+                    "c) Están obligados a recabar el Título en el término de 3 años después de su egreso.",
+                    "d) Están obligados a recabar el Título en el término de 5 años después de su egreso."
+                ],
+                correct: 0,
+                retro: "Es un requisito administrativo para poder ascender de categoría. (DS 04688, p. 51)."
+            },
+            {
+                q: "45. ¿Desde cuándo perciben los normalistas la 5ta categoría según el Art. 82°?",
+                options: [
+                    "a) Percibirán la asignación correspondiente desde su iniciación en la carrera.",
+                    "b) Percibirán la asignación correspondiente desde su primer año de servicio.",
+                    "c) Percibirán la asignación correspondiente desde su inscripción en el escalafón.",
+                    "d) Percibirán la asignación correspondiente desde su egreso de la escuela normal."
+                ],
+                correct: 0,
+                retro: "Es un beneficio inmediato por la titulación profesional. (DS 04688, p. 51)."
+            },
+            {
+                q: "46. ¿Qué servicios se toman en cuenta para la categorización (Art. 84)?",
+                options: [
+                    "a) Única y exclusivamente los servicios prestados en el ramo de Educación.",
+                    "b) Única y exclusivamente los servicios prestados en el ramo de Administración.",
+                    "c) Única y exclusivamente los servicios prestados en el ramo de Instituciones.",
+                    "d) Única y exclusivamente los servicios prestados en el ramo de Planeamiento."
+                ],
+                correct: 0,
+                retro: "No se computan años servidos en otros ministerios o entidades ajenas. (DS 04688, p. 52)."
+            },
+            {
+                q: "47. ¿Qué sucede con los normalistas que tienen menos de 5 años (Art. 85)?",
+                options: [
+                    "a) Percibirán el porcentaje correspondiente a la 5ta categoría que especifica la ley.",
+                    "b) Percibirán el porcentaje correspondiente a la 4ta categoría que especifica la ley.",
+                    "c) Percibirán el porcentaje correspondiente a la 3ra categoría que especifica la ley.",
+                    "d) Percibirán el porcentaje correspondiente a la 2da categoría que especifica la ley."
+                ],
+                correct: 0,
+                retro: "Regulariza el beneficio económico para los nuevos profesionales. (DS 04688, p. 53)."
+            },
+            {
+                q: "48. ¿En qué se convierte el puntaje de méritos según el Artículo 86°?",
+                options: [
+                    "a) Pasará a ser un factor necesario para la promoción de categoría docente.",
+                    "b) Pasará a ser un factor opcional para la promoción de categoría docente.",
+                    "c) Pasará a ser un factor variable para la promoción de categoría docente.",
+                    "d) Pasará a ser un factor técnico para la promoción de categoría docente."
+                ],
+                correct: 0,
+                retro: "Vincula la calidad profesional con el ascenso en el escalafón. (DS 04688, p. 53)."
+            },
+            {
+                q: "49. ¿Quién queda encargado de la ejecución del Decreto Supremo del Escalafón?",
+                options: [
+                    "a) El señor Ministro de Estado en el Despacho de Educación y Bellas Artes.",
+                    "b) El señor Ministro de Estado en el Despacho de Planeamiento y Finanzas.",
+                    "c) El señor Ministro de Estado en el Despacho de Gobierno y Justicia.",
+                    "d) El señor Ministro de Estado en el Despacho de Trabajo y Previsión Social."
+                ],
+                correct: 0,
+                retro: "Designa la autoridad responsable del cumplimiento de la norma. (DS 04688, p. 53)."
+            },
+            {
+                q: "50. ¿Qué se establece sobre las disposiciones contrarias al Reglamento?",
+                options: [
+                    "a) Quedan derogadas todas las disposiciones contrarias al presente Reglamento.",
+                    "b) Quedan suspendidas todas las disposiciones contrarias al presente Reglamento.",
+                    "c) Quedan observadas todas las disposiciones contrarias al presente Reglamento.",
+                    "d) Quedan revisadas todas las disposiciones contrarias al presente Reglamento."
+                ],
+                correct: 0,
+                retro: "Establece la supremacía jerárquica de esta norma en su ramo. (DS 04688, p. 53)."
+            }
+        ];
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

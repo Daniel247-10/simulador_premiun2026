@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Diseño y Desarrollo Curricular</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+        <header>
+        <h1>Diseño, Desarrollo e Innovación del Currículum</h1>
+    </header>
+    <div id="quiz-container"></div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. Según Goodlad y Su (1992), ¿cómo se define técnicamente el 'currículum básico'?",
+                options: [
+                    "a) Una especificación de aquellos campos estimados esenciales para todos los estudiantes.",
+                    "b) Una clasificación de aquellos campos estimados esenciales para todos los estudiantes.",
+                    "c) Una determinación de aquellos campos estimados esenciales para todos los estudiantes.",
+                    "d) Una categorización de aquellos campos estimados esenciales para todos los estudiantes."
+                ],
+                correct: 0,
+                retro: "El currículum básico o nuclear busca delimitar los campos obligatorios para todos los alumnos. (Clemente, 2012, p. 13) [5, 6]."
+            },
+            {
+                q: "2. ¿Qué caracteriza a la posición 'realista' sobre el conocimiento escolar según el texto?",
+                options: [
+                    "a) Su relevancia radica en que nos permite acceder a una realidad objetiva de tipo académico.",
+                    "b) Su relevancia radica en que nos permite acceder a una realidad objetiva de tipo didáctico.",
+                    "c) Su relevancia radica en que nos permite acceder a una realidad objetiva de tipo científico.",
+                    "d) Su relevancia radica en que nos permite acceder a una realidad objetiva de tipo racional."
+                ],
+                correct: 0,
+                retro: "La visión realista sostiene que el valor del saber reside en reflejar una realidad externa académica. (Clemente, 2012, p. 14) [7]."
+            },
+            {
+                q: "3. ¿Cuál es el papel de las administraciones en la selección de la cultura escolar?",
+                options: [
+                    "a) Deben establecer los contenidos mínimos exigibles y las pautas para su distribución.",
+                    "b) Deben establecer los contenidos mínimos exigibles y las reglas para su distribución.",
+                    "c) Deben establecer los contenidos mínimos exigibles y las normas para su distribución.",
+                    "d) Deben establecer los contenidos mínimos exigibles y los planes para su distribución."
+                ],
+                correct: 0,
+                retro: "La administración señala objetivos y contenidos mínimos sin invadir la autonomía docente. (Clemente, 2012, p. 15) [8]."
+            },
+            {
+                q: "4. ¿Qué define al centro educativo como 'contexto organizador' de la enseñanza?",
+                options: [
+                    "a) Es el marco donde se coordinan los estilos pedagógicos para crear planes congruentes.",
+                    "b) Es el marco donde se coordinan los estilos pedagógicos para crear planes integrados.",
+                    "c) Es el marco donde se coordinan los estilos pedagógicos para crear planes adecuados.",
+                    "d) Es el marco donde se coordinan los estilos pedagógicos para crear planes ordenados."
+                ],
+                correct: 0,
+                retro: "El centro da coherencia y continuidad a la trayectoria de cada alumno. (Clemente, 2012, p. 16) [9, 10]."
+            },
+            {
+                q: "5. En el ámbito del aula, ¿cómo se describe el concepto de currículum en acción?",
+                options: [
+                    "a) El aula es el lugar donde el método elegido se hace real; es el currículum en la acción.",
+                    "b) El aula es el lugar donde el método elegido se hace real; es el currículum en la práctica.",
+                    "c) El aula es el lugar donde el método elegido se hace real; es el currículum en la gestión.",
+                    "d) El aula es el lugar donde el método elegido se hace real; es el currículum en la técnica."
+                ],
+                correct: 0,
+                retro: "Es el espacio donde la cultura seleccionada se concreta mediante la enseñanza. (Clemente, 2012, p. 17) [2, 11]."
+            },
+            {
+                q: "6. ¿A qué se refiere el 'criterio epistemológico' para la organización de contenidos?",
+                options: [
+                    "a) Se refiere al carácter de cada ciencia y al carácter científico de las disciplinas escolares.",
+                    "b) Se refiere al carácter de cada ciencia y al carácter académico de las disciplinas escolares.",
+                    "c) Se refiere al carácter de cada ciencia y al carácter técnico de las disciplinas escolares.",
+                    "d) Se refiere al carácter de cada ciencia y al carácter racional de las disciplinas escolares."
+                ],
+                correct: 0,
+                retro: "Analiza el carácter científico y los tipos de conocimiento de las disciplinas. (Clemente, 2012, p. 19) [12, 13]."
+            },
+            {
+                q: "7. ¿Qué busca el 'criterio socioideológico' en la selección de contenidos?",
+                options: [
+                    "a) Considerar que la escuela es un cauce para transmitir distintas visiones de la realidad.",
+                    "b) Considerar que la escuela es un cauce para transmitir distintas lecturas de la realidad.",
+                    "c) Considerar que la escuela es un cauce para transmitir distintas lógicas de la realidad.",
+                    "d) Considerar que la escuela es un cauce para transmitir distintas ópticas de la realidad."
+                ],
+                correct: 0,
+                retro: "La escuela es un elemento clave en la socialización a través de la cultura social. (Clemente, 2012, p. 19) [14, 15]."
+            },
+            {
+                q: "8. Según el texto, ¿qué importancia tiene el 'criterio psicológico' en el currículum?",
+                options: [
+                    "a) Es esencial para organizar y secuenciar contenidos buscando un aprendizaje significativo.",
+                    "b) Es esencial para organizar y secuenciar contenidos buscando un aprendizaje constructivo.",
+                    "c) Es esencial para organizar y secuenciar contenidos buscando un aprendizaje progresivo.",
+                    "d) Es esencial para organizar y secuenciar contenidos buscando un aprendizaje integrativo."
+                ],
+                correct: 0,
+                retro: "Este criterio se centra en el nivel de desarrollo y el aprendizaje significativo. (Clemente, 2012, p. 20) [16]."
+            },
+            {
+                q: "9. ¿Cómo define el autor a las disciplinas como forma de organización escolar?",
+                options: [
+                    "a) Configuran un modo de conocimiento basado en la especificidad y en la profundización.",
+                    "b) Configuran un modo de conocimiento basado en la especificidad y en la sistematización.",
+                    "c) Configuran un modo de conocimiento basado en la especificidad y en la categorización.",
+                    "d) Configuran un modo de conocimiento basado en la especificidad y en la fragmentación."
+                ],
+                correct: 0,
+                retro: "Las disciplinas se basan en la división del conocimiento de universidades e investigación. (Clemente, 2012, p. 20) [17, 18]."
+            },
+            {
+                q: "10. ¿Cuál es el postulado central de la 'globalización' de Decroly?",
+                options: [
+                    "a) Pretende adecuar el conocimiento al modo de pensar de los niños, que es sincrético y global.",
+                    "b) Pretende adaptar el conocimiento al modo de pensar de los niños, que es sincrético y global.",
+                    "c) Pretende ajustar el conocimiento al modo de pensar de los niños, que es sincrético y global.",
+                    "d) Pretende acoplar el conocimiento al modo de pensar de los niños, que es sincrético y global."
+                ],
+                correct: 0,
+                retro: "Propone adecuar el saber al pensamiento infantil mediante centros de interés. (Clemente, 2012, p. 21) [19, 20]."
+            },
+            {
+                q: "11. ¿En qué consiste técnicamente la 'interdisciplinaridad' en los contenidos?",
+                options: [
+                    "a) Consiste en la relación de conocimientos de distintas materias para construir uno nuevo.",
+                    "b) Consiste en la unión de conocimientos de distintas materias para construir uno nuevo.",
+                    "c) Consiste en la mezcla de conocimientos de distintas materias para construir uno nuevo.",
+                    "d) Consiste en la suma de conocimientos de distintas materias para construir uno nuevo."
+                ],
+                correct: 0,
+                retro: "Busca dar respuestas globales evitando la repetición de conocimientos comunes. (Clemente, 2012, p. 21) [21]."
+            },
+            {
+                q: "12. Etimológicamente, ¿con qué se relacionaba el término 'currículum' en Roma?",
+                options: [
+                    "a) Se utilizaba para significar la carrera y la ordenación del recorrido de la misma.",
+                    "b) Se utilizaba para significar la carrera y la organización del recorrido de la misma.",
+                    "c) Se utilizaba para significar la carrera y la estructuración del recorrido de la misma.",
+                    "d) Se utilizaba para significar la carrera y la representación del recorrido de la misma."
+                ],
+                correct: 0,
+                retro: "El término proviene de 'cursus' y se ligaba a la suma de honores o méritos. (Gimeno, 2012, p. 25) [22, 23]."
+            },
+            {
+                q: "13. ¿Qué conformaba el 'trivium' en la organización del conocimiento medieval?",
+                options: [
+                    "a) Estaba integrado por tres caminos: Gramática, Retórica y Dialéctica; de tipo instrumental.",
+                    "b) Estaba integrado por tres caminos: Gramática, Retórica y Dialéctica; de tipo experimental.",
+                    "c) Estaba integrado por tres caminos: Gramática, Retórica y Dialéctica; de tipo convencional.",
+                    "d) Estaba integrado por tres caminos: Gramática, Retórica y Dialéctica; de tipo referencial."
+                ],
+                correct: 0,
+                retro: "Eran las artes instrumentales referidas a los modos de adquirir conocimiento. (Gimeno, 2012, p. 26) [24, 25]."
+            },
+            {
+                q: "14. ¿Cuál es la doble función que desempeña el currículum según Gimeno Sacristán?",
+                options: [
+                    "a) Una función organizadora a la vez que unificadora de la enseñanza y el aprendizaje.",
+                    "b) Una función reguladora a la vez que unificadora de la enseñanza y el aprendizaje.",
+                    "c) Una función ordenadora a la vez que unificadora de la enseñanza y el aprendizaje.",
+                    "d) Una función normativa a la vez que unificadora de la enseñanza y el aprendizaje."
+                ],
+                correct: 0,
+                retro: "Organiza y unifica fragmentos de contenidos para evitar la dispersión. (Gimeno, 2012, p. 26) [25, 26]."
+            },
+            {
+                q: "15. ¿Dónde sitúa el Oxford English Dictionary la primera fuente del término currículum?",
+                options: [
+                    "a) Se sitúa en los registros de la Universidad de Glasgow, en el año de mil seiscientos treinta y tres.",
+                    "b) Se sitúa en los registros de la Universidad de Glasgow, en el año de mil seiscientos cuarenta y tres.",
+                    "c) Se sitúa en los registros de la Universidad de Glasgow, en el año de mil seiscientos cincuenta y tres.",
+                    "d) Se sitúa en los registros de la Universidad de Glasgow, en el año de mil seiscientos sesenta y tres."
+                ],
+                correct: 0,
+                retro: "El término apareció ligado a la visión disciplinaria del calvinismo en Escocia. (Gimeno, 2012, p. 26) [27, 28]."
+            },
+            {
+                q: "16. ¿Cuál es el papel decisivo que cobró el currículum en la escolaridad moderna?",
+                options: [
+                    "a) Cobró el decisivo papel de poner un orden sobre los contenidos de la enseñanza.",
+                    "b) Cobró el decisivo papel de poner una norma sobre los contenidos de la enseñanza.",
+                    "c) Cobró el decisivo papel de poner una regla sobre los contenidos de la enseñanza.",
+                    "d) Cobró el decisivo papel de poner un plan sobre los contenidos de la enseñanza."
+                ],
+                correct: 0,
+                retro: "El currículum funciona como un poder regulador que normaliza qué se enseña. (Gimeno, 2012, p. 27) [29, 30]."
+            },
+            {
+                q: "17. ¿Qué implicó técnicamente el establecimiento de los 'grados' en las instituciones?",
+                options: [
+                    "a) Permitirían la transición a lo largo de la escolaridad sin brusquedades al paso de curso.",
+                    "b) Permitirían la progresión a lo largo de la escolaridad sin brusquedades al paso de curso.",
+                    "c) Permitirían la maduración a lo largo de la escolaridad sin brusquedades al paso de curso.",
+                    "d) Permitirían la evolución a lo largo de la escolaridad sin brusquedades al paso de curso."
+                ],
+                correct: 0,
+                retro: "La graduación asocia contenidos a edades para dar coherencia vertical. (Gimeno, 2012, p. 27) [31]."
+            },
+            {
+                q: "18. ¿Por qué se afirma que el currículum es un 'contenedor no neutro'?",
+                options: [
+                    "a) Porque dispone reglas y un orden que estructuran la escolarización y las prácticas.",
+                    "b) Porque impone reglas y un orden que estructuran la escolarización y las prácticas.",
+                    "c) Porque transmite reglas y un orden que estructuran la escolarización y las prácticas.",
+                    "d) Porque proyecta reglas y un orden que estructuran la escolarización y las prácticas."
+                ],
+                correct: 0,
+                retro: "Es un instrumento con capacidad para estructurar la vida en los centros. (Gimeno, 2012, p. 30) [32]."
+            },
+            {
+                q: "19. ¿Cómo define Gimeno Sacristán el concepto de 'conocimiento escolar'?",
+                options: [
+                    "a) Algo modelado especialmente por los usos y contextos escolares; una cultura peculiar.",
+                    "b) Algo diseñado especialmente por los usos y contextos escolares; una cultura peculiar.",
+                    "c) Algo regulado especialmente por los usos y contextos escolares; una cultura peculiar.",
+                    "d) Algo pautado especialmente por los usos y contextos escolares; una cultura peculiar."
+                ],
+                correct: 0,
+                retro: "Es una construcción 'curricularizada' modelada por códigos institucionales. (Gimeno, 2012, p. 30) [33]."
+            },
+            {
+                q: "20. Según Bourdieu, ¿qué es el 'habitus' en el contexto de las dimensiones curriculares?",
+                options: [
+                    "a) Un sistema de disposiciones duraderas que interiorizan los sujetos, organizando las prácticas.",
+                    "b) Un sistema de inclinaciones duraderas que interiorizan los sujetos, organizando las prácticas.",
+                    "c) Un sistema de orientaciones duraderas que interiorizan los sujetos, organizando las prácticas.",
+                    "d) Un sistema de asimilaciones duraderas que interiorizan los sujetos, organizando las prácticas."
+                ],
+                correct: 0,
+                retro: "Son sistemas de esquemas generadores de prácticas y representaciones. (Gimeno, 2012, p. 33) [34, 35]."
+            },
+            {
+                q: "21. ¿Por qué se afirma que el currículum real es un 'producto contingente'?",
+                options: [
+                    "a) Porque es una posibilidad entre otras alternativas y podría haber sido de otra manera.",
+                    "b) Porque es una consecuencia entre otras alternativas y podría haber sido de otra manera.",
+                    "c) Porque es una derivación entre otras alternativas y podría haber sido de otra manera.",
+                    "d) Porque es una resultante entre otras alternativas y podría haber sido de otra manera."
+                ],
+                correct: 0,
+                retro: "No es algo neutro o inamovible, sino una construcción de opciones sociales. (Gimeno, 2012, p. 33) [36]."
+            },
+            {
+                q: "22. ¿Qué representa la 'conciencia utópica' en el desarrollo del currículum?",
+                options: [
+                    "a) Supone asumir una intencionalidad consciente de crear un nuevo orden en las prácticas.",
+                    "b) Supone asumir una intencionalidad consciente de crear un nuevo plan en las prácticas.",
+                    "c) Supone asumir una intencionalidad consciente de crear una nueva lógica en las prácticas.",
+                    "d) Supone asumir una intencionalidad consciente de crear una nueva regla en las prácticas."
+                ],
+                correct: 0,
+                retro: "La educación proyecta deseos y aspiraciones de mejora sobre la realidad. (Gimeno, 2012, p. 35) [37, 38]."
+            },
+            {
+                q: "23. Según Bernstein (1988), ¿qué conforma el currículum en términos prácticos?",
+                options: [
+                    "a) Lo conforma todo aquello que ocupa el tiempo escolar, más allá de las materias.",
+                    "b) Lo conforma todo aquello que ocupa el espacio escolar, más allá de las materias.",
+                    "c) Lo conforma todo aquello que ocupa el centro escolar, más allá de las materias.",
+                    "d) Lo conforma todo aquello que ocupa el orden escolar, más allá de las materias."
+                ],
+                correct: 0,
+                retro: "Incluye la creación de actitudes, sensibilidades e identidad ciudadana. (Gimeno, 2012, p. 35) [39]."
+            },
+            {
+                q: "24. ¿Qué representa el 'Plano 1' en la visión procesual del currículum?",
+                options: [
+                    "a) El texto curricular o currículum explícitamente pretendido (currículum oficial).",
+                    "b) El texto curricular o currículum formalmente pretendido (currículum oficial).",
+                    "c) El texto curricular o currículum legalmente pretendido (currículum oficial).",
+                    "d) El texto curricular o currículum técnicamente pretendido (currículum oficial)."
+                ],
+                correct: 0,
+                retro: "Es el proyecto educativo antes de ser interpretado por los docentes. (Gimeno, 2012, p. 37) [40]."
+            },
+            {
+                q: "25. ¿En qué consiste el 'currículum evaluado' (Plano 5 del esquema)?",
+                options: [
+                    "a) El constituido por los contenidos exigidos en las prácticas de evaluación escolar.",
+                    "b) El constituido por los contenidos medidos en las prácticas de evaluación escolar.",
+                    "c) El constituido por los contenidos fijados en las prácticas de evaluación escolar.",
+                    "d) El constituido por los contenidos pautados en las prácticas de evaluación escolar."
+                ],
+                correct: 0,
+                retro: "Representa la dimensión visible del rendimiento y el éxito escolar. (Gimeno, 2012, p. 37) [41]."
+            },
+            {
+                q: "26. ¿Qué sugiere el principio de la 'sospecha epistémica' en pedagogía?",
+                options: [
+                    "a) Que la enseñanza no equivale al aprendizaje y las intenciones no coinciden con las prácticas.",
+                    "b) Que la enseñanza no garantiza el aprendizaje y las intenciones no coinciden con las prácticas.",
+                    "c) Que la enseñanza no asegura el aprendizaje y las intenciones no coinciden con las prácticas.",
+                    "d) Que la enseñanza no produce el aprendizaje y las intenciones no coinciden con las prácticas."
+                ],
+                correct: 0,
+                retro: "Invita a dudar de lo evidente para conocer lo que se esconde bajo la superficie. (Gimeno, 2012, p. 38) [42]."
+            },
+            {
+                q: "27. Según Aristóteles, ¿por qué la educación debe ser 'única y la misma para todos'?",
+                options: [
+                    "a) Porque existe un fin único para toda ciudad y el cuidado de ella debe ser común.",
+                    "b) Porque existe un fin único para toda ciudad y el control de ella debe ser común.",
+                    "c) Porque existe un fin único para toda ciudad y el manejo de ella debe ser común.",
+                    "d) Porque existe un fin único para toda ciudad y el régimen de ella debe ser común."
+                ],
+                correct: 0,
+                retro: "La educación es una responsabilidad pública del Estado para sus ciudadanos. (Gimeno, 2012, p. 48) [43, 44]."
+            },
+            {
+                q: "28. ¿Qué se entiende por 'naturalidad de las diferencias' en el plano interindividual?",
+                options: [
+                    "a) Que somos una combinación irrepetible de condiciones y cualidades que forman una singularidad.",
+                    "b) Que somos una amalgama irrepetible de condiciones y cualidades que forman una singularidad.",
+                    "c) Que somos una mezcla irrepetible de condiciones y cualidades que forman una singularidad.",
+                    "d) Que somos una integración irrepetible de condiciones y cualidades que forman una singularidad."
+                ],
+                correct: 0,
+                retro: "La diversidad es un hecho empírico de la riqueza de la especie humana. (Gimeno, 2012, p. 50) [45, 46]."
+            },
+            {
+                q: "29. ¿Cuál es el riesgo de las categorizaciones que realiza el pensamiento común?",
+                options: [
+                    "a) Anticipar el comportamiento de los demás y acomodar las respuestas según la categoría.",
+                    "b) Prever el comportamiento de los demás y acomodar las respuestas según la categoría.",
+                    "c) Predecir el comportamiento de los demás y acomodar las respuestas según la categoría.",
+                    "d) Presumir el comportamiento de los demás y acomodar las respuestas según la categoría."
+                ],
+                correct: 0,
+                retro: "Las categorías simplifican pero imponen etiquetas que condicionan el trato. (Gimeno, 2012, p. 50) [47, 48]."
+            },
+            {
+                q: "30. ¿A qué se refiere Stuart Mill con la metáfora del 'árbol' en educación?",
+                options: [
+                    "a) A que el ser humano necesita desarrollarse por todos los lados según sus fuerzas interiores.",
+                    "b) A que el ser humano necesita ampliarse por todos los lados según sus fuerzas interiores.",
+                    "c) A que el ser humano necesita crecer por todos los lados según sus fuerzas interiores.",
+                    "d) A que el ser humano necesita madurar por todos los lados según sus fuerzas interiores."
+                ],
+                correct: 0,
+                retro: "La naturaleza humana es una cosa viva, no una máquina construida. (Gimeno, 2012, p. 52) [49]."
+            },
+            {
+                q: "31. ¿Por qué se afirma que el éxito y el fracaso escolar son 'fabricaciones'?",
+                options: [
+                    "a) Porque son puras derivaciones del funcionamiento de las propias escuelas y su orden.",
+                    "b) Porque son puras consecuencias del funcionamiento de las propias escuelas y su orden.",
+                    "c) Porque son puros efectos del funcionamiento de las propias escuelas y su orden.",
+                    "d) Porque son puros resultados del funcionamiento de las propias escuelas y su orden."
+                ],
+                correct: 0,
+                retro: "No son rasgos naturales, sino etiquetas del sistema graduado. (Gimeno, 2012, p. 54) [50, 51]."
+            },
+            {
+                q: "32. ¿Qué choque se produjo al ampliarse la escolaridad obligatoria hasta los 16 años?",
+                options: [
+                    "a) El choque entre la afluencia masiva de jóvenes y la cultura elitista de la secundaria.",
+                    "b) El choque entre la presencia masiva de jóvenes y la cultura elitista de la secundaria.",
+                    "c) El choque entre la concurrencia masiva de jóvenes y la cultura elitista de la secundaria.",
+                    "d) El choque entre la asistencia masiva de jóvenes y la cultura elitista de la secundaria."
+                ],
+                correct: 0,
+                retro: "La secundaria arrastra una tradición académica y selectiva previa. (Gimeno, 2012, p. 55) [52, 53]."
+            },
+            {
+                q: "33. ¿Qué pilar sostiene técnicamente el modelo de la 'escuela graduada' moderna?",
+                options: [
+                    "a) La racionalidad taylorista basada en la división de procesos en acciones parciales.",
+                    "b) La racionalidad taylorista basada en la fractura de procesos en acciones parciales.",
+                    "c) La racionalidad taylorista basada en la partición de procesos en acciones parciales.",
+                    "d) La racionalidad taylorista basada en la separación de procesos en acciones parciales."
+                ],
+                correct: 0,
+                retro: "Se especializan tratamientos mediante grados encadenados. (Gimeno, 2012, p. 56) [54, 55]."
+            },
+            {
+                q: "34. ¿Qué implica una pedagogía que 'trata igual a los que son desiguales'?",
+                options: [
+                    "a) El principio de que este tipo de acción educativa produce desigualdad y fracaso escolar.",
+                    "b) El principio de que este tipo de acción educativa provoca desigualdad y fracaso escolar.",
+                    "c) El principio de que este tipo de acción educativa genera desigualdad y fracaso escolar.",
+                    "d) El principio de que este tipo de acción educativa ocasiona desigualdad y fracaso escolar."
+                ],
+                correct: 0,
+                retro: "La uniformidad ante la diversidad profundiza las brechas sociales. (Gimeno, 2012, p. 62) [56]."
+            },
+            {
+                q: "35. ¿Qué define a la escuela 'comprensiva' según Gimeno Sacristán?",
+                options: [
+                    "a) El mantenimiento de todos los estudiantes juntos bajo un currículum común y flexible.",
+                    "b) El mantenimiento de todos los estudiantes juntos bajo un currículum común y regulado.",
+                    "c) El mantenimiento de todos los estudiantes juntos bajo un currículum común y ordenado.",
+                    "d) El mantenimiento de todos los estudiantes juntos bajo un currículum común e integrado."
+                ],
+                correct: 0,
+                retro: "Evita la segregación temprana favoreciendo la mezcla social. (Gimeno, 2012, p. 66) [57]."
+            },
+            {
+                q: "36. Según Rafael Feito, ¿qué es el 'fraude de ley' en 4º de la ESO?",
+                options: [
+                    "a) La existencia de dos tipos de Matemáticas que orientan precozmente al alumnado.",
+                    "b) La presencia de dos tipos de Matemáticas que orientan precozmente al alumnado.",
+                    "c) La aparición de dos tipos de Matemáticas que orientan precozmente al alumnado.",
+                    "d) La creación de dos tipos de Matemáticas que orientan precozmente al alumnado."
+                ],
+                correct: 0,
+                retro: "Dividir las matemáticas rompe el tronco común de la enseñanza obligatoria. (Feito, 2012, p. 68) [58, 59]."
+            },
+            {
+                q: "37. ¿Qué critica Paulo Freire con el término 'educación bancaria'?",
+                options: [
+                    "a) Concibe las cabezas de los estudiantes como recipientes vacíos que el maestro debe llenar.",
+                    "b) Concibe las cabezas de los estudiantes como receptáculos vacíos que el maestro debe llenar.",
+                    "c) Concibe las cabezas de los estudiantes como envases vacíos que el maestro debe llenar.",
+                    "d) Concibe las cabezas de los estudiantes como depósitos vacíos que el maestro debe llenar."
+                ],
+                correct: 0,
+                retro: "El alumno es visto como un objeto pasivo de acumulación de información. (Feito, 2012, p. 74) [60]."
+            },
+            {
+                q: "38. ¿A qué se refiere Capra (1998) con el 'pensamiento sistémico'?",
+                options: [
+                    "a) A colocar las cosas en un contexto para establecer la naturaleza de sus relaciones.",
+                    "b) A situar las cosas en un contexto para establecer la naturaleza de sus relaciones.",
+                    "c) A encuadrar las cosas en un contexto para establecer la naturaleza de sus relaciones.",
+                    "d) A insertar las cosas en un contexto para establecer la naturaleza de sus relaciones."
+                ],
+                correct: 0,
+                retro: "Las propiedades del todo solo se entienden por las relaciones de sus partes. (Feito, 2012, p. 75) [61, 62]."
+            },
+            {
+                q: "39. ¿Cuál es el impacto del 'silencio' en el aula según Jonathan Osborne?",
+                options: [
+                    "a) El silencio fortalece las ideas erróneas, los preconceptos y los prejuicios sociales.",
+                    "b) El silencio mantiene las ideas erróneas, los preconceptos y los prejuicios sociales.",
+                    "c) El silencio ratifica las ideas erróneas, los preconceptos y los prejuicios sociales.",
+                    "d) El silencio confirma las ideas erróneas, los preconceptos y los prejuicios sociales."
+                ],
+                correct: 0,
+                retro: "Sin debate, el alumno no puede contrastar y corregir sus errores. (Feito, 2012, p. 78) [63]."
+            },
+            {
+                q: "40. ¿Qué define a una persona 'competente' en el nuevo marco curricular?",
+                options: [
+                    "a) Aquella que es capaz de resolver problemas reales, los cuales son siempre complejos.",
+                    "b) Aquella que es capaz de afrontar problemas reales, los cuales son siempre complejos.",
+                    "c) Aquella que es capaz de manejar problemas reales, los cuales son siempre complejos.",
+                    "d) Aquella que es capaz de superar problemas reales, los cuales son siempre complejos."
+                ],
+                correct: 0,
+                retro: "La competencia implica movilizar saberes en situaciones prácticas reales. (Feito, 2012, p. 85) [64]."
+            },
+            {
+                q: "41. ¿Qué metáfora utiliza Perrenoud para describir la enseñanza real?",
+                options: [
+                    "a) La asimila a variaciones libres sobre temas impuestos o la 'comedia dell'arte'.",
+                    "b) La asimila a interpretaciones libres sobre temas impuestos o la 'comedia dell'arte'.",
+                    "c) La asimila a recreaciones libres sobre temas impuestos o la 'comedia dell'arte'.",
+                    "d) La asimila a ejecuciones libres sobre temas impuestos o la 'comedia dell'arte'."
+                ],
+                correct: 0,
+                retro: "El maestro reinventa el plan formal según la dinámica diaria del aula. (Perrenoud, 2012, p. 92) [65]."
+            },
+            {
+                q: "42. ¿Qué es el 'currículum real' frente al formal según Musgrave?",
+                options: [
+                    "a) Un conjunto de experiencias y tareas que originan o se supone han de originar aprendizajes.",
+                    "b) Un conjunto de experiencias y tareas que originan o se supone han de originar logros.",
+                    "c) Un conjunto de experiencias y tareas que originan o se supone han de originar conductas.",
+                    "d) Un conjunto de experiencias y tareas que originan o se supone han de originar saberes."
+                ],
+                correct: 0,
+                retro: "Es la transposición pragmática y vivida de la cultura oficial. (Perrenoud, 2012, p. 94) [66, 67]."
+            },
+            {
+                q: "43. ¿Cuál es el significado profundo del 'currículum oculto' según Jackson?",
+                options: [
+                    "a) Rutinas cotidianas que hacen que los alumnos aprendan a obedecer al poder y esperar.",
+                    "b) Rutinas cotidianas que hacen que los alumnos aprendan a respetar al poder y esperar.",
+                    "c) Rutinas cotidianas que hacen que los alumnos aprendan a aceptar al poder y esperar.",
+                    "d) Rutinas cotidianas que hacen que los alumnos aprendan a acatar al poder y esperar."
+                ],
+                correct: 0,
+                retro: "Se aprende a vivir en masa, ser juzgado y matar el tiempo. (Perrenoud, 2012, p. 100) [68]."
+            },
+            {
+                q: "44. ¿Qué supone 'asimilar el currículum' en términos de socialización?",
+                options: [
+                    "a) Convertirse en un miembro de la organización escolar y desempeñar el papel de alumno.",
+                    "b) Convertirse en un oriundo de la organización escolar y desempeñar el papel de alumno.",
+                    "c) Convertirse en un partícipe de la organización escolar y desempeñar el papel de alumno.",
+                    "d) Convertirse en un sujeto de la organización escolar y desempeñar el papel de alumno."
+                ],
+                correct: 1,
+                retro: "Implica actuar sin perturbar el orden ni exigir atención especial. (Perrenoud, 2012, p. 106) [69]."
+            },
+            {
+                q: "45. ¿Por qué el trabajo escolar se considera 'distinto a los demás'?",
+                options: [
+                    "a) Porque carece de una utilidad inmediata, visible, en el sentido de rendir un servicio.",
+                    "b) Porque carece de una función inmediata, visible, en el sentido de rendir un servicio.",
+                    "c) Porque carece de una meta inmediata, visible, en el sentido de rendir un servicio.",
+                    "d) Porque carece de una lógica inmediata, visible, en el sentido de rendir un servicio."
+                ],
+                correct: 0,
+                retro: "Su fin es el aprendizaje, no rendir un servicio productivo real. (Perrenoud, 2012, p. 110) [70, 71]."
+            },
+            {
+                q: "46. ¿Qué característica tiene el trabajo en la escuela tradicional según el texto?",
+                options: [
+                    "a) Es un trabajo no retribuido, impuesto, fragmentado, repetitivo y supervisado.",
+                    "b) Es un trabajo no remunerado, impuesto, fragmentado, repetitivo y supervisado.",
+                    "c) Es un trabajo no compensado, impuesto, fragmentado, repetitivo y supervisado.",
+                    "d) Es un trabajo no abonado, impuesto, fragmentado, repetitivo y supervisado."
+                ],
+                correct: 0,
+                retro: "Se realiza bajo mirada constante sin elección personal del alumno. (Perrenoud, 2012, p. 112) [72]."
+            },
+            {
+                q: "47. ¿Cuál es la 'miseria' del libro de texto según Gimeno Sacristán?",
+                options: [
+                    "a) El monopolio de la actividad escolar y la reducción de la circulación de información.",
+                    "b) El predominio de la actividad escolar y la reducción de la circulación de información.",
+                    "c) El control de la actividad escolar y la reducción de la circulación de información.",
+                    "d) El manejo de la actividad escolar y la reducción de la circulación de información."
+                ],
+                correct: 0,
+                retro: "Se convierte en la única fuente de saber, empobreciendo la cultura. (Gimeno, 2012, p. 113) [73, 74]."
+            },
+            {
+                q: "48. ¿Qué es la 'experiencia vicaria' vinculada al libro de texto?",
+                options: [
+                    "a) Tener que acudir al archivo de la experiencia de otros que indirectamente conocemos.",
+                    "b) Tener que acudir al registro de la experiencia de otros que indirectamente conocemos.",
+                    "c) Tener que acudir al manual de la experiencia de otros que indirectamente conocemos.",
+                    "d) Tener que acudir al catálogo de la experiencia de otros que indirectamente conocemos."
+                ],
+                correct: 0,
+                retro: "Sustituye el contacto directo con la realidad por un relato ajeno. (Gimeno, 2012, p. 116) [75, 76]."
+            },
+            {
+                q: "49. ¿Qué función cumple la 'imagen' en los libros de texto tradicionales?",
+                options: [
+                    "a) Es una llamada de atención para poder relajarse del arduo proceso de descodificar.",
+                    "b) Es un motivo de atención para poder relajarse del arduo proceso de descodificar.",
+                    "c) Es un punto de atención para poder relajarse del arduo proceso de descodificar.",
+                    "d) Es una señal de atención para poder relajarse del arduo proceso de descodificar."
+                ],
+                correct: 0,
+                retro: "A menudo no aporta contenido real, solo ocupa espacio visual. (Gimeno, 2012, p. 118) [77]."
+            },
+            {
+                q: "50. ¿Cuál es el objetivo final de las pruebas PISA en contraste con la escuela fáctica?",
+                options: [
+                    "a) Evaluar competencias o el modo en que el alumno aplica saberes a situaciones nuevas.",
+                    "b) Medir competencias o el modo en que el alumno aplica saberes a situaciones nuevas.",
+                    "c) Estimar competencias o el modo en que el alumno aplica saberes a situaciones nuevas.",
+                    "d) Juzgar competencias o el modo en que el alumno aplica saberes a situaciones nuevas."
+                ],
+                correct: 0,
+                retro: "PISA busca la aplicación práctica frente a lo memorístico de la escuela. (Feito, 2012, p. 80) [78, 79]."
+            }
+        ];
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

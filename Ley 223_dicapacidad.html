@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley General para Personas con Discapacidad (Ley 223)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="header-content">
+            <div class="pc-doctor-title">PC DOCTOR</div>
+            <p class="welcome-elaborado">MATERIAL ELABORADO POR EL:</p>
+            <p class="welcome-profesor">Prof. Daniel Llanos</p>
+            <p class="welcome-celular">📱 Celular: 75136639</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="main-title">Ley General para Personas con Discapacidad (Ley 223)</h1>
+        <p class="subtitle">Cuestionario de Ley 223 - Personas con Discapacidad</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. ¿Cuál es el objeto primordial de la Ley N° 223 según su Artículo 1?",
+                options: [
+                    "a) Garantizar a las personas con discapacidad el ejercicio pleno de sus derechos y deberes.",
+                    "b) Garantizar a las personas con discapacidad la gestión plena de sus derechos y deberes.",
+                    "c) Garantizar a las personas con discapacidad la técnica plena de sus derechos y deberes.",
+                    "d) Garantizar a las personas con discapacidad la norma plena de sus derechos y deberes."
+                ],
+                correct: 0,
+                retro: "Busca la igualdad de condiciones y equiparación de oportunidades bajo protección integral. [1]"
+            },
+            {
+                q: "2. ¿A quiénes es aplicable y de cumplimiento obligatorio la presente Ley?",
+                options: [
+                    "a) A todo el territorio del Estado y órganos públicos, privados, cooperativos o mixtos.",
+                    "b) A todo el territorio del Estado y órganos públicos, técnicos, cooperativos o mixtos.",
+                    "c) A todo el territorio del Estado y órganos públicos, sociales, cooperativos o mixtos.",
+                    "d) A todo el territorio del Estado y órganos públicos, directos, cooperativos o mixtos."
+                ],
+                correct: 0,
+                retro: "Su ámbito de aplicación abarca todas las instituciones del Estado Plurinacional. [2]"
+            },
+            {
+                q: "3. ¿Qué define el principio de 'No Discriminación' en el Artículo 5?",
+                options: [
+                    "a) No anular el ejercicio de derechos por razón de su situación de persona con discapacidad.",
+                    "b) No anular el ejercicio de derechos por razón de su situación de persona con deficiencia.",
+                    "c) No anular el ejercicio de derechos por razón de su situación de persona con limitación.",
+                    "d) No anular el ejercicio de derechos por razón de su situación de persona con problema."
+                ],
+                correct: 0,
+                retro: "Prohíbe cualquier forma de distinción, exclusión o preferencia fundada en la discapacidad. [3]"
+            },
+            {
+                q: "4. ¿Cómo se define técnicamente la 'Discapacidad' según la Ley 223?",
+                options: [
+                    "a) Resultado de la interacción de la persona con deficiencias y diversas barreras del entorno.",
+                    "b) Resultado de la interacción de la persona con problemas y diversas barreras del entorno.",
+                    "c) Resultado de la interacción de la persona con lesiones y diversas barreras del entorno.",
+                    "d) Resultado de la interacción de la persona con fallas y diversas barreras del entorno."
+                ],
+                correct: 0,
+                retro: "Considera deficiencias físicas, psíquicas, intelectuales o sensoriales a largo plazo. [4]"
+            },
+            {
+                q: "5. ¿Qué constituye el 'Trato Preferente' según las definiciones legales?",
+                options: [
+                    "a) Acciones integradoras que procuran eliminar las desventajas con carácter de primacía.",
+                    "b) Acciones integradoras que procuran eliminar las desventajas con carácter de urgencia.",
+                    "c) Acciones integradoras que procuran eliminar las desventajas con carácter de norma.",
+                    "d) Acciones integradoras que procuran eliminar las desventajas con carácter de plan."
+                ],
+                correct: 0,
+                retro: "Garantiza la equiparación e igualdad con el resto de las personas. [4]"
+            },
+            {
+                q: "6. ¿Qué define a una 'Persona con Discapacidad Auditiva' según el Artículo 5?",
+                options: [
+                    "a) Persona con pérdida auditiva que estructura su experiencia a través del sentido de la visión.",
+                    "b) Persona con pérdida auditiva que estructura su experiencia a través del sentido de la lógica.",
+                    "c) Persona con pérdida auditiva que estructura su experiencia a través del sentido de la técnica.",
+                    "d) Persona con pérdida auditiva que estructura su experiencia a través del sentido de la guía."
+                ],
+                correct: 0,
+                retro: "Se enfrenta cotidianamente a barreras de comunicación que impiden su participación. [5]"
+            },
+            {
+                q: "7. ¿Cómo se caracteriza técnicamente la 'Discapacidad Intelectual'?",
+                options: [
+                    "a) Deficiencias del sistema nervioso que limitan la inteligencia y la conducta adaptativa.",
+                    "b) Deficiencias del sistema nervioso que limitan la técnica y la conducta adaptativa.",
+                    "c) Deficiencias del sistema nervioso que limitan la lógica y la conducta adaptativa.",
+                    "d) Deficiencias del sistema nervioso que limitan la gestión y la conducta adaptativa."
+                ],
+                correct: 0,
+                retro: "Afecta el funcionamiento de la inteligencia y el desarrollo psicológico evolutivo. [6]"
+            },
+            {
+                q: "8. ¿Qué se entiende por 'Discapacidad Múltiple' en el marco de esta Ley?",
+                options: [
+                    "a) Aquella generada por múltiples deficiencias sean físicas, sensoriales o intelectuales.",
+                    "b) Aquella generada por múltiples deficiencias sean físicas, técnicas o intelectuales.",
+                    "c) Aquella generada por múltiples deficiencias sean físicas, lógicas o intelectuales.",
+                    "d) Aquella generada por múltiples deficiencias sean físicas, directas o intelectuales."
+                ],
+                correct: 0,
+                retro: "Combina dos o más discapacidades que requieren apoyos específicos. [7]"
+            },
+            {
+                q: "9. ¿Cuál es la definición de 'Grado de Discapacidad Grave'?",
+                options: [
+                    "a) Imposibilidad de realizar la mayoría de actividades diarias, requiriendo asistencia de otros.",
+                    "b) Imposibilidad de realizar la mayoría de actividades diarias, requiriendo asistencia técnica.",
+                    "c) Imposibilidad de realizar la mayoría de actividades diarias, requiriendo asistencia directa.",
+                    "d) Imposibilidad de realizar la mayoría de actividades diarias, requiriendo asistencia social."
+                ],
+                correct: 0,
+                retro: "Afecta actividades de autocuidado y la independencia personal. [8]"
+            },
+            {
+                q: "10. ¿Qué caracteriza al 'Grado de Discapacidad Muy Grave'?",
+                options: [
+                    "a) Imposibilidad de realizar las actividades diarias y requiere asistencia permanente.",
+                    "b) Imposibilidad de realizar las actividades diarias y requiere asistencia técnica.",
+                    "c) Imposibilidad de realizar las actividades diarias y requiere asistencia lógica.",
+                    "d) Imposibilidad de realizar las actividades diarias y requiere asistencia directa."
+                ],
+                correct: 0,
+                retro: "Es el grado máximo de dependencia funcional según la normativa. [8]"
+            },
+            {
+                q: "11. ¿Qué se entiende por 'Educación Inclusiva' según el Artículo 5 literal r?",
+                options: [
+                    "a) Respuesta a la diversidad mediante adaptaciones físicas, curriculares y apoyos.",
+                    "b) Respuesta a la diversidad mediante adaptaciones técnicas, curriculares y apoyos.",
+                    "c) Respuesta a la diversidad mediante adaptaciones lógicas, curriculares y apoyos.",
+                    "d) Respuesta a la diversidad mediante adaptaciones directas, curriculares y apoyos."
+                ],
+                correct: 0,
+                retro: "Busca mayor participación en el aprendizaje y reducir la exclusión. [9]"
+            },
+            {
+                q: "12. ¿Qué son los 'Ajustes Razonables' en el contexto de la discapacidad?",
+                options: [
+                    "a) Modificaciones necesarias que no impongan una carga desproporcionada o indebida.",
+                    "b) Modificaciones necesarias que no impongan una carga técnica o indebida.",
+                    "c) Modificaciones necesarias que no impongan una carga lógica o indebida.",
+                    "d) Modificaciones necesarias que no impongan una carga directa o indebida."
+                ],
+                correct: 0,
+                retro: "Garantizan el goce de derechos humanos en casos particulares. [10]"
+            },
+            {
+                q: "13. ¿Cuál es la obligación de la familia respecto a la persona con discapacidad?",
+                options: [
+                    "a) Proporcionar protección y bienestar promoviendo su autonomía y autodeterminación.",
+                    "b) Proporcionar protección y bienestar promoviendo su técnica y autodeterminación.",
+                    "c) Proporcionar protección y bienestar promoviendo su gestión y autodeterminación.",
+                    "d) Proporcionar protección y bienestar promoviendo su norma y autodeterminación."
+                ],
+                correct: 0,
+                retro: "La familia es el primer espacio de inclusión social obligada. [11]"
+            },
+            {
+                q: "14. ¿Qué garantiza el Estado respecto al derecho a la educación (Art. 10)?",
+                options: [
+                    "a) El acceso y permanencia en el Sistema Educativo Plurinacional de forma inclusiva.",
+                    "b) El acceso y permanencia en el Sistema Educativo Plurinacional de forma técnica.",
+                    "c) El acceso y permanencia en el Sistema Educativo Plurinacional de forma directa.",
+                    "d) El acceso y permanencia en el Sistema Educativo Plurinacional de forma lógica."
+                ],
+                correct: 0,
+                retro: "La educación debe ser inclusiva e integral para todos los estudiantes. [12]"
+            },
+            {
+                q: "15. ¿Qué derecho político se reconoce específicamente en actos eleccionarios?",
+                options: [
+                    "a) Votar acompañados de una persona de confianza elegida por ellos mismos.",
+                    "b) Votar acompañados de una persona de confianza elegida por el tribunal.",
+                    "c) Votar acompañados de una persona de confianza elegida por la familia.",
+                    "d) Votar acompañados de una persona de confianza elegida por el centro."
+                ],
+                correct: 0,
+                retro: "Se deben introducir ajustes razonables para que voten libremente. [13]"
+            },
+            {
+                q: "16. ¿Qué sucede con los beneficios de las personas a cargo si cometen violencia?",
+                options: [
+                    "a) Perderán los beneficios a su favor establecidos en la presente Ley.",
+                    "b) Perderán los beneficios a su favor establecidos en la técnica de la Ley.",
+                    "c) Perderán los beneficios a su favor establecidos en la norma de la Ley.",
+                    "d) Perderán los beneficios a su favor establecidos en la gestión de la Ley."
+                ],
+                correct: 0,
+                retro: "Aplica en casos de violencia doméstica, abusos o discriminación. [14, 15]"
+            },
+            {
+                q: "17. ¿Cuál es un deber fundamental de la persona con discapacidad (Art. 22)?",
+                options: [
+                    "a) Cumplir y hacer cumplir la Constitución Política del Estado y las leyes.",
+                    "b) Cumplir y hacer cumplir la técnica Política del Estado y las leyes.",
+                    "c) Cumplir y hacer cumplir la gestión Política del Estado y las leyes.",
+                    "d) Cumplir y hacer cumplir la norma Política del Estado y las leyes."
+                ],
+                correct: 0,
+                retro: "Deben también respetar, valorar y defender los derechos humanos. [16, 17]"
+            },
+            {
+                q: "18. ¿A qué se refiere la 'Renta Solidaria' establecida en el Artículo 28?",
+                options: [
+                    "a) Un beneficio económico para personas con discapacidad grave y muy grave.",
+                    "b) Un beneficio económico para personas con discapacidad técnica y muy grave.",
+                    "c) Un beneficio económico para personas con discapacidad lógica y muy grave.",
+                    "d) Un beneficio económico para personas con discapacidad directa y muy grave."
+                ],
+                correct: 0,
+                retro: "No la perciben las personas con discapacidad visual ni funcionarios públicos. [18]"
+            },
+            {
+                q: "19. ¿Qué garantiza el Estado en el ámbito de la formación docente (Art. 31)?",
+                options: [
+                    "a) Planes de estudio que habiliten a maestros para la enseñanza personalizada.",
+                    "b) Planes de estudio que habiliten a maestros para la enseñanza técnica.",
+                    "c) Planes de estudio que habiliten a maestros para la enseñanza lógica.",
+                    "d) Planes de estudio que habiliten a maestros para la enseñanza directa."
+                ],
+                correct: 0,
+                retro: "Se deben formar equipos multidisciplinarios para la inclusión educativa. [19, 20]"
+            },
+            {
+                q: "20. ¿Qué obligación tienen las Universidades respecto a los diplomas académicos?",
+                options: [
+                    "a) Extender de manera gratuita los diplomas académicos y títulos a estas personas.",
+                    "b) Extender de manera gratuita los diplomas académicos y títulos a estos técnicos.",
+                    "c) Extender de manera gratuita los diplomas académicos y títulos a estos centros.",
+                    "d) Extender de manera gratuita los diplomas académicos y títulos a estos grupos."
+                ],
+                correct: 0,
+                retro: "Es un beneficio de gratuidad para facilitar el egreso profesional. [21]"
+            },
+            {
+                q: "21. ¿Qué instrumentos de apoyo deben facilitar los Institutos y Universidades?",
+                options: [
+                    "a) Instrumentos en braille e intérpretes de lengua de señas (LSB).",
+                    "b) Instrumentos en braille e intérpretes de lengua de técnica.",
+                    "c) Instrumentos en braille e intérpretes de lengua de norma.",
+                    "d) Instrumentos en braille e intérpretes de lengua de gestión."
+                ],
+                correct: 0,
+                retro: "Se busca garantizar la evaluación y permanencia de estudiantes sensoriales. [22]"
+            },
+            {
+                q: "22. ¿Qué garantiza el Artículo 34 respecto a la situación laboral de los padres?",
+                options: [
+                    "a) La inamovilidad laboral a padres, madres o tutores de hijos con discapacidad.",
+                    "b) La inamovilidad laboral a padres, madres o tutores de hijos con deficiencia.",
+                    "c) La inamovilidad laboral a padres, madres o tutores de hijos con limitación.",
+                    "d) La inamovilidad laboral a padres, madres o tutores de hijos con problema."
+                ],
+                correct: 0,
+                retro: "Protege el empleo siempre que se cumpla la normativa vigente. [23]"
+            },
+            {
+                q: "23. ¿Qué beneficio tributario otorga el Estado según el Artículo 33?",
+                options: [
+                    "a) Exención total de tributos para importación de órtesis, prótesis y ayudas técnicas.",
+                    "b) Exención total de tributos para importación de órtesis, prótesis y guías técnicas.",
+                    "c) Exención total de tributos para importación de órtesis, prótesis y planes técnicos.",
+                    "d) Exención total de tributos para importación de órtesis, prótesis y normas técnicas."
+                ],
+                correct: 0,
+                retro: "No incluye vehículos automotores y es para uso exclusivo de rehabilitación. [24]"
+            },
+            {
+                q: "24. ¿Qué deben incluir las empresas de televisión en sus programas?",
+                options: [
+                    "a) La interpretación a la Lengua de Señas Boliviana (LSB) en programas de interés.",
+                    "b) La interpretación a la Lengua de Señas Boliviana (LSB) en programas de técnica.",
+                    "c) La interpretación a la Lengua de Señas Boliviana (LSB) en programas de gestión.",
+                    "d) La interpretación a la Lengua de Señas Boliviana (LSB) en programas de norma."
+                ],
+                correct: 0,
+                retro: "Permite el acceso a información de interés cultural y educativo. [25, 26]"
+            },
+            {
+                q: "25. ¿Qué es el CONALPEDIS según el Artículo 45 de la Ley?",
+                options: [
+                    "a) Entidad descentralizada encargada de la planificación estratégica en discapacidad.",
+                    "b) Entidad descentralizada encargada de la planificación técnica en discapacidad.",
+                    "c) Entidad descentralizada encargada de la planificación lógica en discapacidad.",
+                    "d) Entidad descentralizada encargada de la planificación directa en discapacidad."
+                ],
+                correct: 0,
+                retro: "Está bajo tuición del Ministerio de Justicia para defensa de derechos. [27]"
+            },
+            {
+                q: "26. ¿Cuál es el fin principal mencionado en el Artículo 2 literal a?",
+                options: [
+                    "a) Asegurar el goce pleno de derechos humanos y el respeto de su dignidad.",
+                    "b) Asegurar el goce pleno de derechos humanos y el respeto de su técnica.",
+                    "c) Asegurar el goce pleno de derechos humanos y el respeto de su norma.",
+                    "d) Asegurar el goce pleno de derechos humanos y el respeto de su gestión."
+                ],
+                correct: 0,
+                retro: "Busca la igualdad sustantiva en todas las libertades fundamentales. [28]"
+            },
+            {
+                q: "27. ¿Qué principio rige la participación plena en todos los ámbitos sociales?",
+                options: [
+                    "a) El principio de Inclusión; participar efectivamente en igualdad de oportunidades.",
+                    "b) El principio de Inclusión; participar efectivamente en igualdad de técnicas.",
+                    "c) El principio de Inclusión; participar efectivamente en igualdad de normas.",
+                    "d) El principio de Inclusión; participar efectivamente en igualdad de gestiones."
+                ],
+                correct: 0,
+                retro: "Abarca ámbitos económicos, políticos, culturales y educativos. [29]"
+            },
+            {
+                q: "28. ¿Cómo se define la 'Accesibilidad' en el Artículo 5 literal d?",
+                options: [
+                    "a) Que los servicios puedan acomodarse para ser accedidos sin restricción alguna.",
+                    "b) Que los servicios puedan acomodarse para ser accedidos sin técnica alguna.",
+                    "c) Que los servicios puedan acomodarse para ser accedidos sin norma alguna.",
+                    "d) Que los servicios puedan acomodarse para ser accedidos sin gestión alguna."
+                ],
+                correct: 0,
+                retro: "Elimina barreras arquitectónicas, sociales y comunicacionales. [29]"
+            },
+            {
+                q: "29. ¿Qué define técnicamente a la 'Deficiencia' según el Artículo 5?",
+                options: [
+                    "a) Problemas en las funciones fisiológicas o estructuras corporales de una persona.",
+                    "b) Problemas en las funciones técnicas o estructuras corporales de una persona.",
+                    "c) Problemas en las funciones lógicas o estructuras corporales de una persona.",
+                    "d) Problemas en las funciones directas o estructuras corporales de una persona."
+                ],
+                correct: 0,
+                retro: "Consiste en pérdidas o anomalías respecto a la norma estadística. [30]"
+            },
+            {
+                q: "30. ¿Qué caracteriza a las 'Personas con Discapacidad Visual'?",
+                options: [
+                    "a) Personas con deficiencias anatómicas o funcionales causantes de ceguera.",
+                    "b) Personas con deficiencias técnicas o funcionales causantes de ceguera.",
+                    "c) Personas con deficiencias lógicas o funcionales causantes de ceguera.",
+                    "d) Personas con deficiencias directas o funcionales causantes de ceguera."
+                ],
+                correct: 0,
+                retro: "Incluye tanto la ceguera total como la baja visión. [5]"
+            },
+            {
+                q: "31. ¿Qué es la 'Discapacidad Mental o Psíquica' según el documento?",
+                options: [
+                    "a) Alteraciones de procesos cognitivos y volitivos que dificultan la adaptación.",
+                    "b) Alteraciones de procesos técnicos y volitivos que dificultan la adaptación.",
+                    "c) Alteraciones de procesos lógicos y volitivos que dificultan la adaptación.",
+                    "d) Alteraciones de procesos directos y volitivos que dificultan la adaptación."
+                ],
+                correct: 0,
+                retro: "Afecta el razonamiento, personalidad y juicio de la realidad. [6]"
+            },
+            {
+                q: "32. ¿Qué se entiende por 'Habilitación y Rehabilitación' (Art. 5 p)?",
+                options: [
+                    "a) Medidas destinadas a lograr la máxima independencia física e intelectual.",
+                    "b) Medidas destinadas a lograr la máxima técnica física e intelectual.",
+                    "c) Medidas destinadas a lograr la máxima gestión física e intelectual.",
+                    "d) Medidas destinadas a lograr la máxima norma física e intelectual."
+                ],
+                correct: 0,
+                retro: "Aplica tanto a deficiencias congénitas como adquiridas. [31]"
+            },
+            {
+                q: "33. ¿Qué garantiza el Estado sobre el 'Derecho a la Identidad'?",
+                options: [
+                    "a) Respetar su pluriculturalidad, nombre y nacionalidad desde el nacimiento.",
+                    "b) Respetar su técnica, nombre y nacionalidad desde el nacimiento.",
+                    "c) Respetar su gestión, nombre y nacionalidad desde el nacimiento.",
+                    "d) Respetar su norma, nombre y nacionalidad desde el nacimiento."
+                ],
+                correct: 0,
+                retro: "Deben ser inscritos inmediatamente al igual que las demás personas. [32]"
+            },
+            {
+                q: "34. ¿Qué derecho tienen las personas con discapacidad intelectual leve?",
+                options: [
+                    "a) Ser consultadas respecto a las decisiones que se refieran a su vida y salud.",
+                    "b) Ser consultadas respecto a las técnicas que se refieran a su vida y salud.",
+                    "c) Ser consultadas respecto a las normas que se refieran a su vida y salud.",
+                    "d) Ser consultadas respecto a las gestiones que se refieran a su vida y salud."
+                ],
+                correct: 0,
+                retro: "Promueve su derecho a proyectarse hacia una vida independiente. [14]"
+            },
+            {
+                q: "35. ¿Cuál es el deber de las personas con discapacidad respecto al medio ambiente?",
+                options: [
+                    "a) Informar, proteger y preservar la biodiversidad y el entorno social.",
+                    "b) Informar, proteger y preservar la técnica y el entorno social.",
+                    "c) Informar, proteger y preservar la gestión y el entorno social.",
+                    "d) Informar, proteger y preservar la norma y el entorno social."
+                ],
+                correct: 0,
+                retro: "Es un deber ciudadano de cuidado del entorno físico y cultural. [33]"
+            },
+            {
+                q: "36. ¿A qué programas deben priorizar el acceso estas personas (Art. 23)?",
+                options: [
+                    "a) Planes y estrategias de reducción de la pobreza y marginalidad social.",
+                    "b) Planes y estrategias de reducción de la técnica y marginalidad social.",
+                    "c) Planes y estrategias de reducción de la norma y marginalidad social.",
+                    "d) Planes y estrategias de reducción de la gestión y marginalidad social."
+                ],
+                correct: 0,
+                retro: "El Estado debe eliminar la exclusión y discriminación económica. [34]"
+            },
+            {
+                q: "37. ¿Qué se promueve para fomentar actividades económicas generadoras de empleo?",
+                options: [
+                    "a) Estímulo a emprendimientos económicos productivos sociales e individuales.",
+                    "b) Estímulo a emprendimientos técnicos productivos sociales e individuales.",
+                    "c) Estímulo a emprendimientos lógicos productivos sociales e individuales.",
+                    "d) Estímulo a emprendimientos directos productivos sociales e individuales."
+                ],
+                correct: 0,
+                retro: "Incluye el apoyo a padres, madres y tutores responsables. [35]"
+            },
+            {
+                q: "38. ¿Qué se garantiza sobre la salud sexual y reproductiva (Art. 32)?",
+                options: [
+                    "a) Acceso a servicios de información salvaguardando derechos contra esterilización.",
+                    "b) Acceso a servicios de información salvaguardando derechos contra técnica.",
+                    "c) Acceso a servicios de información salvaguardando derechos contra norma.",
+                    "d) Acceso a servicios de información salvaguardando derechos contra gestión."
+                ],
+                correct: 0,
+                retro: "Protege contra el suministro obligatorio de métodos anticonceptivos. [36]"
+            },
+            {
+                q: "39. ¿Qué establece el Artículo 39 sobre la conciencia social?",
+                options: [
+                    "a) Medidas para que la sociedad tome conciencia eliminando lenguaje discriminatorio.",
+                    "b) Medidas para que la sociedad tome conciencia eliminando técnica discriminatoria.",
+                    "c) Medidas para que la sociedad tome conciencia eliminando norma discriminatoria.",
+                    "d) Medidas para que la sociedad tome conciencia eliminando gestión discriminatoria."
+                ],
+                correct: 0,
+                retro: "Los medios de comunicación deben mostrar sus aportes a la sociedad. [37]"
+            },
+            {
+                q: "40. ¿Quiénes pierden los beneficios si impiden la participación social del menor?",
+                options: [
+                    "a) Las personas a cargo o allegadas de la persona con discapacidad.",
+                    "b) Las personas técnicas o allegadas de la persona con discapacidad.",
+                    "c) Las personas lógicas o allegadas de la persona con discapacidad.",
+                    "d) Las personas directas o allegadas de la persona con discapacidad."
+                ],
+                correct: 0,
+                retro: "La restricción de actividades cotidianas anula los beneficios legales. [38]"
+            },
+            {
+                q: "41. ¿Qué es el 'Desarrollo Inclusivo Basado en la Comunidad'?",
+                options: [
+                    "a) Acciones locales para igualdad de derechos independientemente de la condición.",
+                    "b) Acciones locales para igualdad de técnicas independientemente de la condición.",
+                    "c) Acciones locales para igualdad de normas independientemente de la condición.",
+                    "d) Acciones locales para igualdad de gestiones independientemente de la condición."
+                ],
+                correct: 0,
+                retro: "Busca el equilibrio entre desarrollo socioeconómico y medio ambiente. [10]"
+            },
+            {
+                q: "42. ¿Qué deber tiene la persona respecto a la medicación prescrita?",
+                options: [
+                    "a) Consumirla, siendo responsable de este deber la familia o el Estado.",
+                    "b) Consumirla, siendo responsable de este deber la técnica o el Estado.",
+                    "c) Consumirla, siendo responsable de este deber la norma o el Estado.",
+                    "d) Consumirla, siendo responsable de este deber la gestión o el Estado."
+                ],
+                correct: 0,
+                retro: "Busca lograr la estabilidad en la salud de la persona. [33]"
+            },
+            {
+                q: "43. ¿Qué beneficio se otorga respecto al 'Servicio Militar'?",
+                options: [
+                    "a) La gratuidad del trámite de la libreta de servicio militar para estas personas.",
+                    "b) La gratuidad del trámite de la libreta de servicio técnico para estas personas.",
+                    "c) La gratuidad del trámite de la libreta de servicio social para estas personas.",
+                    "d) La gratuidad del trámite de la libreta de servicio directo para estas personas."
+                ],
+                correct: 0,
+                retro: "Es un derecho de gratuidad para quienes requieran el documento. [39]"
+            },
+            {
+                q: "44. ¿Qué gratuidad otorga el Órgano Electoral en registros civiles?",
+                options: [
+                    "a) Certificados de nacimiento, matrimonio y defunción para grados grave y muy grave.",
+                    "b) Certificados de nacimiento, matrimonio y defunción para grados técnico y muy grave.",
+                    "c) Certificados de nacimiento, matrimonio y defunción para grados social y muy grave.",
+                    "d) Certificados de nacimiento, matrimonio y defunción para grados directo y muy grave."
+                ],
+                correct: 0,
+                retro: "Facilita el acceso a documentos de identidad fundamentales. [39]"
+            },
+            {
+                q: "45. ¿Cuál es una de las atribuciones de CONALPEDIS según el Artículo 46?",
+                options: [
+                    "a) Tomar acciones para generar la equiparación de oportunidades.",
+                    "b) Tomar acciones para generar la equiparación de técnicas.",
+                    "c) Tomar acciones para generar la equiparación de normas.",
+                    "d) Tomar acciones para generar la equiparación de gestiones."
+                ],
+                correct: 0,
+                retro: "Debe impulsar el ejercicio pleno de los derechos humanos. [40]"
+            },
+            {
+                q: "46. ¿Qué debe fiscalizar el Estado a través de CONALPEDIS?",
+                options: [
+                    "a) A las entidades privadas especializadas en la atención de la discapacidad.",
+                    "b) A las entidades técnicas especializadas en la atención de la discapacidad.",
+                    "c) A las entidades lógicas especializadas en la atención de la discapacidad.",
+                    "d) A las entidades sociales especializadas en la atención de la discapacidad."
+                ],
+                correct: 0,
+                retro: "Aplica mecanismos de acreditación e implantación de protocolos técnicos. [41]"
+            },
+            {
+                q: "47. ¿Quiénes conforman el Directorio de CONALPEDIS según el Art. 47?",
+                options: [
+                    "a) Representantes de la Confederación COBOPDI y del Órgano Ejecutivo.",
+                    "b) Representantes de la Confederación COBOPDI y del Órgano Técnico.",
+                    "c) Representantes de la Confederación COBOPDI y del Órgano Social.",
+                    "d) Representantes de la Confederación COBOPDI y del Órgano Directo."
+                ],
+                correct: 0,
+                retro: "Incluye 9 representantes de organizaciones y 9 del Estado. [42]"
+            },
+            {
+                q: "48. ¿Qué deben dictar las Asambleas Departamentales sobre accesibilidad?",
+                options: [
+                    "a) Normas sobre señalización de avisos en espacios públicos en formatos accesibles.",
+                    "b) Normas sobre señalización de avisos en espacios técnicos en formatos accesibles.",
+                    "c) Normas sobre señalización de avisos en espacios lógicos en formatos accesibles.",
+                    "d) Normas sobre señalización de avisos en espacios directos en formatos accesibles."
+                ],
+                correct: 0,
+                retro: "Debe incluir símbolos convencionales de acceso para orientar. [43]"
+            },
+            {
+                q: "49. ¿Qué beneficio se establece en el transporte según el Artículo 48?",
+                options: [
+                    "a) Descuentos extraordinarios para la persona con discapacidad y su acompañante.",
+                    "b) Descuentos extraordinarios para la persona con discapacidad y su técnico.",
+                    "c) Descuentos extraordinarios para la persona con discapacidad y su guía.",
+                    "d) Descuentos extraordinarios para la persona con discapacidad y su norma."
+                ],
+                correct: 0,
+                retro: "Aplica a transporte aéreo, terrestre, fluvial y ferroviario. [44]"
+            },
+            {
+                q: "50. ¿Qué se garantiza respecto a la participación política (Art. 49)?",
+                options: [
+                    "a) Participación efectiva en la toma de decisiones sobre políticas públicas.",
+                    "b) Participación efectiva en la toma de decisiones sobre políticas técnicas.",
+                    "c) Participación efectiva en la toma de decisiones sobre políticas lógicas.",
+                    "d) Participación efectiva en la toma de decisiones sobre políticas directas."
+                ],
+                correct: 0,
+                retro: "El Estado promueve todas las formas de auto-organización ciudadana. [45]"
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        quizData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `<div class='question-text'><strong>${item.q}</strong></div>`;
+            const list = document.createElement('ul');
+            item.options.forEach((opt, idx) => {
+                const li = document.createElement('li');
+                li.innerText = opt;
+                li.onclick = () => {
+                    const allLi = list.querySelectorAll('li');
+                    allLi.forEach(l => l.style.pointerEvents = 'none');
+                    const fb = document.getElementById(`fb-${index}`);
+                    fb.style.display = 'block';
+                    if(idx === item.correct) {
+                        li.classList.add('selected-correct');
+                        fb.innerHTML = "¡Correcto! " + item.retro;
+                        fb.style.background = "#d4edda";
+                    } else {
+                        li.classList.add('selected-incorrect');
+                        fb.innerText = "¡Incorrrecto!";
+                        fb.style.background = "#f8d7da";
+                    }
+                };
+                list.appendChild(li);
+            });
+            card.appendChild(list);
+            const fbDiv = document.createElement('div');
+            fbDiv.id = `fb-${index}`; fbDiv.className = 'feedback';
+            card.appendChild(fbDiv);
+            container.appendChild(card);
+        });
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

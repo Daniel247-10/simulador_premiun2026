@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estilos de Aprendizaje y Métodos de Enseñanza</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="header-content">
+            <div class="pc-doctor-title">PC DOCTOR</div>
+            <p class="welcome-elaborado">MATERIAL ELABORADO POR EL:</p>
+            <p class="welcome-profesor">Prof. Daniel Llanos</p>
+            <p class="welcome-celular">📱 Celular: 75136639</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="main-title">Estilos de Aprendizaje y Métodos de Enseñanza</h1>
+        <p class="subtitle">Cuestionario de Estilos de Aprendizaje</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. Según Keefe (1988), ¿qué rasgos sirven como indicadores de cómo los alumnos perciben y responden?",
+                options: [
+                    "a) Rasgos cognitivos, afectivos y fisiológicos que sirven como indicadores relativamente estables.",
+                    "b) Rasgos cognitivos, afectivos y fisiológicos que sirven como indicadores sistemáticamente estables.",
+                    "c) Rasgos cognitivos, afectivos y fisiológicos que sirven como indicadores permanentemente estables.",
+                    "d) Rasgos cognitivos, afectivos y fisiológicos que sirven como indicadores estructuralmente estables."
+                ],
+                correct: 0,
+                retro: "Los estilos de aprendizaje definen la interacción del alumno con su ambiente educativo. (Sáez, 2018, p. 24)."
+            },
+            {
+                q: "2. ¿Cómo se define el proceso de aprendizaje según el esquema de teorías presentado en el texto?",
+                options: [
+                    "a) Proceso de asimilar información con cambio resultante en el comportamiento de los sujetos.",
+                    "b) Proceso de asimilar información con cambio resultante en el conocimiento de los sujetos.",
+                    "c) Proceso de asimilar información con cambio resultante en el entendimiento de los sujetos.",
+                    "d) Proceso de asimilar información con cambio resultante en el razonamiento de los sujetos."
+                ],
+                correct: 0,
+                retro: "El aprendizaje implica una transformación observable o interna tras la asimilación. (Sáez, 2018, p. 9)."
+            },
+            {
+                q: "3. ¿Qué caracteriza al estilo de aprendizaje 'Convergente' en el modelo de Kolb?",
+                options: [
+                    "a) Se basa en la conceptualización abstracta (CA) y en la experimentación activa de tipo técnico.",
+                    "b) Se basa en la conceptualización abstracta (CA) y en la experimentación activa de tipo práctico.",
+                    "c) Se basa en la conceptualización abstracta (CA) y en la experimentación activa de tipo lógico.",
+                    "d) Se basa en la conceptualización abstracta (CA) y en la experimentación activa de tipo directo."
+                ],
+                correct: 0,
+                retro: "Los convergentes destacan en la aplicación técnica de ideas y resolución de problemas. (Sáez, 2018, p. 27)."
+            },
+            {
+                q: "4. ¿Cuál es la fase del ciclo de aprendizaje de Kolb que precede a la reflexión?",
+                options: [
+                    "a) La fase de actuar; donde el alumno se involucra en una experiencia concreta de aprendizaje.",
+                    "b) La fase de teorizar; donde el alumno se involucra en una experiencia concreta de aprendizaje.",
+                    "c) La fase de experimentar; donde el alumno se involucra en una experiencia concreta de aprendizaje.",
+                    "d) La fase de conceptualizar; donde el alumno se involucra en una experiencia concreta de aprendizaje."
+                ],
+                correct: 0,
+                retro: "El ciclo comienza con el hacer (actuar) para generar la materia prima de la reflexión. (Sáez, 2018, p. 27)."
+            },
+            {
+                q: "5. ¿Qué nivel representa el vértice superior de la pirámide de la Taxonomía de Bloom?",
+                options: [
+                    "a) El nivel de Evaluación; proceso mediante el cual se emiten juicios sobre el valor de algo.",
+                    "b) El nivel de Síntesis; proceso mediante el cual se emiten juicios sobre el valor de algo.",
+                    "c) El nivel de Análisis; proceso mediante el cual se emiten juicios sobre el valor de algo.",
+                    "d) El nivel de Aplicación; proceso mediante el cual se emiten juicios sobre el valor de algo."
+                ],
+                correct: 0,
+                retro: "La evaluación es la habilidad cognitiva de orden superior según la taxonomía clásica. (Sáez, 2018, p. 21)."
+            },
+            {
+                q: "6. ¿Cómo se describe el 'aprendizaje significativo' en el mapa de tipos de aprendizaje?",
+                options: [
+                    "a) Un tipo de aprendizaje donde el alumno conecta la información nueva con la ya existente.",
+                    "b) Un tipo de aprendizaje donde el alumno vincula la información nueva con la ya existente.",
+                    "c) Un tipo de aprendizaje donde el alumno relaciona la información nueva con la ya existente.",
+                    "d) Un tipo de aprendizaje donde el alumno asocia la información nueva con la ya existente."
+                ],
+                correct: 2,
+                retro: "La relación sustancial entre conocimientos previos y nuevos define la significatividad. (Sáez, 2018, p. 9)."
+            },
+            {
+                q: "7. ¿Qué define al estilo 'Divergente' dentro de las capacidades de aprendizaje?",
+                options: [
+                    "a) Posee capacidades para la Experiencia Concreta (EC) y la Observación Reflexiva de tipo analítico.",
+                    "b) Posee capacidades para la Experiencia Concreta (EC) y la Observación Reflexiva de tipo creativo.",
+                    "c) Posee capacidades para la Experiencia Concreta (EC) y la Observación Reflexiva de tipo técnico.",
+                    "d) Posee capacidades para la Experiencia Concreta (EC) y la Observación Reflexiva de tipo práctico."
+                ],
+                correct: 0,
+                retro: "Los divergentes son buenos captando el 'todo' y generando ideas desde la reflexión. (Sáez, 2018, p. 27)."
+            },
+            {
+                q: "8. ¿En qué consiste el método de enseñanza 'Puzle o Jigsaw' según el texto?",
+                options: [
+                    "a) Consiste en dividir un tema en partes para que cada estudiante se convierta en un experto.",
+                    "b) Consiste en fragmentar un tema en partes para que cada estudiante se convierta en un experto.",
+                    "c) Consiste en segmentar un tema en partes para que cada estudiante se convierta en un experto.",
+                    "d) Consiste en separar un tema en partes para que cada estudiante se convierta en un experto."
+                ],
+                correct: 0,
+                retro: "Es una técnica de aprendizaje cooperativo donde la interdependencia es clave. (Sáez, 2018, p. 44)."
+            },
+            {
+                q: "9. ¿Cuál es el primer paso en el procedimiento técnico del Puzle?",
+                options: [
+                    "a) Preparación de grupos; se forman los grupos y se designa un líder y roles en el aula.",
+                    "b) Preparación de grupos; se forman los grupos y se designa un guía y roles en el aula.",
+                    "c) Preparación de grupos; se forman los grupos y se designa un tutor y roles en el aula.",
+                    "d) Preparación de grupos; se forman los grupos y se designa un jefe y roles en el aula."
+                ],
+                correct: 0,
+                retro: "La organización inicial de roles y materiales es el fundamento del puzle. (Sáez, 2018, p. 44)."
+            },
+            {
+                q: "10. Según el modelo de Marcelo, ¿qué caracteriza al desarrollo profesional autónomo?",
+                options: [
+                    "a) Es un desarrollo profesional que se sustenta en la reflexión constante sobre la propia práctica.",
+                    "b) Es un desarrollo profesional que se sustenta en la reflexión constante sobre la propia técnica.",
+                    "c) Es un desarrollo profesional que se sustenta en la reflexión constante sobre la propia gestión.",
+                    "d) Es un desarrollo profesional que se sustenta en la reflexión constante sobre la propia acción."
+                ],
+                correct: 0,
+                retro: "La autonomía docente nace de la capacidad autocrítica y reflexiva. (Sáez, 2018, p. 79)."
+            },
+            {
+                q: "11. ¿Qué principio psicológico de la enseñanza sugiere 'desafiar pero exitosos'?",
+                options: [
+                    "a) Proponer tareas que requieran esfuerzo por parte del alumno pero que sean alcanzables.",
+                    "b) Proponer tareas que requieran empeño por parte del alumno pero que sean alcanzables.",
+                    "c) Proponer tareas que requieran trabajo por parte del alumno pero que sean alcanzables.",
+                    "d) Proponer tareas que requieran estudio por parte del alumno pero que sean alcanzables."
+                ],
+                correct: 0,
+                retro: "El reto motiva cuando la meta se percibe como posible (Zona de Desarrollo Próximo). (Sáez, 2018, p. 79)."
+            },
+            {
+                q: "12. ¿Cómo se define el 'Aprendizaje Organizativo' en el ámbito de la escuela?",
+                options: [
+                    "a) La escuela se concibe como micro-sociedad con cultura propia y clima de tipo particular.",
+                    "b) La escuela se concibe como micro-sociedad con cultura propia y clima de tipo singular.",
+                    "c) La escuela se concibe como micro-sociedad con cultura propia y clima de tipo especial.",
+                    "d) La escuela se concibe como micro-sociedad con cultura propia y clima de tipo distintivo."
+                ],
+                correct: 0,
+                retro: "El aprendizaje trasciende al individuo y se vuelve un proceso de la institución. (Sáez, 2018, p. 65)."
+            },
+            {
+                q: "13. ¿Qué caracteriza a los centros educativos tipificados como 'Estancados'?",
+                options: [
+                    "a) Son centros que no asumen la singularidad y carecen de líneas de mejora de tipo sistemático.",
+                    "b) Son centros que no asumen la singularidad y carecen de líneas de mejora de tipo pedagógico.",
+                    "c) Son centros que no asumen la singularidad y carecen de líneas de mejora de tipo académico.",
+                    "d) Son centros que no asumen la singularidad y carecen de líneas de mejora de tipo técnico."
+                ],
+                correct: 0,
+                retro: "La falta de autodiagnóstico impide el crecimiento de la organización. (Sáez, 2018, p. 65)."
+            },
+            {
+                q: "14. ¿En qué se basa el Aprendizaje Organizativo 'tecnológico-científico'?",
+                options: [
+                    "a) Basado en la explicación de la realidad de las organizaciones para transformarla de modo técnico.",
+                    "b) Basado en la explicación de la realidad de las organizaciones para transformarla de modo teórico.",
+                    "c) Basado en la explicación de la realidad de las organizaciones para transformarla de modo práctico.",
+                    "d) Basado en la explicación de la realidad de las organizaciones para transformarla de modo lógico."
+                ],
+                correct: 0,
+                retro: "Busca el saber por qué se hace lo que se hace, superando el mero activismo. (Sáez, 2018, p. 65)."
+            },
+            {
+                q: "15. ¿Qué sugiere el principio de enseñanza de proceder 'del todo a las partes'?",
+                options: [
+                    "a) Presentar primero una visión global de la materia para luego analizar sus componentes.",
+                    "b) Presentar primero una visión general de la materia para luego analizar sus componentes.",
+                    "c) Presentar primero una visión amplia de la materia para luego analizar sus componentes.",
+                    "d) Presentar primero una visión total de la materia para luego analizar sus componentes."
+                ],
+                correct: 0,
+                retro: "Favorece el pensamiento sistémico antes de entrar en el detalle analítico. (Sáez, 2018, p. 79)."
+            },
+            {
+                q: "16. ¿Cómo se manifiesta un nivel 'Alto' de Entusiasmo Intelectual en el maestro?",
+                options: [
+                    "a) El maestro se muestra muy claro y emocionante; es percibido como un maestro de tipo completo.",
+                    "b) El maestro se muestra muy claro y emocionante; es percibido como un maestro de tipo facilitador.",
+                    "c) El maestro se muestra muy claro y emocionante; es percibido como un maestro de tipo conferencista.",
+                    "d) El maestro se muestra muy claro y emocionante; es percibido como un maestro de tipo intelectual."
+                ],
+                correct: 0,
+                retro: "La pasión por el contenido es un motor clave para el aprendizaje del alumno. (Sáez, 2018, p. 98)."
+            },
+            {
+                q: "17. ¿Qué define a una Relación Interpersonal 'Moderada' según la Dimensión II?",
+                options: [
+                    "a) El maestro es relativamente cálido, accesible y democrático; se considera de tipo competente.",
+                    "b) El maestro es relativamente cálido, accesible y democrático; se considera de tipo adecuado.",
+                    "c) El maestro es relativamente cálido, accesible y democrático; se considera de tipo facilitador.",
+                    "d) El maestro es relativamente cálido, accesible y democrático; se considera de tipo marginal."
+                ],
+                correct: 0,
+                retro: "Un clima social equilibrado permite un desempeño docente profesional. (Sáez, 2018, p. 98)."
+            },
+            {
+                q: "18. ¿Qué es el 'aprendizaje por diálogo' propuesto por Ruf y Gallin?",
+                options: [
+                    "a) Un enfoque que integra el aprendizaje transversal, integrado e intercultural en la escuela.",
+                    "b) Un enfoque que integra el aprendizaje transversal, integrado e institucional en la escuela.",
+                    "c) Un enfoque que integra el aprendizaje transversal, integrado e internacional en la escuela.",
+                    "d) Un enfoque que integra el aprendizaje transversal, integrado e intelectual en la escuela."
+                ],
+                correct: 0,
+                retro: "El diálogo es el puente para la construcción colectiva de saberes. (Sáez, 2018, p. 53)."
+            },
+            {
+                q: "19. ¿Hacia dónde conduce la 'incertidumbre' en el proceso de aprendizaje por diálogo?",
+                options: [
+                    "a) Hacia el descubrimiento; superando el dirigismo para alcanzar una certidumbre de tipo personal.",
+                    "b) Hacia el descubrimiento; superando el dirigismo para alcanzar una certidumbre de tipo académica.",
+                    "c) Hacia el descubrimiento; superando el dirigismo para alcanzar una certidumbre de tipo racional.",
+                    "d) Hacia el descubrimiento; superando el dirigismo para alcanzar una certidumbre de tipo científica."
+                ],
+                correct: 0,
+                retro: "El aprendizaje es un camino de la duda a la comprensión propia. (Sáez, 2018, p. 53)."
+            },
+            {
+                q: "20. ¿Qué caracteriza a los alumnos con estilo de aprendizaje 'Visual'?",
+                options: [
+                    "a) Prefieren obtener la información a través de diagramas, mapas, cuadros y otras representaciones.",
+                    "b) Prefieren obtener la información a través de diagramas, mapas, cuadros y otras ilustraciones.",
+                    "c) Prefieren obtener la información a través de diagramas, mapas, cuadros y otras figuras.",
+                    "d) Prefieren obtener la información a través de diagramas, mapas, cuadros y otras imágenes."
+                ],
+                correct: 3,
+                retro: "Captan mejor los conceptos cuando se presentan espacialmente. (Sáez, 2018, p. 24)."
+            },
+            {
+                q: "21. ¿Qué rasgo define a los alumnos 'Sensoriales' frente a los intuitivos?",
+                options: [
+                    "a) Prefieren los hechos, los datos y los procedimientos de tipo algorítmico en su aprendizaje.",
+                    "b) Prefieren los hechos, los datos y los procedimientos de tipo secuencial en su aprendizaje.",
+                    "c) Prefieren los hechos, los datos y los procedimientos de tipo lógico en su aprendizaje.",
+                    "d) Prefieren los hechos, los datos y los procedimientos de tipo práctico en su aprendizaje."
+                ],
+                correct: 0,
+                retro: "Se apoyan en la evidencia concreta y en pasos probados. (Sáez, 2018, p. 24)."
+            },
+            {
+                q: "22. ¿Cómo se describe el estilo 'Asimilador' en el cuadrante de Kolb?",
+                options: [
+                    "a) Combina la Conceptualización Abstracta (CA) con la Observación Reflexiva de tipo inductivo.",
+                    "b) Combina la Conceptualización Abstracta (CA) con la Observación Reflexiva de tipo deductivo.",
+                    "c) Combina la Conceptualización Abstracta (CA) con la Observación Reflexiva de tipo analítico.",
+                    "d) Combina la Conceptualización Abstracta (CA) con la Observación Reflexiva de tipo lógico."
+                ],
+                correct: 0,
+                retro: "Excelentes creando modelos teóricos y razonando inductivamente. (Sáez, 2018, p. 27)."
+            },
+            {
+                q: "23. ¿Qué implica el estilo 'Acomodador' en términos de capacidades?",
+                options: [
+                    "a) Combina la Experiencia Concreta (EC) con la Experimentación Activa de tipo práctico.",
+                    "b) Combina la Experiencia Concreta (EC) con la Experimentación Activa de tipo directo.",
+                    "c) Combina la Experiencia Concreta (EC) con la Experimentación Activa de tipo intuitivo.",
+                    "d) Combina la Experiencia Concreta (EC) con la Experimentación Activa de tipo dinámico."
+                ],
+                correct: 0,
+                retro: "Son hacedores que se adaptan a circunstancias nuevas de forma inmediata. (Sáez, 2018, p. 27)."
+            },
+            {
+                q: "24. En el test de Kolb, ¿qué significa preferir 'pensar en las ideas'?",
+                options: [
+                    "a) Indica una orientación hacia la fase de conceptualizar; propia de los estilos de tipo teórico.",
+                    "b) Indica una orientación hacia la fase de conceptualizar; propia de los estilos de tipo lógico.",
+                    "c) Indica una orientación hacia la fase de conceptualizar; propia de los estilos de tipo racional.",
+                    "d) Indica una orientación hacia la fase de conceptualizar; propia de los estilos de tipo analítico."
+                ],
+                correct: 0,
+                retro: "Es la tendencia a estructurar la información en leyes y teorías. (Sáez, 2018, p. 114)."
+            },
+            {
+                q: "25. ¿Qué respuesta es típica de la 'Experiencia Concreta' (EC) al aprender?",
+                options: [
+                    "a) Prefiero valerme de mis sensaciones y sentimientos; me fío de las corazonadas de tipo personal.",
+                    "b) Prefiero valerme de mis sensaciones y sentimientos; me fío de las corazonadas de tipo individual.",
+                    "c) Prefiero valerme de mis sensaciones y sentimientos; me fío de las corazonadas de tipo propio.",
+                    "d) Prefiero valerme de mis sensaciones y sentimientos; me fío de las corazonadas de tipo interno."
+                ],
+                correct: 0,
+                retro: "Se prioriza la vivencia subjetiva y el contacto con la realidad. (Sáez, 2018, p. 114)."
+            },
+            {
+                q: "26. ¿Cómo se manifiesta la 'Experimentación Activa' (EA) en el aprendizaje?",
+                options: [
+                    "a) Prefiero hacer cosas; me siento responsable de las cosas y asumo una actitud de tipo activa.",
+                    "b) Prefiero hacer cosas; me siento responsable de las cosas y asumo una actitud de tipo dinámica.",
+                    "c) Prefiero hacer cosas; me siento responsable de las cosas y asumo una actitud de tipo práctica.",
+                    "d) Prefiero hacer cosas; me siento responsable de las cosas y asumo una actitud de tipo directo."
+                ],
+                correct: 0,
+                retro: "El aprendizaje se consolida a través de la aplicación y la acción. (Sáez, 2018, p. 114)."
+            },
+            {
+                q: "27. ¿Qué es el 'Aprendizaje Episódico' según el mapa conceptual?",
+                options: [
+                    "a) Es el aprendizaje de información de tipo autobiográfico relacionada con sucesos y lugares.",
+                    "b) Es el aprendizaje de información de tipo autobiográfico relacionada con eventos y lugares.",
+                    "c) Es el aprendizaje de información de tipo autobiográfico relacionada con hechos y lugares.",
+                    "d) Es el aprendizaje de información de tipo autobiográfico relacionada con actos y lugares."
+                ],
+                correct: 1,
+                retro: "Se liga a la memoria de momentos específicos vividos por el sujeto. (Sáez, 2018, p. 9)."
+            },
+            {
+                q: "28. ¿Cuál es el núcleo del 'Aprendizaje por Enculturación'?",
+                options: [
+                    "a) El proceso mediante el cual los individuos asimilan las prácticas de tipo cultural.",
+                    "b) El proceso mediante el cual los individuos asimilan las prácticas de tipo social.",
+                    "c) El proceso mediante el cual los individuos asimilan las prácticas de tipo grupal.",
+                    "d) El proceso mediante el cual los individuos asimilan las prácticas de tipo étnico."
+                ],
+                correct: 0,
+                retro: "Integración de las normas y costumbres del entorno social. (Sáez, 2018, p. 9)."
+            },
+            {
+                q: "29. ¿Qué define al 'Aprendizaje Multimedia' en el entorno tecnológico?",
+                options: [
+                    "a) El uso de diversos soportes que integran texto, audio e imágenes para la enseñanza de tipo digital.",
+                    "b) El uso de diversos soportes que integran texto, audio e imágenes para la enseñanza de tipo virtual.",
+                    "c) El uso de diversos soportes que integran texto, audio e imágenes para la enseñanza de tipo técnico.",
+                    "d) El uso de diversos soportes que integran texto, audio e imágenes para la enseñanza de tipo moderno."
+                ],
+                correct: 0,
+                retro: "La combinación de canales mejora la retención de información. (Sáez, 2018, p. 9)."
+            },
+            {
+                q: "30. ¿Qué caracteriza a la enseñanza que procede 'del análisis a la síntesis'?",
+                options: [
+                    "a) Descomponer un problema en sus partes para luego reconstruir una conclusión de tipo global.",
+                    "b) Descomponer un problema en sus partes para luego reconstruir una conclusión de tipo general.",
+                    "c) Descomponer un problema en sus partes para luego reconstruir una conclusión de tipo integrador.",
+                    "d) Descomponer un problema en sus partes para luego reconstruir una conclusión de tipo total."
+                ],
+                correct: 0,
+                retro: "Metodología que va de lo particular al conocimiento unificado. (Sáez, 2018, p. 79)."
+            },
+            {
+                q: "31. ¿Qué principio sugiere avanzar 'de lo empírico a lo racional'?",
+                options: [
+                    "a) Partir de los datos de la experiencia sensorial para llegar a las leyes y conceptos de tipo lógico.",
+                    "b) Partir de los datos de la experiencia sensorial para llegar a las leyes y conceptos de tipo abstracto.",
+                    "c) Partir de los datos de la experiencia sensorial para llegar a las leyes y conceptos de tipo teórico.",
+                    "d) Partir de los datos de la experiencia sensorial para llegar a las leyes y conceptos de tipo racional."
+                ],
+                correct: 0,
+                retro: "El conocimiento sólido se construye desde la base observable. (Sáez, 2018, p. 79)."
+            },
+            {
+                q: "32. ¿Qué es el 'Aprendizaje Tangencial' según el texto?",
+                options: [
+                    "a) Aprender sobre un tema por el interés que despierta un contenido de tipo secundario.",
+                    "b) Aprender sobre un tema por el interés que despierta un contenido de tipo adicional.",
+                    "c) Aprender sobre un tema por el interés que despierta un contenido de tipo colateral.",
+                    "d) Aprender sobre un tema por el interés que despierta un contenido de tipo paralelo."
+                ],
+                correct: 0,
+                retro: "Aprendizaje no planificado que surge de la curiosidad lateral. (Sáez, 2018, p. 19)."
+            },
+            {
+                q: "33. ¿Qué caracteriza a los centros educativos 'Dinámicos'?",
+                options: [
+                    "a) Promueven el desarrollo profesional, asumen la singularidad y potencian las relaciones de tipo social.",
+                    "b) Promueven el desarrollo profesional, asumen la singularidad y potencian las relaciones de tipo humano.",
+                    "c) Promueven el desarrollo profesional, asumen la singularidad y potencian las relaciones de tipo grupal.",
+                    "d) Promueven el desarrollo profesional, asumen la singularidad y potencian las relaciones de tipo educativo."
+                ],
+                correct: 0,
+                retro: "Son organizaciones que aprenden y se adaptan al cambio constantemente. (Sáez, 2018, p. 65)."
+            },
+            {
+                q: "34. ¿Qué es el Aprendizaje Organizativo 'técnico-práctico'?",
+                options: [
+                    "a) Resultado de la consecución de habilidades que permite enfrentar planteamientos de tipo creativo.",
+                    "b) Resultado de la consecución de habilidades que permite enfrentar planteamientos de tipo técnico.",
+                    "c) Resultado de la consecución de habilidades que permite enfrentar planteamientos de tipo práctico.",
+                    "d) Resultado de la consecución de habilidades que permite enfrentar planteamientos de tipo lógico."
+                ],
+                correct: 0,
+                retro: "Se enfoca en el 'saber hacer' eficiente dentro de la escuela. (Sáez, 2018, p. 65)."
+            },
+            {
+                q: "35. ¿Cuál es la diferencia entre motivación intrínseca y extrínseca?",
+                options: [
+                    "a) La intrínseca nace del interés por la tarea; la extrínseca depende de premios de tipo externo.",
+                    "b) La intrínseca nace del interés por la tarea; la extrínseca depende de premios de tipo material.",
+                    "c) La intrínseca nace del interés por la tarea; la extrínseca depende de premios de tipo social.",
+                    "d) La intrínseca nace del interés por la tarea; la extrínseca depende de premios de tipo ajeno."
+                ],
+                correct: 0,
+                retro: "La fuente del refuerzo determina la persistencia en el aprendizaje. (Sáez, 2018, p. 79)."
+            },
+            {
+                q: "36. ¿A qué se refiere el estilo 'Global' de aprendizaje?",
+                options: [
+                    "a) Los alumnos aprenden a saltos, absorbiendo material casi al azar sin ver conexiones de tipo lógico.",
+                    "b) Los alumnos aprenden a saltos, absorbiendo material casi al azar sin ver conexiones de tipo lineal.",
+                    "c) Los alumnos aprenden a saltos, absorbiendo material casi al azar sin ver conexiones de tipo directo.",
+                    "d) Los alumnos aprenden a saltos, absorbiendo material casi al azar sin ver conexiones de tipo secuencial."
+                ],
+                correct: 0,
+                retro: "Captan la 'gran imagen' súbitamente después de un periodo de confusión. (Sáez, 2018, p. 24)."
+            },
+            {
+                q: "37. ¿Qué define al estilo 'Secuencial' de aprendizaje?",
+                options: [
+                    "a) Los alumnos ganan entendimiento en pasos de tipo lineal; cada paso se apoya en el anterior.",
+                    "b) Los alumnos ganan entendimiento en pasos de tipo lógico; cada paso se apoya en el anterior.",
+                    "c) Los alumnos ganan entendimiento en pasos de tipo directo; cada paso se apoya en el anterior.",
+                    "d) Los alumnos ganan entendimiento en pasos de tipo ordenado; cada paso se apoya en el anterior."
+                ],
+                correct: 0,
+                retro: "Prefieren el avance progresivo y estructurado de la materia. (Sáez, 2018, p. 24)."
+            },
+            {
+                q: "38. ¿Qué es el 'Aprendizaje Observacional' según la teoría de Bandura?",
+                options: [
+                    "a) Proceso en el cual un individuo asimila una conducta a través de la observación de tipo social.",
+                    "b) Proceso en el cual un individuo asimila una conducta a través de la observación de tipo directo.",
+                    "c) Proceso en el cual un individuo asimila una conducta a través de la observación de tipo externo.",
+                    "d) Proceso en el cual un individuo asimila una conducta a través de la observación de un modelo."
+                ],
+                correct: 3,
+                retro: "La imitación de modelos es una fuente potente de aprendizaje humano. (Sáez, 2018, p. 9)."
+            },
+            {
+                q: "39. ¿Qué rasgo identifica al alumno con estilo 'Reflexivo'?",
+                options: [
+                    "a) Prefieren meditar sobre la información recibida antes de pasar a la acción de tipo directo.",
+                    "b) Prefieren meditar sobre la información recibida antes de pasar a la acción de tipo técnico.",
+                    "c) Prefieren meditar sobre la información recibida antes de pasar a la acción de tipo práctico.",
+                    "d) Prefieren meditar sobre la información recibida antes de pasar a la acción de tipo formal."
+                ],
+                correct: 0,
+                retro: "Priorizan el análisis y la observación antes de intervenir. (Sáez, 2018, p. 24)."
+            },
+            {
+                q: "40. ¿Qué caracteriza a los alumnos 'Intuitivos'?",
+                options: [
+                    "a) Prefieren la innovación, las posibilidades y los principios de tipo abstracto en el saber.",
+                    "b) Prefieren la innovación, las posibilidades y los principios de tipo teórico en el saber.",
+                    "c) Prefieren la innovación, las posibilidades y los principios de tipo lógico en el saber.",
+                    "d) Prefieren la innovación, las posibilidades y los principios de tipo racional en el saber."
+                ],
+                correct: 0,
+                retro: "Se aburren con la repetición y buscan relaciones conceptuales complejas. (Sáez, 2018, p. 24)."
+            },
+            {
+                q: "41. ¿Cuál es el objetivo del nivel de 'Análisis' en la Taxonomía de Bloom?",
+                options: [
+                    "a) Dividir el material en sus partes componentes y detectar las relaciones de tipo interno.",
+                    "b) Dividir el material en sus partes componentes y detectar las relaciones de tipo lógico.",
+                    "c) Dividir el material en sus partes componentes y detectar las relaciones de tipo técnico.",
+                    "d) Dividir el material en sus partes componentes y detectar las relaciones de tipo racional."
+                ],
+                correct: 0,
+                retro: "Implica entender la estructura organizativa de la información. (Sáez, 2018, p. 21)."
+            },
+            {
+                q: "42. ¿En qué consiste el nivel de 'Aplicación' en la Taxonomía de Bloom?",
+                options: [
+                    "a) El uso de abstracciones en situaciones de tipo particular y de tipo concreto.",
+                    "b) El uso de abstracciones en situaciones de tipo particular y de tipo práctico.",
+                    "c) El uso de abstracciones en situaciones de tipo particular y de tipo técnico.",
+                    "d) El uso de abstracciones en situaciones de tipo particular y de tipo real."
+                ],
+                correct: 0,
+                retro: "Capacidad de transferir el conocimiento a nuevos contextos. (Sáez, 2018, p. 21)."
+            },
+            {
+                q: "43. ¿Qué define al maestro de tipo 'Conferencista' en la relación interpersonal?",
+                options: [
+                    "a) Posee un entusiasmo intelectual alto pero una relación interpersonal de tipo moderado.",
+                    "b) Posee un entusiasmo intelectual alto pero una relación interpersonal de tipo adecuado.",
+                    "c) Posee un entusiasmo intelectual alto pero una relación interpersonal de tipo marginal.",
+                    "d) Posee un entusiasmo intelectual alto pero una relación interpersonal de tipo limitado."
+                ],
+                correct: 0,
+                retro: "Domina el tema pero mantiene cierta distancia emocional con el grupo. (Sáez, 2018, p. 98)."
+            },
+            {
+                q: "44. ¿Cómo se califica a un maestro con Entusiasmo Bajo y Relación Baja?",
+                options: [
+                    "a) Se califica como maestro de tipo inadecuado; vago y aburrido en su desempeño docente.",
+                    "b) Se califica como maestro de tipo marginal; vago y aburrido en su desempeño docente.",
+                    "c) Se califica como maestro de tipo borroso; vago y aburrido en su desempeño docente.",
+                    "d) Se califica como maestro de tipo limitado; vago y aburrido en su desempeño docente."
+                ],
+                correct: 0,
+                retro: "La falta de interés y cercanía anulan el impacto educativo. (Sáez, 2018, p. 98)."
+            },
+            {
+                q: "45. ¿Qué es el 'Aprendizaje Programado' como método de enseñanza?",
+                options: [
+                    "a) Sistema en el que el material se presenta en pequeñas unidades con refuerzo de tipo inmediato.",
+                    "b) Sistema en el que el material se presenta en pequeñas unidades con refuerzo de tipo constante.",
+                    "c) Sistema en el que el material se presenta en pequeñas unidades con refuerzo de tipo directo.",
+                    "d) Sistema en el que el material se presenta en pequeñas unidades con refuerzo de tipo continuo."
+                ],
+                correct: 0,
+                retro: "Se basa en el condicionamiento operante para guiar al estudiante. (Sáez, 2018, p. 24)."
+            },
+            {
+                q: "46. ¿Qué función cumple la 'Retroalimentación' en los principios de enseñanza?",
+                options: [
+                    "a) Informar al alumno sobre sus aciertos y errores para guiar su proceso de tipo personal.",
+                    "b) Informar al alumno sobre sus aciertos y errores para guiar su proceso de tipo propio.",
+                    "c) Informar al alumno sobre sus aciertos y errores para guiar su proceso de tipo individual.",
+                    "d) Informar al alumno sobre sus aciertos y errores para guiar su proceso de tipo autónomo."
+                ],
+                correct: 0,
+                retro: "El feedback es vital para la corrección y mejora del aprendizaje. (Sáez, 2018, p. 79)."
+            },
+            {
+                q: "47. ¿Qué principio de enseñanza se refiere a proceder 'de lo simple a lo complejo'?",
+                options: [
+                    "a) Iniciar con los elementos básicos de la materia para integrar luego estructuras de tipo superior.",
+                    "b) Iniciar con los elementos básicos de la materia para integrar luego estructuras de tipo complejo.",
+                    "c) Iniciar con los elementos básicos de la materia para integrar luego estructuras de tipo difícil.",
+                    "d) Iniciar con los elementos básicos de la materia para integrar luego estructuras de tipo avanzado."
+                ],
+                correct: 0,
+                retro: "Evita la sobrecarga cognitiva inicial del estudiante. (Sáez, 2018, p. 79)."
+            },
+            {
+                q: "48. ¿A qué etapa del Puzle corresponde el 'Retorno al grupo original'?",
+                options: [
+                    "a) Los alumnos enseñan a sus compañeros de base la información recopilada en los grupos expertos.",
+                    "b) Los alumnos enseñan a sus compañeros de base la información recopilada en los grupos técnicos.",
+                    "c) Los alumnos enseñan a sus compañeros de base la información recopilada en los grupos directos.",
+                    "d) Los alumnos enseñan a sus compañeros de base la información recopilada en los grupos lógicos."
+                ],
+                correct: 0,
+                retro: "Es el momento donde se integra el conocimiento fragmentado en un todo. (Sáez, 2018, p. 44)."
+            },
+            {
+                q: "49. ¿Cómo se define el 'Aprendizaje por Imprinting'?",
+                options: [
+                    "a) Un tipo de aprendizaje rápido que ocurre en una fase crítica del desarrollo de tipo temprano.",
+                    "b) Un tipo de aprendizaje rápido que ocurre en una fase crítica del desarrollo de tipo infantil.",
+                    "c) Un tipo de aprendizaje rápido que ocurre en una fase crítica del desarrollo de tipo biológico.",
+                    "d) Un tipo de aprendizaje rápido que ocurre en una fase crítica del desarrollo de tipo inicial."
+                ],
+                correct: 0,
+                retro: "Se refiere a la impronta o fijación de conductas en etapas sensibles. (Sáez, 2018, p. 19)."
+            },
+            {
+                q: "50. ¿Qué significa proceder 'de lo real a lo representativo' en la enseñanza?",
+                options: [
+                    "a) Partir del contacto con objetos físicos antes de pasar a su sustitución por signos o palabras.",
+                    "b) Partir del contacto con objetos físicos antes de pasar a su sustitución por signos o imágenes.",
+                    "c) Partir del contacto con objetos físicos antes de pasar a su sustitución por signos o símbolos.",
+                    "d) Partir del contacto con objetos físicos antes de pasar a su sustitución por signos o figuras."
+                ],
+                correct: 0,
+                retro: "La abstracción requiere una base sólida en la experiencia física real. (Sáez, 2018, p. 79)."
+            }
+        ];
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

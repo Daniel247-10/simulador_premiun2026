@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurociencia y Neuroaprendizaje</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="header-content">
+            <div class="pc-doctor-title">PC DOCTOR</div>
+            <p class="welcome-elaborado">MATERIAL ELABORADO POR EL:</p>
+            <p class="welcome-profesor">Prof. Daniel Llanos</p>
+            <p class="welcome-celular">📱 Celular: 75136639</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="main-title">Neurociencia y Neuroaprendizaje en la Educación</h1>
+        <p class="subtitle">Cuestionario de Neurociencias y Neuroaprendizaje</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. ¿Qué concepto define la capacidad del cerebro para cambiar y adaptarse a través de la experiencia?",
+                options: [
+                    "a) La plasticidad cerebral; proceso mediante el cual las neuronas se reorganizan constantemente.",
+                    "b) La flexibilidad cerebral; proceso mediante el cual las neuronas se reorganizan constantemente.",
+                    "c) La elasticidad cerebral; proceso mediante el cual las neuronas se reorganizan constantemente.",
+                    "d) La porosidad cerebral; proceso mediante el cual las neuronas se reorganizan constantemente."
+                ],
+                correct: 0,
+                retro: "La plasticidad es la base biológica que permite el aprendizaje a lo largo de toda la vida [1]."
+            },
+            {
+                q: "2. Según la neurociencia, ¿cuál es el papel fundamental de las emociones en el aprendizaje?",
+                options: [
+                    "a) Las emociones actúan como un filtro que determina qué información se procesa y se recuerda.",
+                    "b) Las emociones actúan como un canal que determina qué información se procesa y se recuerda.",
+                    "c) Las emociones actúan como un puente que determina qué información se procesa y se recuerda.",
+                    "d) Las emociones actúan como un imán que determina qué información se procesa y se recuerda."
+                ],
+                correct: 0,
+                retro: "El binomio emoción-cognición es indisoluble; sin emoción no hay aprendizaje significativo [1, 3]."
+            },
+            {
+                q: "3. ¿Qué neuronas se activan tanto al realizar una acción como al observar a otro realizarla?",
+                options: [
+                    "a) Las neuronas espejo; fundamentales para la empatía, la imitación y el aprendizaje social.",
+                    "b) Las neuronas reflejo; fundamentales para la empatía, la imitación y el aprendizaje social.",
+                    "c) Las neuronas motoras; fundamentales para la empatía, la imitación y el aprendizaje social.",
+                    "d) Las neuronas visuales; fundamentales para la empatía, la imitación y el aprendizaje social."
+                ],
+                correct: 0,
+                retro: "Las neuronas espejo permiten comprender las intenciones y acciones de los demás [1, 2]."
+            },
+            {
+                q: "4. ¿Cuál es la función principal de la dopamina en el proceso de aprendizaje?",
+                options: [
+                    "a) Actúa como un neurotransmisor clave en el sistema de recompensa y la motivación intrínseca.",
+                    "b) Actúa como un neurotransmisor clave en el sistema de relajación y la motivación intrínseca.",
+                    "c) Actúa como un neurotransmisor clave en el sistema de atención y la motivación intrínseca.",
+                    "d) Actúa como un neurotransmisor clave en el sistema de memoria y la motivación intrínseca."
+                ],
+                correct: 0,
+                retro: "La dopamina se libera ante la novedad y el logro, reforzando la conducta de aprender [1]."
+            },
+            {
+                q: "5. ¿Qué área del cerebro es responsable de las funciones ejecutivas como la toma de decisiones?",
+                options: [
+                    "a) La corteza prefrontal; encargada de la planificación, el control y la autorregulación ética.",
+                    "b) La corteza occipital; encargada de la planificación, el control y la autorregulación ética.",
+                    "c) La corteza parietal; encargada de la planificación, el control y la autorregulación ética.",
+                    "d) La corteza temporal; encargada de la planificación, el control y la autorregulación ética."
+                ],
+                correct: 0,
+                retro: "La corteza prefrontal es la última en madurar y coordina el comportamiento complejo [1, 3]."
+            },
+            {
+                q: "6. ¿Por qué el sueño es crítico para la consolidación del aprendizaje según las fuentes?",
+                options: [
+                    "a) Durante el sueño el cerebro procesa, organiza y almacena la información adquirida en el día.",
+                    "b) Durante el sueño el cerebro descansa, organiza y almacena la información adquirida en el día.",
+                    "c) Durante el sueño el cerebro limpia, organiza y almacena la información adquirida en el día.",
+                    "d) Durante el sueño el cerebro apaga, organiza y almacena la información adquirida en el día."
+                ],
+                correct: 0,
+                retro: "La falta de sueño afecta negativamente la memoria a largo plazo y la atención [1, 2]."
+            },
+            {
+                q: "7. ¿Qué se entiende por 'ventanas de oportunidad' o periodos críticos en el desarrollo?",
+                options: [
+                    "a) Momentos del desarrollo donde el cerebro es especialmente sensible a ciertos estímulos externos.",
+                    "b) Momentos del desarrollo donde el cerebro es especialmente inmune a ciertos estímulos externos.",
+                    "c) Momentos del desarrollo donde el cerebro es especialmente reactivo a ciertos estímulos externos.",
+                    "d) Momentos del desarrollo donde el cerebro es especialmente pasivo a ciertos estímulos externos."
+                ],
+                correct: 0,
+                retro: "Existen etapas óptimas para la adquisición del lenguaje y habilidades sensoriales [1, 3]."
+            },
+            {
+                q: "8. ¿Cuál es el impacto del estrés crónico (cortisol) en el hipocampo?",
+                options: [
+                    "a) Los niveles altos de cortisol pueden dañar las neuronas del hipocampo, dificultando la memoria.",
+                    "b) Los niveles altos de cortisol pueden activar las neuronas del hipocampo, dificultando la memoria.",
+                    "c) Los niveles altos de cortisol pueden nutrir las neuronas del hipocampo, dificultando la memoria.",
+                    "d) Los niveles altos de cortisol pueden aislar las neuronas del hipocampo, dificultando la memoria."
+                ],
+                correct: 0,
+                retro: "El estrés persistente bloquea el acceso a la memoria y anula la creatividad [1]."
+            },
+            {
+                q: "9. ¿Qué técnica pedagógica favorece la atención basándose en los ciclos cerebrales?",
+                options: [
+                    "a) Realizar pausas activas o cambios de ritmo cada quince o veinte minutos durante la clase.",
+                    "b) Realizar pausas activas o cambios de ritmo cada treinta o cuarenta minutos durante la clase.",
+                    "c) Realizar pausas activas o cambios de ritmo cada sesenta o setenta minutos durante la clase.",
+                    "d) Realizar pausas activas o cambios de ritmo cada cinco o diez minutos durante la clase."
+                ],
+                correct: 0,
+                retro: "La atención sostenida tiene límites temporales que deben respetarse en el aula [1, 2]."
+            },
+            {
+                q: "10. ¿Cómo influye el ejercicio físico en la neurogénesis según el texto?",
+                options: [
+                    "a) Aumenta la producción de BDNF, una proteína que promueve el crecimiento de nuevas neuronas.",
+                    "b) Aumenta la producción de BDNF, una proteína que promueve la muerte de nuevas neuronas.",
+                    "c) Aumenta la producción de BDNF, una proteína que promueve el reposo de nuevas neuronas.",
+                    "d) Aumenta la producción de BDNF, una proteína que promueve la división de nuevas neuronas."
+                ],
+                correct: 0,
+                retro: "El movimiento mejora la oxigenación cerebral y la salud cognitiva general [1, 3]."
+            },
+            {
+                q: "11. ¿Qué es la 'sinaptogénesis' en el contexto del aprendizaje infantil?",
+                options: [
+                    "a) La formación de nuevas conexiones entre neuronas como respuesta a estímulos y experiencias.",
+                    "b) La formación de nuevas neuronas como respuesta a estímulos y experiencias de tipo directo.",
+                    "c) La formación de nuevas señales entre neuronas como respuesta a estímulos y experiencias.",
+                    "d) La formación de nuevas capas entre neuronas como respuesta a estímulos y experiencias."
+                ],
+                correct: 0,
+                retro: "Cada nuevo aprendizaje modifica físicamente la estructura del cerebro [1, 2]."
+            },
+            {
+                q: "12. ¿Qué hemisferio cerebral se asocia tradicionalmente con el procesamiento lógico y analítico?",
+                options: [
+                    "a) El hemisferio izquierdo; encargado de funciones como el lenguaje, la lógica y las matemáticas.",
+                    "b) El hemisferio derecho; encargado de funciones como el lenguaje, la lógica y las matemáticas.",
+                    "c) El hemisferio frontal; encargado de funciones como el lenguaje, la lógica y las matemáticas.",
+                    "d) El hemisferio central; encargado de funciones como el lenguaje, la lógica y las matemáticas."
+                ],
+                correct: 0,
+                retro: "Aunque ambos trabajan integrados, el izquierdo domina el procesamiento secuencial [1, 3]."
+            },
+            {
+                q: "13. ¿Qué función cumple la amígdala en el cerebro emocional?",
+                options: [
+                    "a) Evalúa los estímulos ambientales para detectar posibles amenazas o beneficios emocionales.",
+                    "b) Evalúa los estímulos ambientales para detectar posibles fallos o beneficios emocionales.",
+                    "c) Evalúa los estímulos ambientales para detectar posibles ruidos o beneficios emocionales.",
+                    "d) Evalúa los estímulos ambientales para detectar posibles cambios o beneficios emocionales."
+                ],
+                correct: 0,
+                retro: "La amígdala es el centro de procesamiento del miedo y la memoria emocional [1, 2]."
+            },
+            {
+                q: "14. ¿Qué es el 'aprendizaje multisensorial' desde la neurociencia?",
+                options: [
+                    "a) Involucrar varios sentidos simultáneamente para crear huellas de memoria más fuertes.",
+                    "b) Involucrar varios sentidos secuencialmente para crear huellas de memoria más fuertes.",
+                    "c) Involucrar varios sentidos opcionalmente para crear huellas de memoria más fuertes.",
+                    "d) Involucrar varios sentidos alternadamente para crear huellas de memoria más fuertes."
+                ],
+                correct: 0,
+                retro: "La redundancia sensorial facilita la recuperación de la información almacenada [1, 3]."
+            },
+            {
+                q: "15. ¿A qué se refiere la 'poda sináptica' durante la adolescencia?",
+                options: [
+                    "a) Eliminación de conexiones neuronales poco utilizadas para mejorar la eficiencia del cerebro.",
+                    "b) Eliminación de neuronas completas poco utilizadas para mejorar la eficiencia del cerebro.",
+                    "c) Eliminación de neurotransmisores poco utilizados para mejorar la eficiencia del cerebro.",
+                    "d) Eliminación de impulsos eléctricos poco utilizados para mejorar la eficiencia del cerebro."
+                ],
+                correct: 0,
+                retro: "Es un proceso de refinamiento estructural para la madurez cognitiva [1, 2]."
+            },
+            {
+                q: "16. ¿Qué papel juega la curiosidad en el proceso de atención?",
+                options: [
+                    "a) Dispara la liberación de dopamina y enfoca los recursos cognitivos hacia el nuevo estímulo.",
+                    "b) Dispara la liberación de dopamina y enfoca los recursos cognitivos hacia el nuevo concepto.",
+                    "c) Dispara la liberación de dopamina y enfoca los recursos cognitivos hacia el nuevo objeto.",
+                    "d) Dispara la liberación de dopamina y enfoca los recursos cognitivos hacia el nuevo tema."
+                ],
+                correct: 0,
+                retro: "La novedad es uno de los mejores ganchos para captar la atención del alumno [1, 3]."
+            },
+            {
+                q: "17. ¿Cómo afecta la deshidratación al rendimiento cerebral según las fuentes?",
+                options: [
+                    "a) Reduce la capacidad de concentración, la memoria de corto plazo y el tiempo de reacción.",
+                    "b) Reduce la capacidad de concentración, la memoria de corto plazo y el tiempo de reflexión.",
+                    "c) Reduce la capacidad de concentración, la memoria de corto plazo y el tiempo de respuesta.",
+                    "d) Reduce la capacidad de concentración, la memoria de corto plazo y el tiempo de razonamiento."
+                ],
+                correct: 0,
+                retro: "El cerebro requiere una hidratación óptima para mantener la sinapsis eficiente [2]."
+            },
+            {
+                q: "18. ¿Qué es la 'metacognición' en términos de neuroaprendizaje?",
+                options: [
+                    "a) La capacidad de ser conscientes de nuestros propios procesos de pensamiento y aprendizaje.",
+                    "b) La capacidad de ser conscientes de nuestros propios procesos de conducta y aprendizaje.",
+                    "c) La capacidad de ser conscientes de nuestros propios procesos de memoria y aprendizaje.",
+                    "d) La capacidad de ser conscientes de nuestros propios procesos de atención y aprendizaje."
+                ],
+                correct: 0,
+                retro: "Fomenta la autonomía y la autorregulación del estudiante ante tareas complejas [3]."
+            },
+            {
+                q: "19. ¿Cuál es el efecto de la música en el aprendizaje de idiomas?",
+                options: [
+                    "a) Mejora la retención de vocabulario y la pronunciación al activar áreas auditivas y rítmicas.",
+                    "b) Mejora la retención de vocabulario y la pronunciación al activar áreas motoras y rítmicas.",
+                    "c) Mejora la retención de vocabulario y la pronunciación al activar áreas visuales y rítmicas.",
+                    "d) Mejora la retención de vocabulario y la pronunciación al activar áreas lógicas y rítmicas."
+                ],
+                correct: 0,
+                retro: "El ritmo y la melodía facilitan la memorización de estructuras lingüísticas [1, 2]."
+            },
+            {
+                q: "20. ¿Qué se recomienda para evitar la fatiga mental en una jornada larga?",
+                options: [
+                    "a) Alternar tareas que requieran alta concentración con actividades creativas o de movimiento.",
+                    "b) Alternar tareas que requieran alta concentración con actividades técnicas o de movimiento.",
+                    "c) Alternar tareas que requieran alta concentración con actividades lógicas o de movimiento.",
+                    "d) Alternar tareas que requieran alta concentración con actividades directas o de movimiento."
+                ],
+                correct: 0,
+                retro: "El cerebro no puede mantener el foco máximo durante periodos prolongados sin descanso [1, 3]."
+            },
+            {
+                q: "21. ¿Qué es el 'aprendizaje invertido' (Flipped Classroom) desde la neurociencia?",
+                options: [
+                    "a) Optimiza el tiempo de clase para el diálogo y la aplicación, reduciendo la carga pasiva.",
+                    "b) Optimiza el tiempo de clase para el diálogo y la aplicación, reduciendo la carga técnica.",
+                    "c) Optimiza el tiempo de clase para el diálogo y la aplicación, reduciendo la carga lógica.",
+                    "d) Optimiza el tiempo de clase para el diálogo y la aplicación, reduciendo la carga activa."
+                ],
+                correct: 0,
+                retro: "Promueve un rol activo del estudiante, esencial para la plasticidad sináptica [3]."
+            },
+            {
+                q: "22. ¿Cómo influye el ambiente físico (luz, aire) en el cerebro del estudiante?",
+                options: [
+                    "a) Una buena iluminación y ventilación reducen el estrés y mejoran los niveles de atención.",
+                    "b) Una buena iluminación y ventilación reducen el estrés y mejoran los niveles de memoria.",
+                    "c) Una buena iluminación y ventilación reducen el estrés y mejoran los niveles de energía.",
+                    "d) Una buena iluminación y ventilación reducen el estrés y mejoran los niveles de enfoque."
+                ],
+                correct: 0,
+                retro: "Factores externos condicionan la predisposición biológica para el estudio [1, 2]."
+            },
+            {
+                q: "23. ¿Qué importancia tiene el juego en el neuroaprendizaje de adultos?",
+                options: [
+                    "a) Mantiene la neuroplasticidad y reduce la ansiedad asociada al error o al fracaso académico.",
+                    "b) Mantiene la neuroplasticidad y reduce la ansiedad asociada al error o al fracaso profesional.",
+                    "c) Mantiene la neuroplasticidad y reduce la ansiedad asociada al error o al fracaso intelectual.",
+                    "d) Mantiene la neuroplasticidad y reduce la ansiedad asociada al error o al fracaso formativo."
+                ],
+                correct: 0,
+                retro: "La gamificación activa circuitos dopaminérgicos de placer y aprendizaje [1]."
+            },
+            {
+                q: "24. ¿Qué es la 'ceguera atencional' según los estudios presentados?",
+                options: [
+                    "a) La incapacidad de notar estímulos inesperados cuando la atención está enfocada en otra tarea.",
+                    "b) La incapacidad de notar estímulos inesperados cuando la atención está enfocada en otro objeto.",
+                    "c) La incapacidad de notar estímulos inesperados cuando la atención está enfocada en otro punto.",
+                    "d) La incapacidad de notar estímulos inesperados cuando la atención está enfocada en otro tema."
+                ],
+                correct: 0,
+                retro: "Demuestra que la atención es un recurso finito y altamente selectivo [1, 2]."
+            },
+            {
+                q: "25. ¿Cuál es el impacto de la retroalimentación positiva en el hipocampo?",
+                options: [
+                    "a) Fortalece las vías neuronales del aprendizaje al asociarlo con una sensación de competencia.",
+                    "b) Fortalece las vías neuronales del aprendizaje al asociarlo con una sensación de pertenencia.",
+                    "c) Fortalece las vías neuronales del aprendizaje al asociarlo con una sensación de seguridad.",
+                    "d) Fortalece las vías neuronales del aprendizaje al asociarlo con una sensación de confianza."
+                ],
+                correct: 0,
+                retro: "El reconocimiento social es un reforzador biológico potente para la memoria [1, 3]."
+            },
+            {
+                q: "26. ¿Qué función cumple el cerebelo más allá del equilibrio físico?",
+                options: [
+                    "a) Participa en la automatización de procesos cognitivos y en la coordinación del pensamiento.",
+                    "b) Participa en la automatización de procesos cognitivos y en la coordinación del movimiento.",
+                    "c) Participa en la automatización de procesos cognitivos y en la coordinación del aprendizaje.",
+                    "d) Participa en la automatización de procesos cognitivos y en la coordinación del razonamiento."
+                ],
+                correct: 0,
+                retro: "Es clave para la fluidez en tareas motoras y mentales complejas [1, 2]."
+            },
+            {
+                q: "27. ¿Por qué se debe evitar el 'multitasking' o multitarea en el estudio?",
+                options: [
+                    "a) Dividir la atención entre varias tareas reduce la calidad y aumenta el tiempo de ejecución.",
+                    "b) Dividir la atención entre varias tareas reduce la calidad y aumenta el tiempo de respuesta.",
+                    "c) Dividir la atención entre varias tareas reduce la calidad y aumenta el tiempo de reflexión.",
+                    "d) Dividir la atención entre varias tareas reduce la calidad y aumenta el tiempo de reacción."
+                ],
+                correct: 0,
+                retro: "El cerebro no procesa en paralelo, sino que salta de un foco a otro ineficientemente [1, 3]."
+            },
+            {
+                q: "28. ¿Qué es el 'efecto de primacía' en una lección de clase?",
+                options: [
+                    "a) Tendencia a recordar mejor la información presentada al inicio de una sesión de aprendizaje.",
+                    "b) Tendencia a recordar mejor la información presentada al inicio de una sesión de instrucción.",
+                    "c) Tendencia a recordar mejor la información presentada al inicio de una sesión de enseñanza.",
+                    "d) Tendencia a recordar mejor la información presentada al inicio de una sesión de formación."
+                ],
+                correct: 0,
+                retro: "Los primeros minutos son de oro para los conceptos fundamentales [2, 3]."
+            },
+            {
+                q: "29. ¿Qué es el 'efecto de recencia' en la memoria?",
+                options: [
+                    "a) Tendencia a recordar con mayor facilidad los últimos datos recibidos en un periodo dado.",
+                    "b) Tendencia a recordar con mayor facilidad los últimos datos recibidos en un periodo técnico.",
+                    "c) Tendencia a recordar con mayor facilidad los últimos datos recibidos en un periodo directo.",
+                    "d) Tendencia a recordar con mayor facilidad los últimos datos recibidos en un periodo lógico."
+                ],
+                correct: 0,
+                retro: "El cierre de la sesión es el segundo momento de mayor retención [2, 3]."
+            },
+            {
+                q: "30. ¿Cómo influye la dieta (ej. Omega 3) en las membranas neuronales?",
+                options: [
+                    "a) Mejora la fluidez de las membranas, facilitando la comunicación química entre las neuronas.",
+                    "b) Mejora la fluidez de las membranas, facilitando la comunicación física entre las neuronas.",
+                    "c) Mejora la fluidez de las membranas, facilitando la comunicación directa entre las neuronas.",
+                    "d) Mejora la fluidez de las membranas, facilitando la comunicación técnica entre las neuronas."
+                ],
+                correct: 0,
+                retro: "La nutrición es el soporte biológico de la actividad electroquímica cerebral [1, 2]."
+            },
+            {
+                q: "31. ¿Qué es la 'neuroética' en el ámbito de la educación?",
+                options: [
+                    "a) Reflexión sobre las implicaciones morales de aplicar los conocimientos sobre el cerebro.",
+                    "b) Reflexión sobre las implicaciones legales de aplicar los conocimientos sobre el cerebro.",
+                    "c) Reflexión sobre las implicaciones técnicas de aplicar los conocimientos sobre el cerebro.",
+                    "d) Reflexión sobre las implicaciones sociales de aplicar los conocimientos sobre el cerebro."
+                ],
+                correct: 0,
+                retro: "Busca proteger la integridad y privacidad del proceso mental del alumno [1]."
+            },
+            {
+                q: "32. ¿Qué relación hay entre el arte y la plasticidad cerebral?",
+                options: [
+                    "a) Las actividades artísticas integran procesos motores, emocionales y cognitivos complejos.",
+                    "b) Las actividades artísticas integran procesos motores, emocionales y cognitivos variados.",
+                    "c) Las actividades artísticas integran procesos motores, emocionales y cognitivos diversos.",
+                    "d) Las actividades artísticas integran procesos motores, emocionales y cognitivos múltiples."
+                ],
+                correct: 0,
+                retro: "El arte estimula la conectividad entre diferentes regiones del cerebro [1, 2]."
+            },
+            {
+                q: "33. ¿Qué es el 'síndrome del impostor' desde la neurociencia emocional?",
+                options: [
+                    "a) Una distorsión de la autopercepción ligada a altos niveles de ansiedad y estrés social.",
+                    "b) Una distorsión de la autopercepción ligada a altos niveles de ansiedad y estrés docente.",
+                    "c) Una distorsión de la autopercepción ligada a altos niveles de ansiedad y estrés académico.",
+                    "d) Una distorsión de la autopercepción ligada a altos niveles de ansiedad y estrés mental."
+                ],
+                correct: 0,
+                retro: "Afecta la autoconfianza y la liberación de neurotransmisores del bienestar [1]."
+            },
+            {
+                q: "34. ¿Cómo ayuda la visualización o ensayo mental en el aprendizaje motor?",
+                options: [
+                    "a) Activa las mismas áreas cerebrales que la ejecución real, fortaleciendo el circuito motor.",
+                    "b) Activa las mismas áreas cerebrales que la ejecución real, fortaleciendo el circuito técnico.",
+                    "c) Activa las mismas áreas cerebrales que la ejecución real, fortaleciendo el circuito físico.",
+                    "d) Activa las mismas áreas cerebrales que la ejecución real, fortaleciendo el circuito directo."
+                ],
+                correct: 0,
+                retro: "El cerebro no distingue radicalmente entre imaginación y realidad percibida [1, 3]."
+            },
+            {
+                q: "35. ¿Qué es el 'aprendizaje basado en problemas' (ABP) para el cerebro?",
+                options: [
+                    "a) Activa la curiosidad y la búsqueda de soluciones, estimulando el pensamiento crítico.",
+                    "b) Activa la curiosidad y la búsqueda de soluciones, estimulando el pensamiento lógico.",
+                    "c) Activa la curiosidad y la búsqueda de soluciones, estimulando el pensamiento técnico.",
+                    "d) Activa la curiosidad y la búsqueda de soluciones, estimulando el pensamiento racional."
+                ],
+                correct: 0,
+                retro: "El reto intelectual favorece la formación de redes neuronales robustas [3]."
+            },
+            {
+                q: "36. ¿Qué impacto tiene la meditación o 'mindfulness' en la corteza prefrontal?",
+                options: [
+                    "a) Aumenta el grosor cortical en áreas relacionadas con el control emocional y la atención.",
+                    "b) Aumenta el grosor cortical en áreas relacionadas con el control emocional y la memoria.",
+                    "c) Aumenta el grosor cortical en áreas relacionadas con el control emocional y la lógica.",
+                    "d) Aumenta el grosor cortical en áreas relacionadas con el control emocional y la técnica."
+                ],
+                correct: 0,
+                retro: "Entrenar la mente modifica físicamente la estructura del cerebro ejecutivo [1, 2]."
+            },
+            {
+                q: "37. ¿Qué es la 'mielinización' y cómo afecta al aprendizaje?",
+                options: [
+                    "a) Recubrimiento de los axones que aumenta la velocidad de transmisión de los impulsos nerviosos.",
+                    "b) Recubrimiento de las neuronas que aumenta la velocidad de transmisión de los impulsos nerviosos.",
+                    "c) Recubrimiento de las sinapsis que aumenta la velocidad de transmisión de los impulsos nerviosos.",
+                    "d) Recubrimiento de los núcleos que aumenta la velocidad de transmisión de los impulsos nerviosos."
+                ],
+                correct: 0,
+                retro: "A mayor mielina, mayor rapidez y eficiencia en el procesamiento de información [1]."
+            },
+            {
+                q: "38. ¿Qué papel juega la oxitocina en el aprendizaje cooperativo?",
+                options: [
+                    "a) Promueve el vínculo social, la confianza y la colaboración entre los miembros del grupo.",
+                    "b) Promueve el vínculo social, la confianza y la colaboración entre los miembros del centro.",
+                    "c) Promueve el vínculo social, la confianza y la colaboración entre los miembros del equipo.",
+                    "d) Promueve el vínculo social, la confianza y la colaboración entre los miembros del aula."
+                ],
+                correct: 0,
+                retro: "El bienestar social facilita un entorno seguro para aprender sin miedo [1, 3]."
+            },
+            {
+                q: "39. ¿Qué es un 'neuromito' según la comunidad científica?",
+                options: [
+                    "a) Una idea falsa o distorsionada sobre el cerebro que se propaga en entornos educativos.",
+                    "b) Una idea falsa o distorsionada sobre el cerebro que se propaga en entornos académicos.",
+                    "c) Una idea falsa o distorsionada sobre el cerebro que se propaga en entornos técnicos.",
+                    "d) Una idea falsa o distorsionada sobre el cerebro que se propaga en entornos sociales."
+                ],
+                correct: 0,
+                retro: "Ejemplos: el uso del 10% del cerebro o los estilos auditivos/visuales rígidos [1, 2]."
+            },
+            {
+                q: "40. ¿Cómo influye el bilingüismo en la reserva cognitiva?",
+                options: [
+                    "a) Aumenta la flexibilidad mental y retrasa la aparición de síntomas de deterioro cognitivo.",
+                    "b) Aumenta la flexibilidad mental y retrasa la aparición de síntomas de deterioro técnico.",
+                    "c) Aumenta la flexibilidad mental y retrasa la aparición de síntomas de deterioro físico.",
+                    "d) Aumenta la flexibilidad mental y retrasa la aparición de síntomas de deterioro mental."
+                ],
+                correct: 0,
+                retro: "Cambiar de código lingüístico entrena las funciones ejecutivas del cerebro [1]."
+            },
+            {
+                q: "41. ¿Qué es la 'transferencia' del aprendizaje en neuroeducación?",
+                options: [
+                    "a) Capacidad de aplicar conocimientos aprendidos en un contexto a una situación totalmente nueva.",
+                    "b) Capacidad de aplicar conocimientos aprendidos en un contexto a una situación totalmente técnica.",
+                    "c) Capacidad de aplicar conocimientos aprendidos en un contexto a una situación totalmente directa.",
+                    "d) Capacidad de aplicar conocimientos aprendidos en un contexto a una situación totalmente lógica."
+                ],
+                correct: 0,
+                retro: "Es el objetivo final de la educación: que el saber sea útil fuera de la escuela [3]."
+            },
+            {
+                q: "42. ¿Qué importancia tiene el error en el proceso de neuroaprendizaje?",
+                options: [
+                    "a) Es una señal de ajuste necesaria para que el cerebro recalibre sus predicciones y mejore.",
+                    "b) Es una señal de ajuste necesaria para que el cerebro recalibre sus respuestas y mejore.",
+                    "c) Es una señal de ajuste necesaria para que el cerebro recalibre sus esquemas y mejore.",
+                    "d) Es una señal de ajuste necesaria para que el cerebro recalibre sus lógicas y mejore."
+                ],
+                correct: 0,
+                retro: "Aprender de los errores fortalece las redes de corrección prefrontales [1, 2]."
+            },
+            {
+                q: "43. ¿Qué es el 'clima emocional' del aula desde la neurociencia?",
+                options: [
+                    "a) El conjunto de percepciones y sentimientos compartidos que facilitan o bloquean el saber.",
+                    "b) El conjunto de percepciones y sentimientos compartidos que facilitan o bloquean la técnica.",
+                    "c) El conjunto de percepciones y sentimientos compartidos que facilitan o bloquean el orden.",
+                    "d) El conjunto de percepciones y sentimientos compartidos que facilitan o bloquean el plan."
+                ],
+                correct: 0,
+                retro: "Un clima de amenaza bloquea el hipocampo y activa respuestas de supervivencia [1, 3]."
+            },
+            {
+                q: "44. ¿Cómo afecta el uso excesivo de pantallas al cerebro infantil?",
+                options: [
+                    "a) Puede alterar los ciclos de sueño y reducir los periodos de atención profunda y reflexión.",
+                    "b) Puede alterar los ciclos de sueño y reducir los periodos de atención profunda y lógica.",
+                    "c) Puede alterar los ciclos de sueño y reducir los periodos de atención profunda y técnica.",
+                    "d) Puede alterar los ciclos de sueño y reducir los periodos de atención profunda y respuesta."
+                ],
+                correct: 0,
+                retro: "La luz azul inhibe la melatonina y la sobreestimulación afecta el foco [2]."
+            },
+            {
+                q: "45. ¿Qué es la 'atención selectiva' en el aula?",
+                options: [
+                    "a) Habilidad para centrarse en un estímulo relevante ignorando las distracciones del entorno.",
+                    "b) Habilidad para centrarse en un estímulo relevante ignorando las distracciones del distrito.",
+                    "c) Habilidad para centrarse en un estímulo relevante ignorando las distracciones del departamento.",
+                    "d) Habilidad para centrarse en un estímulo relevante ignorando las distracciones del grupo."
+                ],
+                correct: 0,
+                retro: "Es fundamental para filtrar el ruido y procesar la información clave [1, 3]."
+            },
+            {
+                q: "46. ¿Qué relación hay entre la risa y el aprendizaje?",
+                options: [
+                    "a) Reduce el cortisol y libera endorfinas, creando un estado de receptividad cognitiva ideal.",
+                    "b) Reduce el cortisol y libera endorfinas, creando un estado de receptividad técnica ideal.",
+                    "c) Reduce el cortisol y libera endorfinas, creando un estado de receptividad lógica ideal.",
+                    "d) Reduce el cortisol y libera endorfinas, creando un estado de receptividad directa ideal."
+                ],
+                correct: 0,
+                retro: "El humor relaja la tensión y favorece la retención de los contenidos [1, 2]."
+            },
+            {
+                q: "47. ¿Qué es el 'periodo de latencia' tras un aprendizaje nuevo?",
+                options: [
+                    "a) Tiempo necesario para que la información se asiente antes de recibir nuevos datos.",
+                    "b) Tiempo necesario para que la información se asiente antes de recibir nuevos temas.",
+                    "c) Tiempo necesario para que la información se asiente antes de recibir nuevos planes.",
+                    "d) Tiempo necesario para que la información se asiente antes de recibir nuevos retos."
+                ],
+                correct: 0,
+                retro: "Saturar al alumno impide la consolidación efectiva de las sinapsis [1, 3]."
+            },
+            {
+                q: "48. ¿Cómo influye la postura física en el estado mental del estudiante?",
+                options: [
+                    "a) Posturas abiertas y erguidas pueden aumentar la confianza y los niveles de energía.",
+                    "b) Posturas abiertas y erguidas pueden aumentar la confianza y los niveles de memoria.",
+                    "c) Posturas abiertas y erguidas pueden aumentar la confianza y los niveles de enfoque.",
+                    "d) Posturas abiertas y erguidas pueden aumentar la confianza y los niveles de atención."
+                ],
+                correct: 0,
+                retro: "Existe una comunicación bidireccional entre el cuerpo y el cerebro (encarnación) [1]."
+            },
+            {
+                q: "49. ¿Qué es la 'estimulación temprana' desde la neurociencia?",
+                options: [
+                    "a) Proporcionar un ambiente rico en experiencias para potenciar el desarrollo sináptico inicial.",
+                    "b) Proporcionar un ambiente rico en experiencias para potenciar el desarrollo sináptico infantil.",
+                    "c) Proporcionar un ambiente rico en experiencias para potenciar el desarrollo sináptico biológico.",
+                    "d) Proporcionar un ambiente rico en experiencias para potenciar el desarrollo sináptico cerebral."
+                ],
+                correct: 0,
+                retro: "Aprovecha los periodos de máxima plasticidad en los primeros años de vida [1, 2]."
+            },
+            {
+                q: "50. ¿Cuál es la conclusión principal de la neuroeducación para el docente 2026?",
+                options: [
+                    "a) Entender el cerebro permite diseñar estrategias que respeten la naturaleza humana de aprender.",
+                    "b) Entender el cerebro permite diseñar estrategias que respeten la naturaleza técnica de aprender.",
+                    "c) Entender el cerebro permite diseñar estrategias que respeten la naturaleza lógica de aprender.",
+                    "d) Entender el cerebro permite diseñar estrategias que respeten la naturaleza directa de aprender."
+                ],
+                correct: 0,
+                retro: "La pedagogía basada en evidencia científica es el futuro de la educación inclusiva [1, 3]."
+            }
+        ];
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>

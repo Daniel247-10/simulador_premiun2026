@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Resolución de Problemas (UNICEF/SEP)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <div class="header-content">
+            <div class="pc-doctor-title">PC DOCTOR</div>
+            <p class="welcome-elaborado">MATERIAL ELABORADO POR EL:</p>
+            <p class="welcome-profesor">Prof. Daniel Llanos</p>
+            <p class="welcome-celular">📱 Celular: 75136639</p>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="main-title">Manual de Resolución de Problemas (UNICEF/SEP)</h1>
+        <p class="subtitle">Cuestionario de Resolución de Problemas</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "1. ¿Cómo se define técnicamente la resolución de problemas según el manual?",
+                options: [
+                    "a) Capacidad de identificar una dificultad y tomar medidas lógicas para encontrar una solución.",
+                    "b) Capacidad de identificar una dificultad y tomar medidas técnicas para encontrar una solución.",
+                    "c) Capacidad de identificar una dificultad y tomar medidas sociales para encontrar una solución.",
+                    "d) Capacidad de identificar una dificultad y tomar medidas directas para encontrar una solución."
+                ],
+                correct: 0,
+                retro: "Incluye además la supervisión y evaluación de su implementación. [1]"
+            },
+            {
+                q: "2. ¿En qué marco global de habilidades se basa este manual según la introducción?",
+                options: [
+                    "a) En las 12 habilidades del Marco Global de Habilidades Transferibles de UNICEF.",
+                    "b) En las 12 habilidades del Marco Global de Habilidades Técnicas de UNICEF.",
+                    "c) En las 12 habilidades del Marco Global de Habilidades Lógicas de UNICEF.",
+                    "d) En las 12 habilidades del Marco Global de Habilidades Sociales de UNICEF."
+                ],
+                correct: 0,
+                retro: "Este marco está alineado con el ODS4 de educación de calidad. [2, 3]"
+            },
+            {
+                q: "3. ¿Qué habilidades incluye la 'Dimensión Cognitiva' dentro del marco de UNICEF?",
+                options: [
+                    "a) Creatividad, pensamiento crítico y resolución de problemas de tipo cognitivo.",
+                    "b) Creatividad, pensamiento crítico y resolución de problemas de tipo técnico.",
+                    "c) Creatividad, pensamiento crítico y resolución de problemas de tipo directo.",
+                    "d) Creatividad, pensamiento crítico y resolución de problemas de tipo social."
+                ],
+                correct: 0,
+                retro: "Se consideran habilidades fundamentales para el aprendizaje. [3]"
+            },
+            {
+                q: "4. ¿Qué habilidades se agrupan en la 'Dimensión Instrumental'?",
+                options: [
+                    "a) Cooperación, negociación y toma de decisiones para la resolución de conflictos.",
+                    "b) Cooperación, negociación y toma de decisiones para la gestión de proyectos.",
+                    "c) Cooperación, negociación y toma de decisiones para la técnica de procesos.",
+                    "d) Cooperación, negociación y toma de decisiones para la norma de conductas."
+                ],
+                correct: 0,
+                retro: "Son herramientas para la interacción y el logro de objetivos. [3]"
+            },
+            {
+                q: "5. ¿Qué comprende la 'Dimensión Individual' de las habilidades transferibles?",
+                options: [
+                    "a) Manejo de emociones, resiliencia y comunicación efectiva con otras personas.",
+                    "b) Manejo de emociones, resiliencia y gestión técnica con otras personas.",
+                    "c) Manejo de emociones, resiliencia y lógica directa con otras personas.",
+                    "d) Manejo de emociones, resiliencia y revisión social con otras personas."
+                ],
+                correct: 0,
+                retro: "Se enfoca en el desarrollo de capacidades personales internas. [3, 4]"
+            },
+            {
+                q: "6. ¿Qué habilidades se destacan en la 'Dimensión Social' según el manual?",
+                options: [
+                    "a) Respeto por la diversidad, empatía y participación ciudadana de tipo activa.",
+                    "b) Respeto por la diversidad, empatía y participación ciudadana de tipo técnica.",
+                    "c) Respeto por la diversidad, empatía y participación ciudadana de tipo lógica.",
+                    "d) Respeto por la diversidad, empatía y participación ciudadana de tipo directa."
+                ],
+                correct: 0,
+                retro: "Busca formar estudiantes para una ciudadanía comprometida. [4]"
+            },
+            {
+                q: "7. ¿Cuál es el objeto de aprendizaje del Campo Formativo 'De lo humano y lo Comunitario'?",
+                options: [
+                    "a) Experiencias cognitivas, motrices, socioafectivas y creativas de tipo integral.",
+                    "b) Experiencias cognitivas, motrices, socioafectivas y creativas de tipo técnico.",
+                    "c) Experiencias cognitivas, motrices, socioafectivas y creativas de tipo directo.",
+                    "d) Experiencias cognitivas, motrices, socioafectivas y creativas de tipo lógico."
+                ],
+                correct: 0,
+                retro: "Favorece la construcción de identidad y sentido de pertenencia. [5]"
+            },
+            {
+                q: "8. Según Boisvert (2004), ¿cómo se entiende el proceso de resolución de problemas?",
+                options: [
+                    "a) Como un proceso activo que alterna entre el análisis y la acción de respuesta.",
+                    "b) Como un proceso activo que alterna entre el análisis y la técnica de respuesta.",
+                    "c) Como un proceso activo que alterna entre el análisis y la gestión de respuesta.",
+                    "d) Como un proceso activo que alterna entre el análisis y la norma de respuesta."
+                ],
+                correct: 0,
+                retro: "Implica ejecutar una serie de pasos para hallar el resultado óptimo. [6]"
+            },
+            {
+                q: "9. ¿Cuál es el resultado óptimo final de la resolución de problemas según el texto?",
+                options: [
+                    "a) La eliminación del problema mediante una alternativa conveniente y viable.",
+                    "b) La eliminación del problema mediante una alternativa técnica y viable.",
+                    "c) La eliminación del problema mediante una alternativa lógica y viable.",
+                    "d) La eliminación del problema mediante una alternativa directa y viable."
+                ],
+                correct: 0,
+                retro: "El rigor del proceso permite determinar por qué la opción es la mejor. [6, 7]"
+            },
+            {
+                q: "10. ¿Por qué es importante recurrir a experiencias previas al enfrentar un problema?",
+                options: [
+                    "a) Para orientar la generación de alternativas viables y trazar rutas de solución.",
+                    "b) Para orientar la generación de alternativas técnicas y trazar rutas de solución.",
+                    "c) Para orientar la generación de alternativas lógicas y trazar rutas de solución.",
+                    "d) Para orientar la generación de alternativas directas y trazar rutas de solución."
+                ],
+                correct: 0,
+                retro: "Permite delimitar el problema antes de que se vuelva inmanejable. [7]"
+            },
+            {
+                q: "11. ¿Qué favorece el pensamiento crítico desarrollado por esta habilidad?",
+                options: [
+                    "a) El tratamiento eficaz de la gran cantidad de información disponible actualmente.",
+                    "b) El tratamiento técnico de la gran cantidad de información disponible actualmente.",
+                    "c) El tratamiento lógico de la gran cantidad de información disponible actualmente.",
+                    "d) El tratamiento directo de la gran cantidad de información disponible actualmente."
+                ],
+                correct: 0,
+                retro: "Permite sopesar contenidos sustentados frente a información falsa. [8]"
+            },
+            {
+                q: "12. ¿En qué consisten las dos fases en las que se dividen las lecciones del manual?",
+                options: [
+                    "a) Precisar el problema y analizar e implementar soluciones de tipo efectivo.",
+                    "b) Precisar el problema y analizar e implementar soluciones de tipo técnico.",
+                    "c) Precisar el problema y analizar e implementar soluciones de tipo directo.",
+                    "d) Precisar el problema y analizar e implementar soluciones de tipo social."
+                ],
+                correct: 0,
+                retro: "Abarca desde la identificación hasta la evaluación de la solución. [9]"
+            },
+            {
+                q: "13. ¿Qué criterio pedagógico sigue el diseño de las lecciones (SAFE)?",
+                options: [
+                    "a) Secuencial, Activa, Focalizada y Explícita en el desarrollo de habilidades.",
+                    "b) Secuencial, Activa, Focalizada y Estándar en el desarrollo de habilidades.",
+                    "c) Secuencial, Activa, Focalizada y Externa en el desarrollo de habilidades.",
+                    "d) Secuencial, Activa, Focalizada y Estructural en el desarrollo de habilidades."
+                ],
+                correct: 0,
+                retro: "Los programas que siguen este criterio son más efectivos. [10, 11]"
+            },
+            {
+                q: "14. ¿Cuál es el objetivo específico de la Lección 3?",
+                options: [
+                    "a) Identificar cuál es el problema y qué información se necesita para abordarlo.",
+                    "b) Identificar cuál es el problema y qué técnica se necesita para abordarlo.",
+                    "c) Identificar cuál es el problema y qué norma se necesita para abordarlo.",
+                    "d) Identificar cuál es el problema y qué gestión se necesita para abordarlo."
+                ],
+                correct: 0,
+                retro: "Es el primer paso de la fase de precisión del problema. [12]"
+            },
+            {
+                q: "15. ¿Qué función cumple la sección 'El concepto de hoy' en cada lección?",
+                options: [
+                    "a) Brinda una breve presentación del concepto esencial y precisiones teóricas.",
+                    "b) Brinda una breve presentación del concepto técnico y precisiones teóricas.",
+                    "c) Brinda una breve presentación del concepto directo y precisiones teóricas.",
+                    "d) Brinda una breve presentación del concepto social y precisiones teóricas."
+                ],
+                correct: 0,
+                retro: "Ayuda a los estudiantes a consolidar el aprendizaje central. [13]"
+            },
+            {
+                q: "16. ¿Qué tipos de evaluación se integran en el manual?",
+                options: [
+                    "a) Diagnóstico de habilidades (pre y post) y revisión final de aprendizajes.",
+                    "b) Diagnóstico de habilidades (pre y post) y revisión técnica de aprendizajes.",
+                    "c) Diagnóstico de habilidades (pre y post) y revisión social de aprendizajes.",
+                    "d) Diagnóstico de habilidades (pre y post) y revisión directa de aprendizajes."
+                ],
+                correct: 0,
+                retro: "Miden el progreso y la comprensión de los contenidos enseñados. [14-16]"
+            },
+            {
+                q: "17. ¿Por qué se afirma que 'enseñamos lo que somos' según Palmer Parker?",
+                options: [
+                    "a) Porque es esencial modelar la habilidad de participación en las interacciones.",
+                    "b) Porque es esencial modelar la técnica de participación en las interacciones.",
+                    "c) Porque es esencial modelar la gestión de participación en las interacciones.",
+                    "d) Porque es esencial modelar la norma de participación en las interacciones."
+                ],
+                correct: 0,
+                retro: "La interiorización personal es clave para una enseñanza efectiva. [17]"
+            },
+            {
+                q: "18. ¿Cuál es una recomendación para promover la participación en clase?",
+                options: [
+                    "a) Mantener una actitud modesta y humilde que reconozca la capacidad del alumno.",
+                    "b) Mantener una actitud técnica y humilde que reconozca la capacidad del alumno.",
+                    "c) Mantener una actitud lógica y humilde que reconozca la capacidad del alumno.",
+                    "d) Mantener una actitud directa y humilde que reconozca la capacidad del alumno."
+                ],
+                correct: 0,
+                retro: "Implica escuchar activamente e intervenir lo menos posible. [18]"
+            },
+            {
+                q: "19. ¿Qué característica debe tener la verdadera participación según el manual?",
+                options: [
+                    "a) Debe ser voluntaria y sin coerción; nadie puede ser obligado a participar.",
+                    "b) Debe ser técnica y sin coerción; nadie puede ser obligado a participar.",
+                    "c) Debe ser lógica y sin coerción; nadie puede ser obligado a participar.",
+                    "d) Debe ser directa y sin coerción; nadie puede ser obligado a participar."
+                ],
+                correct: 0,
+                retro: "Los estudiantes deben estar informados sobre el sentido de su acción. [19]"
+            },
+            {
+                q: "20. ¿Qué se debe hacer si una lección toma más tiempo del previsto?",
+                options: [
+                    "a) Se recomienda evitar cortarla y concluir la sesión en otro momento.",
+                    "b) Se recomienda evitar cortarla y concluir la sesión de forma técnica.",
+                    "c) Se recomienda evitar cortarla y concluir la sesión de forma directa.",
+                    "d) Se recomienda evitar cortarla y concluir la sesión de forma rápida."
+                ],
+                correct: 0,
+                retro: "Es mejor alentar las discusiones profundas que apresurarlas. [20]"
+            },
+            {
+                q: "21. ¿Qué se busca lograr en la Actividad 1 de la Lección 1 con Ana?",
+                options: [
+                    "a) Que los estudiantes identifiquen dificultades propias de contextos diversos.",
+                    "b) Que los estudiantes identifiquen dificultades propias de contextos técnicos.",
+                    "c) Que los estudiantes identifiquen dificultades propias de contextos lógicos.",
+                    "d) Que los estudiantes identifiquen dificultades propias de contextos directos."
+                ],
+                correct: 0,
+                retro: "Identificar el problema y sus causas es sustancial para resolverlo. [21, 22]"
+            },
+            {
+                q: "22. En el caso de Martín, ¿cuál se identifica como su problema real?",
+                options: [
+                    "a) La demora en llegar a la escuela, no necesariamente la falta de bicicleta.",
+                    "b) La falta de una bicicleta nueva para transportarse de forma técnica.",
+                    "c) La falta de dinero de su padre para resolver el tema de forma directa.",
+                    "d) La falta de un transporte público de tipo social en su comunidad."
+                ],
+                correct: 0,
+                retro: "El contexto es clave para identificar la raíz del problema. [23, 24]"
+            },
+            {
+                q: "23. ¿Cuál es un beneficio de la resolución de problemas en el ámbito personal?",
+                options: [
+                    "a) Reducción del estrés al tener estrategias claras para enfrentar desafíos.",
+                    "b) Reducción del estrés al tener técnicas claras para enfrentar desafíos.",
+                    "c) Reducción del estrés al tener gestiones claras para enfrentar desafíos.",
+                    "d) Reducción del estrés al tener normas claras para enfrentar desafíos."
+                ],
+                correct: 0,
+                retro: "Disminuye la ansiedad ante situaciones difíciles de la vida diaria. [25]"
+            },
+            {
+                q: "24. ¿Qué técnica se sugiere para definir plenamente un problema?",
+                options: [
+                    "a) Formular preguntas que permitan enfocar la situación y lo que se debe resolver.",
+                    "b) Formular técnicas que permitan enfocar la situación y lo que se debe resolver.",
+                    "c) Formular planes que permitan enfocar la situación y lo que se debe resolver.",
+                    "d) Formular normas que permitan enfocar la situación y lo que se debe resolver."
+                ],
+                correct: 0,
+                retro: "Preguntar quién se ve afectado o qué factores están involucrados. [26, 27]"
+            },
+            {
+                q: "25. ¿A qué fuentes se debe recurrir al analizar un problema (Lección 4)?",
+                options: [
+                    "a) Fuentes de información confiable como libros, especialistas o páginas oficiales.",
+                    "b) Fuentes de información técnica como libros, especialistas o páginas oficiales.",
+                    "c) Fuentes de información social como libros, especialistas o páginas oficiales.",
+                    "d) Fuentes de información directa como libros, especialistas o páginas oficiales."
+                ],
+                correct: 0,
+                retro: "Garantiza una comprensión profunda y fundamentada del problema. [28]"
+            },
+            {
+                q: "26. ¿En qué consiste la estrategia de 'los cinco porqués'?",
+                options: [
+                    "a) Preguntar '¿por qué?' repetidamente para encontrar la causa raíz del problema.",
+                    "b) Preguntar '¿por qué?' repetidamente para encontrar la técnica raíz del problema.",
+                    "c) Preguntar '¿por qué?' repetidamente para encontrar la lógica raíz del problema.",
+                    "d) Preguntar '¿por qué?' repetidamente para encontrar la gestión raíz del problema."
+                ],
+                correct: 0,
+                retro: "Cinco veces es una buena regla general para profundizar. [28, 29]"
+            },
+            {
+                q: "27. ¿Qué se recomienda al momento de 'generar posibles soluciones'?",
+                options: [
+                    "a) No juzgar las ideas al principio y permitir que la creatividad fluya.",
+                    "b) No juzgar las ideas al principio y permitir que la técnica fluya.",
+                    "c) No juzgar las ideas al principio y permitir que la lógica fluya.",
+                    "d) No juzgar las ideas al principio y permitir que la norma fluya."
+                ],
+                correct: 0,
+                retro: "Se deben pensar muchas posibilidades antes de elegir una. [30, 31]"
+            },
+            {
+                q: "28. ¿Qué significa 'Rosebud' en la película Ciudadano Kane según el manual?",
+                options: [
+                    "a) El trineo de su infancia que simboliza la inocencia y felicidad perdida.",
+                    "b) El trineo de su infancia que simboliza la técnica y felicidad perdida.",
+                    "c) El trineo de su infancia que simboliza la gestión y felicidad perdida.",
+                    "d) El trineo de su infancia que simboliza la norma y felicidad perdida."
+                ],
+                correct: 0,
+                retro: "Se usa como ejercicio para desarrollar la creatividad de alternativas. [32]"
+            },
+            {
+                q: "29. ¿En qué consiste el análisis de 'pros y contras' de las soluciones?",
+                options: [
+                    "a) En anticipar las consecuencias y evaluar si serán beneficiosas o perjudiciales.",
+                    "b) En anticipar las consecuencias y evaluar si serán técnicas o perjudiciales.",
+                    "c) En anticipar las consecuencias y evaluar si serán lógicas o perjudiciales.",
+                    "d) En anticipar las consecuencias y evaluar si serán directas o perjudiciales."
+                ],
+                correct: 0,
+                retro: "Evita soluciones impulsivas con efectos negativos a largo plazo. [33, 34]"
+            },
+            {
+                q: "30. ¿Qué caracteriza a la importancia de una consecuencia según la Lección 7?",
+                options: [
+                    "a) Es subjetiva y depende de los valores, necesidades y opiniones relevantes.",
+                    "b) Es objetiva y depende de los valores, necesidades y opiniones relevantes.",
+                    "c) Es técnica y depende de los valores, necesidades y opiniones relevantes.",
+                    "d) Es directa y depende de los valores, necesidades y opiniones relevantes."
+                ],
+                correct: 0,
+                retro: "Valorar las consecuencias brinda claridad sobre la viabilidad de la solución. [35]"
+            },
+            {
+                q: "31. ¿Qué diferencia hay entre 'comparar' y 'contrastar'?",
+                options: [
+                    "a) Comparar identifica similitudes y contrastar se enfoca en las diferencias.",
+                    "b) Comparar identifica técnicas y contrastar se enfoca en las diferencias.",
+                    "c) Comparar identifica lógicas y contrastar se enfoca en las diferencias.",
+                    "d) Comparar identifica gestiones y contrastar se enfoca en las diferencias."
+                ],
+                correct: 0,
+                retro: "Permite evaluar alternativas de manera lógica y estructurada. [36]"
+            },
+            {
+                q: "32. ¿Qué implica técnicamente 'planificar' en la resolución de problemas?",
+                options: [
+                    "a) Definir tareas, asignar responsables, prever recursos y establecer cronogramas.",
+                    "b) Definir tareas, asignar técnicos, prever recursos y establecer cronogramas.",
+                    "c) Definir tareas, asignar gestores, prever recursos y establecer cronogramas.",
+                    "d) Definir tareas, asignar normas, prever recursos y establecer cronogramas."
+                ],
+                correct: 0,
+                retro: "Asegura una implementación más eficiente y efectiva de la solución. [37]"
+            },
+            {
+                q: "33. ¿Qué herramienta de pensamiento crítico se usa en la Actividad 3 de la Lección 8?",
+                options: [
+                    "a) La herramienta BMI: Identificar lo bueno, lo malo e interesante del tema.",
+                    "b) La herramienta BMI: Identificar lo bueno, lo mixto e interesante del tema.",
+                    "c) La herramienta BMI: Identificar lo bueno, lo manual e interesante del tema.",
+                    "d) La herramienta BMI: Identificar lo bueno, lo medible e interesante del tema."
+                ],
+                correct: 0,
+                retro: "Ayuda a reflexionar profundamente sobre una experiencia vivida. [36, 38]"
+            },
+            {
+                q: "34. ¿Cuál es el quinto paso de la guía para resolver un problema (Lección 10)?",
+                options: [
+                    "a) Elegir una solución e implementarla tras evaluar las posibilidades.",
+                    "b) Elegir una solución y técnica tras evaluar las posibilidades.",
+                    "c) Elegir una solución y gestión tras evaluar las posibilidades.",
+                    "d) Elegir una solución y norma tras evaluar las posibilidades."
+                ],
+                correct: 0,
+                retro: "Es la culminación del proceso reflexivo y analítico. [39, 40]"
+            },
+            {
+                q: "35. ¿Qué puntaje en el diagnóstico indica un nivel alto de habilidad?",
+                options: [
+                    "a) Un puntaje entre 45 y 60 puntos obtenidos en el diagnóstico.",
+                    "b) Un puntaje entre 30 y 44 puntos obtenidos en el diagnóstico.",
+                    "c) Un puntaje entre 15 y 29 puntos obtenidos en el diagnóstico.",
+                    "d) Un puntaje entre 10 y 14 puntos obtenidos en el diagnóstico."
+                ],
+                correct: 0,
+                retro: "Indica capacidad plena para identificar, analizar y generar soluciones. [41]"
+            },
+            {
+                q: "36. ¿Qué se busca al recabar información en el análisis del problema?",
+                options: [
+                    "a) Comprenderlo mejor y descomponerlo en partes que sean más manejables.",
+                    "b) Comprenderlo mejor y descomponerlo en partes que sean más técnicas.",
+                    "c) Comprenderlo mejor y descomponerlo en partes que sean más lógicas.",
+                    "d) Comprenderlo mejor y descomponerlo en partes que sean más directas."
+                ],
+                correct: 0,
+                retro: "Permite precisar las causas y avanzar hacia la búsqueda de soluciones. [28, 42]"
+            },
+            {
+                q: "37. ¿Cuál es una consecuencia de no planificar una solución compleja?",
+                options: [
+                    "a) Dificultad en la coordinación del equipo y manejo ineficiente de recursos.",
+                    "b) Dificultad en la técnica del equipo y manejo ineficiente de recursos.",
+                    "c) Dificultad en la gestión del equipo y manejo ineficiente de recursos.",
+                    "d) Dificultad en la norma del equipo y manejo ineficiente de recursos."
+                ],
+                correct: 0,
+                retro: "La planificación ayuda a anticipar obstáculos en problemas colectivos. [43, 44]"
+            },
+            {
+                q: "38. ¿Qué significa evaluar la implementación de una solución?",
+                options: [
+                    "a) Monitorear de qué manera se está cumpliendo lo planificado para ajustarlo.",
+                    "b) Monitorear de qué manera se está cumpliendo lo técnico para ajustarlo.",
+                    "c) Monitorear de qué manera se está cumpliendo lo social para ajustarlo.",
+                    "d) Monitorear de qué manera se está cumpliendo lo directo para ajustarlo."
+                ],
+                correct: 0,
+                retro: "Garantiza que el aprendizaje se integre en la vida cotidiana. [1, 37]"
+            },
+            {
+                q: "39. ¿Qué fomenta la autocompasión mencionada en la Lección 7?",
+                options: [
+                    "a) La resiliencia y el equilibrio emocional para enfrentar desafíos futuros.",
+                    "b) La técnica y el equilibrio emocional para enfrentar desafíos futuros.",
+                    "c) La gestión y el equilibrio emocional para enfrentar desafíos futuros.",
+                    "d) La norma y el equilibrio emocional para enfrentar desafíos futuros."
+                ],
+                correct: 0,
+                retro: "Incluye atención plena, humanidad compartida y bondad propia. [45]"
+            },
+            {
+                q: "40. ¿Cuál es la finalidad de la revisión final de aprendizajes?",
+                options: [
+                    "a) Identificar si los conceptos clave quedaron claros o si existen dudas.",
+                    "b) Identificar si los conceptos técnicos quedaron claros o si existen dudas.",
+                    "c) Identificar si los conceptos sociales quedaron claros o si existen dudas.",
+                    "d) Identificar si los conceptos directos quedaron claros o si existen dudas."
+                ],
+                correct: 0,
+                retro: "Permite repasar temas donde se identifiquen errores comunes. [46]"
+            },
+            {
+                q: "41. ¿Qué se entiende por 'Habilidades para el futuro' en este contexto?",
+                options: [
+                    "a) Herramientas para manejar situaciones difíciles en la vida adulta y el trabajo.",
+                    "b) Herramientas para manejar situaciones técnicas en la vida adulta y el trabajo.",
+                    "c) Herramientas para manejar situaciones sociales en la vida adulta y el trabajo.",
+                    "d) Herramientas para manejar situaciones directas en la vida adulta y el trabajo."
+                ],
+                correct: 0,
+                retro: "La resolución de problemas prepara para los desafíos del mundo real. [25]"
+            },
+            {
+                q: "42. ¿Cómo contribuye esta habilidad al desarrollo de la autonomía?",
+                options: [
+                    "a) Haciendo al estudiante más independiente y capaz de tomar decisiones informadas.",
+                    "b) Haciendo al estudiante más técnico y capaz de tomar decisiones informadas.",
+                    "c) Haciendo al estudiante más lógico y capaz de tomar decisiones informadas.",
+                    "d) Haciendo al estudiante más directo y capaz de tomar decisiones informadas."
+                ],
+                correct: 0,
+                retro: "Fortalece la confianza en las propias capacidades de gestión. [25]"
+            },
+            {
+                q: "43. ¿Qué recomienda el manual para la 'Toma de decisiones en acción'?",
+                options: [
+                    "a) Argumentar la elección de la solución basándose en el análisis previo.",
+                    "b) Argumentar la elección de la solución basándose en la técnica previa.",
+                    "c) Argumentar la elección de la solución basándose en la gestión previa.",
+                    "d) Argumentar la elección de la solución basándose en la norma previa."
+                ],
+                correct: 0,
+                retro: "Es el paso final tras identificar causas y evaluar pros y contras. [47]"
+            },
+            {
+                q: "44. ¿Qué importancia tiene el trabajo colaborativo en la resolución de problemas?",
+                options: [
+                    "a) Permite integrar diversas perspectivas para definir y abordar la dificultad.",
+                    "b) Permite integrar diversas técnicas para definir y abordar la dificultad.",
+                    "c) Permite integrar diversas normas para definir y abordar la dificultad.",
+                    "d) Permite integrar diversas gestiones para definir y abordar la dificultad."
+                ],
+                correct: 0,
+                retro: "Todas las perspectivas de la comunidad escolar son relevantes. [48, 49]"
+            },
+            {
+                q: "45. ¿Cuál es el primer paso sugerido al aplicar 'los cinco porqués'?",
+                options: [
+                    "a) Tomar una causa identificada inicialmente y preguntar por qué ocurre.",
+                    "b) Tomar una técnica identificada inicialmente y preguntar por qué ocurre.",
+                    "c) Tomar una gestión identificada inicialmente y preguntar por qué ocurre.",
+                    "d) Tomar una norma identificada inicialmente y preguntar por qué ocurre."
+                ],
+                correct: 0,
+                retro: "Cada respuesta sucesiva debe basarse en la respuesta anterior. [28]"
+            },
+            {
+                q: "46. ¿Qué se entiende por 'causa raíz' en el análisis de problemas?",
+                options: [
+                    "a) El origen profundo de la dificultad que no es visible a simple vista.",
+                    "b) El origen técnico de la dificultad que no es visible a simple vista.",
+                    "c) El origen social de la dificultad que no es visible a simple vista.",
+                    "d) El origen directo de la dificultad que no es visible a simple vista."
+                ],
+                correct: 0,
+                retro: "Encontrarla permite que la solución sea realmente efectiva. [28, 50]"
+            },
+            {
+                q: "47. ¿Qué garantiza que un aprendizaje sea significativo según el manual?",
+                options: [
+                    "a) Conectar las lecciones con situaciones cotidianas comunes de la escuela.",
+                    "b) Conectar las lecciones con situaciones técnicas comunes de la escuela.",
+                    "c) Conectar las lecciones con situaciones lógicas comunes de la escuela.",
+                    "d) Conectar las lecciones con situaciones directas comunes de la escuela."
+                ],
+                correct: 0,
+                retro: "Reflexionar sobre la cotidianidad ayuda a dar sentido a lo aprendido. [51]"
+            },
+            {
+                q: "48. ¿Cuál es la base para que el manual tenga un impacto real en la vida?",
+                options: [
+                    "a) El reforzamiento de las herramientas estudiadas en la convivencia diaria.",
+                    "b) El reforzamiento de las técnicas estudiadas en la convivencia diaria.",
+                    "c) El reforzamiento de las gestiones estudiadas en la convivencia diaria.",
+                    "d) El reforzamiento de las normas estudiadas en la convivencia diaria."
+                ],
+                correct: 0,
+                retro: "Las estrategias deben aplicarse en diferentes momentos del día. [52]"
+            },
+            {
+                q: "49. ¿Qué define a un 'Problema Curricular' en el ámbito escolar?",
+                options: [
+                    "a) Las formas de conocer, construir y legitimar saberes en el aula.",
+                    "b) Las formas de conocer, construir y legitimar técnicas en el aula.",
+                    "c) Las formas de conocer, construir y legitimar normas en el aula.",
+                    "d) Las formas de conocer, construir y legitimar gestiones en el aula."
+                ],
+                correct: 0,
+                retro: "Surge en la mediación pedagógica y los contenidos enseñados."
+            },
+            {
+                q: "50. ¿Cómo se logra la maestría en la resolución de problemas según la conclusión?",
+                options: [
+                    "a) Practicando una y otra vez ante los diferentes desafíos de la vida.",
+                    "b) Practicando una y otra vez ante las diferentes técnicas de la vida.",
+                    "c) Practicando una y otra vez ante las diferentes gestiones de la vida.",
+                    "d) Practicando una y otra vez ante las diferentes normas de la vida."
+                ],
+                correct: 0,
+                retro: "Los cinco pasos son una guía, pero el dominio requiere práctica constante. [53]"
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        quizData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `<div class='question-text'><strong>${item.q}</strong></div>`;
+            const list = document.createElement('ul');
+            item.options.forEach((opt, idx) => {
+                const li = document.createElement('li');
+                li.innerText = opt;
+                li.onclick = () => {
+                    const allLi = list.querySelectorAll('li');
+                    allLi.forEach(l => l.style.pointerEvents = 'none');
+                    const fb = document.getElementById(`fb-${index}`);
+                    fb.style.display = 'block';
+                    if(idx === item.correct) {
+                        li.classList.add('selected-correct');
+                        fb.innerHTML = "¡Correcto! " + item.retro;
+                        fb.style.background = "#d4edda";
+                    } else {
+                        li.classList.add('selected-incorrect');
+                        fb.innerText = "¡Incorrrecto!";
+                        fb.style.background = "#f8d7da";
+                    }
+                };
+                list.appendChild(li);
+            });
+            card.appendChild(list);
+            const fbDiv = document.createElement('div');
+            fbDiv.id = `fb-${index}`; fbDiv.className = 'feedback';
+            card.appendChild(fbDiv);
+            container.appendChild(card);
+        });
+    </script>
+    <script src="quiz-behavior.js"></script>
+</body>
+</html>
