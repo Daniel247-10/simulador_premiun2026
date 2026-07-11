@@ -159,7 +159,7 @@
           try { return sessionStorage.getItem('premiumActive') === 'true'; } catch (e) { return false; }
         })();
 
-    const preview = premiumOn ? data : data.slice(0, 3);
+    const preview = premiumOn ? data : data.slice(0, 5);
 
     preview.forEach((item, index) => {
       const card = document.createElement('div');
@@ -526,13 +526,18 @@
     banner.id = 'premium-lock-banner';
     banner.className = 'premium-lock-banner';
     banner.innerHTML = `
-      <span>Has completado 3 preguntas. Accede a pruebas premium de mayor complejidad.</span>
+      <span>Has completado 5 preguntas. Accede a pruebas premium de mayor complejidad.</span>
       <a class="btn" id="open-premium-lock">ACCEDE PRUEBAS PREMIUM</a>
+      <a class="btn premium-menu-btn" id="open-premium-menu">IR AL MENÚ</a>
     `;
     document.body.appendChild(banner);
 
     document.getElementById('open-premium-lock').addEventListener('click', () => {
       window.location.href = 'index.html?premium=open';
+    });
+
+    document.getElementById('open-premium-menu').addEventListener('click', () => {
+      window.location.href = 'index.html';
     });
   }
 
@@ -544,7 +549,7 @@
       overlay.innerHTML = `
         <div class="premium-quiz-overlay-content">
           <h2 class="premium-modal-title">Límite alcanzado</h2>
-          <p class="premium-modal-text">Has completado 3 preguntas. Accede a pruebas premium de mayor complejidad.</p>
+          <p class="premium-modal-text">Has completado 5 preguntas. Accede a pruebas premium de mayor complejidad.</p>
           <a class="btn" id="overlay-go-index">ACCEDE PRUEBAS PREMIUM</a>
         </div>
       `;
@@ -583,7 +588,7 @@
     }
 
     const answered = getAnsweredQuestions();
-    if (answered >= 3) {
+    if (answered >= 5) {
       const lock = document.getElementById('premium-lock-banner');
       if (lock) lock.classList.add('show');
       const overlay = document.getElementById('premiumQuizOverlay');

@@ -48,10 +48,9 @@ body.premium-unlocked .premium-banner::after {
 }
 
 .premium-banner {
-  position: absolute;
-  top: 50%;
-  right: 24px;
-  transform: translateY(-50%);
+  position: relative;
+  display: inline-block;
+  margin: 14px auto 4px;
   background: linear-gradient(135deg, #ffb703 0%, #ff9500 100%);
   color: #1f1206;
   font-weight: 900;
@@ -768,6 +767,16 @@ button:hover,
   display: flex;
 }
 
+body.premium-lock-active {
+  padding-top: 64px;
+}
+
+@media (max-width: 600px) {
+  body.premium-lock-active {
+    padding-top: 110px;
+  }
+}
+
 .premium-lock-banner span {
   flex: 1 1 auto;
   min-width: 0;
@@ -782,6 +791,13 @@ button:hover,
   flex: 0 0 auto;
   white-space: nowrap;
   margin-left: auto;
+}
+
+.premium-lock-banner .premium-menu-btn {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin-left: 0;
 }
 
 @media (max-width: 600px) {
@@ -800,6 +816,11 @@ button:hover,
     margin-left: 0;
     width: 100%;
     text-align: center;
+  }
+
+  .premium-lock-banner .premium-menu-btn {
+    margin-left: 0;
+    width: 100%;
   }
 }
 
