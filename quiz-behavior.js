@@ -1,4 +1,6 @@
 (function () {
+  let quizizz = { active: false, index: 0, timer: null };
+
   function addSharedStyles() {
     if (document.getElementById('quiz-behavior-styles')) return;
 
@@ -103,8 +105,162 @@
           padding-bottom: 160px !important;
         }
       }
+
+      .question-card.quizizz-active {
+        outline: 3px solid #6a4dbf;
+        box-shadow: 0 0 0 5px rgba(106, 77, 191, 0.28);
+        transition: outline 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      #quizizzToggle {
+        background: linear-gradient(135deg, #ff7a00 0%, #ff9500 100%);
+      }
+
+      body.quizizz-running .options-list .option-label {
+        cursor: default;
+      }
     `;
     document.head.appendChild(style);
+  }
+
+  function pickSpanishVoice() {
+    try {
+      const voices = window.speechSynthesis.getVoices();
+      const esVoices = voices.filter(v => /^es/i.test(v.lang) || /^es/i.test(v.name));
+      if (!esVoices.length) return null;
+      // Preferir voces MASCULINAS, neuronales / en línea (más naturales).
+      // Pistas de género en el nombre: masculino (diego, pablo, raul, jorge,
+      // enrique, miguel, alvaro, Gonzalo, david, carlos) y femenino (sofia,
+      // helena, valentina, paula, laura, maria, ana, rosa, esperanza).
+      const maleHints = /(diego|pablo|raul|jorge|enrique|miguel|alvaro|gonzalo|david|carlos|tono|antonio|jose|pedro|\bmale\b|hombre|masculin)/i;
+      const femaleHints = /(sofia|sofía|helena|valentina|paula|laura|maria|maría|ana|rosa|esperanza|\bfemale\b|mujer|femenin)/i;
+      const ranked = esVoices.sort((a, b) => {
+        const score = (v) => {
+          const n = (v.name || '').toLowerCase();
+          let s = 0;
+          if (maleHints.test(n)) s += 200;
+          if (femaleHints.test(n)) s -= 200;
+          if (/neural/.test(n)) s += 100;
+          if (/online|cloud/.test(n)) s += 60;
+          if (/premium|natural|conversational/.test(n)) s += 40;
+          if (/google|edge|azure/.test(n)) s += 30;
+          if (/desktop|local/.test(n)) s -= 50;
+          if (/es-(es|mx|ar|co|cl)/.test(v.lang || '')) s += 10;
+          return s;
+        };
+        return score(b) - score(a);
+      });
+      return ranked[0];
+    } catch (e) { return null; }
+  }
+
+  function speak(text, onEnd) {
+    if (!('speechSynthesis' in window)) {
+      if (onEnd) setTimeout(onEnd, 0);
+      return;
+    }
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(String(text || '').replace(/^\s*\d+\.\s*/, ''));
+      u.lang = 'es-ES';
+      const voice = pickSpanishVoice();
+      if (voice) u.voice = voice;
+      // Parámetros más naturales: ritmo ligeramente pausado y tono neutro.
+      u.rate = 0.92;
+      u.pitch = 1.02;
+      u.volume = 1;
+      if (onEnd) u.onend = function () { onEnd(); };
+      window.speechSynthesis.speak(u);
+    } catch (e) {
+      if (onEnd) onEnd();
+    }
+  }
+
+  function revealAnswer(index) {
+    const data = getQuizData();
+    const card = document.querySelectorAll('.question-card')[index];
+    if (!card) return;
+    const item = data ? data[index] : null;
+    const list = card.querySelector('.options-list');
+    if (list) {
+      list.classList.add('answered');
+      const correctIndex = getCorrectIndex(item);
+      const labels = Array.from(list.querySelectorAll('.option-label'));
+      labels.forEach((label, i) => {
+        if (quizizz.active) {
+          if (i === correctIndex) label.classList.add('correct-answer');
+        } else {
+          label.classList.add('correct-answer');
+        }
+        const input = label.querySelector('input[type="radio"]');
+        if (input) input.disabled = true;
+      });
+    }
+    if (quizizz.active) return;
+    const feedback = card.querySelector('.feedback');
+    if (feedback) {
+      feedback.style.display = 'block';
+      feedback.className = 'feedback correct';
+      if (item) feedback.innerHTML = buildFeedback(item, true);
+    }
+  }
+
+  function quizizzStep() {
+    if (!quizizz.active) return;
+    const cards = Array.from(document.querySelectorAll('.question-card'));
+    if (quizizz.index >= cards.length) {
+      speak('Cuestionario completado. Modo Quizizz finalizado.');
+      stopQuizizzMode();
+      return;
+    }
+    cards.forEach(c => c.classList.remove('quizizz-active'));
+    const card = cards[quizizz.index];
+    card.classList.add('quizizz-active');
+    try { card.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+    const title = card.querySelector('.question-title');
+    const qText = title ? title.textContent : '';
+    speak(qText, function () {
+      quizizz.timer = setTimeout(function () {
+        revealAnswer(quizizz.index);
+        const data = getQuizData();
+        const item = data ? data[quizizz.index] : null;
+        let answerText = '';
+        if (item) {
+          const opts = getItemOptions(item);
+          const ci = getCorrectIndex(item);
+          answerText = (opts[ci] || '').replace(/^[a-d]\)\s*/i, '');
+        }
+        speak('Respuesta correcta: ' + answerText, function () {
+          quizizz.timer = setTimeout(function () {
+            quizizz.index++;
+            quizizzStep();
+          }, 2500);
+        });
+      }, 3000);
+    });
+  }
+
+  function startQuizizzMode() {
+    if (quizizz.active) return;
+    if ('speechSynthesis' in window && window.speechSynthesis.getVoices().length === 0) {
+      window.speechSynthesis.onvoiceschanged = function () {};
+    }
+    quizizz.active = true;
+    quizizz.index = 0;
+    const btn = document.getElementById('quizizzToggle');
+    if (btn) btn.textContent = '⏹ Detener Quizizz';
+    quizizzStep();
+  }
+
+  function stopQuizizzMode() {
+    quizizz.active = false;
+    if ('speechSynthesis' in window) {
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+    }
+    clearTimeout(quizizz.timer);
+    const btn = document.getElementById('quizizzToggle');
+    if (btn) btn.textContent = '▶ Modo Quizizz (audio)';
+    document.querySelectorAll('.question-card.quizizz-active').forEach(c => c.classList.remove('quizizz-active'));
   }
 
   function shuffleArray(array) {
@@ -273,6 +429,7 @@
   }
 
   function handleListOption(event) {
+    if (quizizz.active) return;
     const li = event.target.closest('.options li');
     if (!li || li.querySelector('input[type="radio"]')) return;
 
@@ -307,6 +464,7 @@
   }
 
   function handleGeneratedRadio(event) {
+    if (quizizz.active) return;
     const input = event.target.closest('input[type="radio"]');
     if (!input || !input.name.match(/^p\d+$/)) return;
 
@@ -354,6 +512,7 @@
   }
 
   function handleStaticRadio(event) {
+    if (quizizz.active) return;
     const input = event.target.closest('input[type="radio"][data-qid]');
     if (!input || typeof respuestasCorrectas === 'undefined') return;
 
@@ -605,6 +764,14 @@
     const actionBar = document.createElement('div');
     actionBar.className = 'quiz-action-bar';
 
+    const quizizzBtn = document.createElement('button');
+    quizizzBtn.type = 'button';
+    quizizzBtn.id = 'quizizzToggle';
+    quizizzBtn.textContent = '▶ Modo Quizizz (audio)';
+    quizizzBtn.addEventListener('click', function () {
+      if (quizizz.active) stopQuizizzMode(); else startQuizizzMode();
+    });
+
     const finishButton = document.createElement('button');
     finishButton.type = 'button';
     finishButton.textContent = 'Finalizar Cuestionario';
@@ -615,6 +782,7 @@
     menuLink.className = 'btn';
     menuLink.textContent = 'Men\u00fa Principal';
 
+    actionBar.appendChild(quizizzBtn);
     actionBar.appendChild(finishButton);
     actionBar.appendChild(menuLink);
 
