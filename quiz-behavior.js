@@ -29,15 +29,18 @@
       }
 
       .quiz-action-bar {
+        box-sizing: border-box;
         position: fixed;
         left: 50%;
         bottom: 16px;
         z-index: 2000;
         display: flex;
         justify-content: center;
+        align-items: center;
         flex-wrap: wrap;
         gap: 10px;
         width: min(920px, calc(100% - 24px));
+        max-width: calc(100% - 24px);
         margin: 0;
         padding: 10px;
         background: rgba(255, 255, 255, 0.94);
@@ -49,8 +52,14 @@
       }
 
       .quiz-action-bar .btn,
-      .quiz-action-bar button {
+      .quiz-action-bar button,
+      .quiz-action-bar a {
+        box-sizing: border-box;
         display: inline-block;
+        flex: 0 1 auto;
+        min-width: 0;
+        white-space: normal;
+        overflow-wrap: anywhere;
         background: linear-gradient(135deg, #6a4dbf 0%, #4a33a0 100%);
         color: #fff;
         border: none;
@@ -64,7 +73,8 @@
       }
 
       .quiz-action-bar .btn:hover,
-      .quiz-action-bar button:hover {
+      .quiz-action-bar button:hover,
+      .quiz-action-bar a:hover {
         transform: translateY(-2px);
         text-decoration: none;
       }
@@ -93,10 +103,13 @@
         .quiz-action-bar {
           align-items: stretch;
           bottom: 10px;
+          width: calc(100% - 16px);
+          max-width: calc(100% - 16px);
         }
 
         .quiz-action-bar .btn,
-        .quiz-action-bar button {
+        .quiz-action-bar button,
+        .quiz-action-bar a {
           flex: 1 1 100%;
           text-align: center;
         }
@@ -248,7 +261,7 @@
     quizizz.active = true;
     quizizz.index = 0;
     const btn = document.getElementById('quizizzToggle');
-    if (btn) btn.textContent = '⏹ Detener Quizizz';
+    if (btn) btn.textContent = '⏹ Detener';
     quizizzStep();
   }
 
@@ -259,7 +272,7 @@
     }
     clearTimeout(quizizz.timer);
     const btn = document.getElementById('quizizzToggle');
-    if (btn) btn.textContent = '▶ Modo Quizizz (audio)';
+    if (btn) btn.textContent = '▶ Audio';
     document.querySelectorAll('.question-card.quizizz-active').forEach(c => c.classList.remove('quizizz-active'));
   }
 
@@ -767,20 +780,20 @@
     const quizizzBtn = document.createElement('button');
     quizizzBtn.type = 'button';
     quizizzBtn.id = 'quizizzToggle';
-    quizizzBtn.textContent = '▶ Modo Quizizz (audio)';
+    quizizzBtn.textContent = 'Audio';
     quizizzBtn.addEventListener('click', function () {
       if (quizizz.active) stopQuizizzMode(); else startQuizizzMode();
     });
 
     const finishButton = document.createElement('button');
     finishButton.type = 'button';
-    finishButton.textContent = 'Finalizar Cuestionario';
+    finishButton.textContent = 'Finalizar';
     finishButton.addEventListener('click', finishQuiz);
 
     const menuLink = document.createElement('a');
     menuLink.href = 'index.html';
     menuLink.className = 'btn';
-    menuLink.textContent = 'Men\u00fa Principal';
+    menuLink.textContent = 'Menú';
 
     actionBar.appendChild(quizizzBtn);
     actionBar.appendChild(finishButton);
