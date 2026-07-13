@@ -790,14 +790,6 @@
     const actionBar = document.createElement('div');
     actionBar.className = 'quiz-action-bar';
 
-    const quizizzBtn = document.createElement('button');
-    quizizzBtn.type = 'button';
-    quizizzBtn.id = 'quizizzToggle';
-    quizizzBtn.textContent = 'Audio';
-    quizizzBtn.addEventListener('click', function () {
-      if (quizizz.active) stopQuizizzMode(); else startQuizizzMode();
-    });
-
     const finishButton = document.createElement('button');
     finishButton.type = 'button';
     finishButton.textContent = 'Finalizar';
@@ -808,7 +800,6 @@
     menuLink.className = 'btn';
     menuLink.textContent = 'Menú';
 
-    actionBar.appendChild(quizizzBtn);
     actionBar.appendChild(finishButton);
     actionBar.appendChild(menuLink);
 
